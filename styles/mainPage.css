@@ -1,0 +1,158 @@
+.menu__item-link_sp {
+  padding-left: 10px !important;
+}
+
+ 
+
+.featuredProducts .slick-slide {
+  width: 268px !important;
+  margin-right: 10px;
+}
+
+.SampleNextArrow {
+  position: absolute;
+  top: -74px;
+  right: 0;
+}
+
+
+.SamplePrevArrow {
+  position: absolute;
+  top: -74px;
+  right: 39px;
+}
+.crouselWrapper{
+  display: flex;
+  justify-content: center;
+  width: 100% !important;
+}
+
+
+.aboutWrapper{
+  display: flex;
+  
+}
+
+
+.pointer{
+  cursor: pointer;
+}
+
+
+
+
+.carouselBigPicture{
+width: 70px;
+height: 70px;
+}
+
+
+
+.carouselThumbs{
+
+}
+
+
+.slick-dots li{
+  height: initial !important;
+  width: initial !important;
+}
+
+
+
+
+
+.detailed .slick-slide img{
+  width: 100%;
+}
+.slick-dots_sp .slick-active{
+  border: 1px solid rgb(35, 35, 35);
+}
+.slick-dots_sp{
+  display: flex !important;
+  justify-content: flex-start;
+  bottom: -60px !important;
+
+}
+
+.heartSp{
+  font-size: 25px
+}
+
+.dropdownIcon{
+  fill: rgba(0, 0, 0, 0.25);
+  color: red;
+  margin-left: 6px;
+}
+
+.departments__button-icon_sp{
+     font-size: 27px;
+    top: 8px;
+}
+
+
+.departments__button-arrow_sp{
+     font-size: 18px;
+     font-weight: 800;
+     top: calc(50% - 12px);
+}
+.departments__item-arrow_sp{
+  font-size: 16px;
+}
+
+
+
+
+@media only screen and (max-width: 1200px) {
+  .featuredProducts .slick-slide {
+    width: 299px !important;
+  }
+    }
+@media only screen and (max-width: 992px) {
+  .product__info_sp{
+    margin-top: 120px;
+  }
+  .slick-dots_sp{
+    display: flex !important;
+    justify-content: flex-start;
+    bottom: -60px !important;
+  
+  }
+  .SampleNextArrow {
+     top: -56px;
+   }
+   
+  .SamplePrevArrow {
+     top: -56px;
+   }
+
+   .featuredProducts .slick-list{
+     height: 500px;
+   }
+   .featuredProducts .slick-slide {
+    width: 220px !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .featuredProducts .slick-slide {
+    width: 246px !important;
+  }
+}
+ 
+
+@media only screen and (max-width: 767px) {
+  .block-slideshow__slide-image--desktop {
+    display: none !important;
+  }
+
+}
+@media only screen and (max-width: 460px) {
+  .block-header__divider + .block-header__groups-list{
+    margin-left: 0 !important;
+  }
+  .carouselBigPicture {
+    width: 55px;
+    height: 55px;
+}
+}
