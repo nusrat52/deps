@@ -2,7 +2,40 @@
   padding-left: 10px !important;
 }
 
- 
+.filter-categories__item--parent__sp{
+  padding-left: 0 !important;
+}
+
+
+.deptRange>div>div >div>div{
+  width: 30px !important;
+  height: 30px !important;
+}
+.deptRange>div>div >div{
+  }
+.filter__title__mb{
+  margin-bottom: 15px;
+}
+
+.deptRange>div>div >div>div:focus{
+outline: 0;
+border: 0;
+}
+.filter__body{
+  overflow: inherit !important;
+}
+.search__dropdown{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.search__dropdown:hover{
+  background: #f2f2f2;
+
+ }
 
 .featuredProducts .slick-slide {
   width: 268px !important;

@@ -3228,9 +3228,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 }
 .filter__title:focus,
 .filter__title:hover {
-  transition-duration: 0.1s, 0.1s;
-  background: #f2f2f2;
-  fill: #b3b3b3;
+ 
 }
 .filter__title:focus {
   outline: none;
@@ -3257,7 +3255,23 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   visibility: visible;
   height: auto;
   opacity: 1;
+  
 }
+
+.filter__sp{
+  max-height: 0 !important;
+  overflow: hidden !important;
+   transition: max-height 0.5s ease-in-out;
+ 
+}
+.filter--opened__sp{
+ 
+  max-height: 500px !important;
+
+}
+
+
+
 .filter--opened .filter__arrow {
   transform: rotate(180deg);
 }
@@ -3400,6 +3414,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   border-top-width: 1px;
   border-bottom-width: 1px;
   background: #f7f7f7;
+  margin-top: 10px;
 }
 .filter-categories-alt__list--level--2 > .filter-categories-alt__item {
   padding: 4px 0;
@@ -5318,8 +5333,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   flex-shrink: 0;
   width: 255px;
   -ms-flex-pack: center;
-  justify-content: center;
-  color: inherit;
+   color: inherit;
   margin-right: 30px;
 }
 .site-header__logo a {
@@ -5836,6 +5850,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   margin-top: -380px;
   border-radius: 4px 4px 0 0;
   padding: 75px 92px;
+  box-shadow: 0 0 10px;
 }
 .about-us__title {
   margin-bottom: 50px;

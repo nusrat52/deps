@@ -5,14 +5,15 @@ function DashboarDropdown () {
     
     const [dropOn, setDropOn] = useState(false);
     const dropClass = dropOn
-      ? "indicator indicator--trigger--click indicator--display indicator--open"
+      ? "indicator indicator--trigger--click  indicator--display indicator--open"
       : "indicator indicator--trigger--click";
       const dropclick = (e) => {
           e.stopPropagation();
           setDropOn(!dropOn);
     };
-    const onblur = (e) => {
-        if (e.relatedTarget && e.relatedTarget.closest(".indicator--trigger--click")) {
+  const onblur = (e) => {
+      console.log(e.target==e.relatedTarget, 'etarget');
+        if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click")) {
               return
           }
           e.stopPropagation();
@@ -20,10 +21,9 @@ function DashboarDropdown () {
     };
   
 
-
-
+ 
   return (
-    <div onBlur={onblur} onClick={dropclick} tabIndex='-1' className={dropClass}>
+    <div id='indicator--trigger--click' onBlur={onblur} onClick={dropclick} tabIndex='-1' className={dropClass}>
   <a className="indicator__button">
     <span className="indicator__area">
 

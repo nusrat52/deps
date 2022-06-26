@@ -76,49 +76,13 @@ import {AiOutlineHeart} from "react-icons/ai"
           <!-- .topbar --> */}{" "} <div className="site-header__topbar topbar">
             <div className="topbar__container container">
               <div className="topbar__row">
-                <div className="topbar__item topbar__item--link">
-                  <a className="topbar-link" href="about-us.html"> {" "} About Us{" "} </a>
-                </div>
-                <div className="topbar__item topbar__item--link">
-                  <a className="topbar-link" href="contact-us.html"> {" "} Contacts{" "} </a>
-                </div>
-                <div className="topbar__item topbar__item--link">
-                  <a className="topbar-link" href="#"> {" "} Store Location{" "} </a>
-                </div>
-                <div className="topbar__item topbar__item--link">
-                  <a className="topbar-link" href="track-order.html"> {" "} Track Order{" "} </a>
-                </div>
-                <div className="topbar__item topbar__item--link">
-                  <a className="topbar-link" href="blog-classic.html"> {" "} Blog{" "} </a>
-                </div>
+             
+           
+           
+              
                  <div className="topbar__spring"></div>
                 
-                 <TopBarItemDrpDown title="My Account">
-                 <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-dashboard.html"> {" "} Dashboard{" "} </a>
-                          </li>
-                          <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-profile.html"> {" "} Edit Profile{" "} </a>
-                          </li>
-                          <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-orders.html"> {" "} Order History{" "} </a>
-                          </li>
-                          <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-addresses.html"> {" "} Addresses{" "} </a>
-                          </li>
-                          <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-password.html"> {" "} Password{" "} </a>
-                          </li>
-                          <li className="menu__item">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link menu__item-link_sp" href="account-login.html"> {" "} Logout{" "} </a>
-                          </li>
-                  </TopBarItemDrpDown>
+   
 
                   
                  <TopBarItemDrpDown title="Language" >
@@ -230,44 +194,77 @@ import {AiOutlineHeart} from "react-icons/ai"
                        
                          <Link style={{color:"red !important"}} href="/">
                            <a className="nav-links__item-link" >
-                           <div className="nav-links__item-body">Ana Səhifə</div>
+                           <div className="nav-links__item-body">Home</div>
                            </a>
                          </Link>
-                      <MenuList title="Profil">
+                      <MenuList title="Account">
                       <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-login.html"> {" "} Login{" "} </a>
-                              </li>
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/daxilol">
+                                <a className="menu__item-link" > {" "} Login{" "} </a>
+                           </Link>
+                         </li>
+
+
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/register">
+                                <a className="menu__item-link" > {" "} Register{" "} </a>
+                           </Link>
+                         </li>
+          
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/profile/dashboard">
+                                <a className="menu__item-link" > {" "} Dashboard{" "} </a>
+                           </Link>
+                         </li>
+
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/profile/edit">
+                                <a className="menu__item-link" > {" "} Edit Profile{" "} </a>
+                           </Link>
+                         </li>
+
+
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/register">
+                                <a className="menu__item-link" > {" "} Register{" "} </a>
+                           </Link>
+                         </li>
+                 
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/profile/orderhistory">
+                                <a className="menu__item-link" > {" "} Order History{" "} </a>
+                           </Link>
+                         </li>
+                         
+                       </MenuList>
+                       <MenuList title="Contact Us">
                               <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-dashboard.html"> {" "} Dashboard{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-profile.html"> {" "} Edit Profile{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-orders.html"> {" "} Order History{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-order-details.html"> {" "} Order Details{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-addresses.html"> {" "} Address Book{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-edit-address.html"> {" "} Edit Address{" "} </a>
-                              </li>
-                              <li className="menu__item nav-links__item_hoversp">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-password.html"> {" "} Change Password{" "} </a>
-                              </li>
-                      </MenuList>
-                      <MenuList title="Shop">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/bizimleelaqe">
+                                <a className="menu__item-link" > {" "} Contact Us{" "} </a>
+                           </Link>
+                         </li>
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/direktorayaz">
+                                <a className="menu__item-link" > {" "} Write Director{" "} </a>
+                           </Link>
+                         </li>
+                         <li className="menu__item nav-links__item_hoversp">
+                           <div className="menu__item-submenu-offset"></div>
+                           <Link href="/sualver">
+                                <a className="menu__item-link" > {" "} Ask Question{" "} </a>
+                           </Link>
+                         </li>
+                         
+                          </MenuList>
+                      {/* <MenuList title="Shop">
                         <RightMenuList title="Shop Grid">
                           <li className="menu__item nav-links__item_hoversp">
                             <div className="menu__item-submenu-offset"></div>
@@ -324,155 +321,11 @@ import {AiOutlineHeart} from "react-icons/ai"
                           <div className="menu__item-submenu-offset"></div>
                           <a className="menu__item-link" href="cart-empty.html"> {" "} Cart Empty{" "} </a>
                         </li>
-                      </MenuList>
-                      <li className="nav-links__item nav-links__item--has-submenu">
-                        <a className="nav-links__item-link" href="account-login.html">
-                           <div className="nav-links__item-body"> {" "} Account{" "}
-                             
-
-
-                             <IoIosArrowDown/>
-                             
-
-                          </div>
-                        </a>
-                        <div className="nav-links__submenu nav-links__submenu--type--menu"> {" "} {/*
-                          <!-- .menu --> */}{" "} <div className="menu menu--layout--classic">
-                            <div className="menu__submenus-container"></div>
-                            <ul className="menu__list">
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-login.html"> {" "} Login{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-dashboard.html"> {" "} Dashboard{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-profile.html"> {" "} Edit Profile{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-orders.html"> {" "} Order History{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-order-details.html"> {" "} Order Details{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-addresses.html"> {" "} Address Book{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-edit-address.html"> {" "} Edit Address{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="account-password.html"> {" "} Change Password{" "} </a>
-                              </li>
-                            </ul>
-                          </div>{" "} {/*
-                          <!-- .menu / end --> */}
-                        </div>
-                      </li>
-                      <li className="nav-links__item nav-links__item--has-submenu">
-                        <a className="nav-links__item-link" href="blog-classic.html">
-                          <div className="nav-links__item-body"> {" "} Blog{" "} <svg className="nav-links__item-arrow" width="9px" height="6px">
-                              <use xlinkHref="images/sprite.svg#arrow-rounded-down-9x6"></use>
-                            </svg>
-                          </div>
-                        </a>
-                        <div className="nav-links__submenu nav-links__submenu--type--menu"> {" "} {/*
-                          <!-- .menu --> */}{" "} <div className="menu menu--layout--classic">
-                            <div className="menu__submenus-container"></div>
-                            <ul className="menu__list">
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="blog-classic.html"> {" "} Blog Classic{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="blog-grid.html"> {" "} Blog Grid{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="blog-list.html"> {" "} Blog List{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="blog-left-sidebar.html"> {" "} Blog Left Sidebar{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="post.html"> {" "} Post Page{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="post-without-sidebar.html"> {" "} Post Without Sidebar{" "} </a>
-                              </li>
-                            </ul>
-                          </div>{" "} {/*
-                          <!-- .menu / end --> */}
-                        </div>
-                      </li>
-                      <li className="nav-links__item nav-links__item--has-submenu">
-                        <a className="nav-links__item-link" href="#">
-                          <div className="nav-links__item-body"> {" "} Pages{" "} <svg className="nav-links__item-arrow" width="9px" height="6px">
-                              <use xlinkHref="images/sprite.svg#arrow-rounded-down-9x6"></use>
-                            </svg>
-                          </div>
-                        </a>
-                        <div className="nav-links__submenu nav-links__submenu--type--menu"> {" "} {/*
-                          <!-- .menu --> */}{" "} <div className="menu menu--layout--classic">
-                            <div className="menu__submenus-container"></div>
-                             <ul className="menu__list">
-                               
-
-                               
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="about-us.html"> {" "} About Us{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="contact-us.html"> {" "} Contact Us{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="contact-us-alt.html"> {" "} Contact Us Alt{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="404.html"> {" "} 404{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="terms-and-conditions.html"> {" "} Terms And Conditions{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="faq.html"> {" "} FAQ{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="components.html"> {" "} Components{" "} </a>
-                              </li>
-                              <li className="menu__item">
-                                <div className="menu__item-submenu-offset"></div>
-                                <a className="menu__item-link" href="typography.html"> {" "} Typography{" "} </a>
-                              </li>
-                            </ul>
-                          </div>{" "} {/*
-                          <!-- .menu / end --> */}
-                        </div>
-                       </li>
-                       
-                      <li  className="nav-links__item">
-                         <Link style={{color:"red !important"}} href="/haqqimizda">
+                       </MenuList> */}
+                        <li  className="nav-links__item">
+                         <Link  href="/haqqimizda">
                            <a className="nav-links__item-link" >
-                           <div className="nav-links__item-body">Haqqımızda</div>
+                           <div className="nav-links__item-body">About us</div>
                            </a>
                          </Link>
                        </li>

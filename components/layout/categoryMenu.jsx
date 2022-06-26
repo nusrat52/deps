@@ -2,14 +2,11 @@ import React, {useState, useEffect} from 'react'
 import MenuItems from './menuItems'
 import { useRouter } from 'next/router';
 import { BiMenuAltLeft } from "react-icons/bi";
-import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io"
+import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io";
  function CategoryMenu () {
   const router = useRouter()
   
-
-
-
-     const [dropOn, setDropOn] = useState(false);
+    const [dropOn, setDropOn] = useState(false);
     const dropClass = dropOn
       ? "departments departments--open"
       : "departments"
@@ -17,12 +14,13 @@ import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io"
           e.stopPropagation();
       setDropOn(!dropOn);
       };
-  
-      useEffect(() => {
-        if (router.pathname == '/') {
-          setDropOn(true);
+   useEffect(() => {
+     if (router.pathname == '/') {
+           setDropOn(true);
+     } else {
+      setDropOn(false);
         }
-      }, [])
+      }, [router])
   
    return (
     <div className={dropClass} data-departments-fixed-by=".block-slideshow">
@@ -34,8 +32,7 @@ import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io"
          <li className="departments__item">
                <a className="departments__item-link" href="#"> {" "} Hand Tools{" "}
                  <IoIosArrowForward className="departments__item-arrow departments__item-arrow_sp" />
- 
-           </a>
+            </a>
                           <div className="departments__submenu departments__submenu--type--megamenu departments__submenu--size--lg">
                               <div className="megamenu megamenu--departments">
                <div className="megamenu__body" style={{

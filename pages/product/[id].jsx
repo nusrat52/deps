@@ -21,9 +21,9 @@ const [content, setContent] = useState("description")
                         
                         <li className="breadcrumb-item">
                           <a href="index.html">Home</a>
-                         <svg className="breadcrumb-arrow" width="6px" height="9px">
+                         <div className="breadcrumb-arrow" width="6px" height="9px">
                           <Image src="/images/sprite.svg#arrow-rounded-right-6x9" width={64} height={64} alt="" />
-                          </svg>
+                          </div>
                          </li>
                         
                       <li className="breadcrumb-item">
@@ -155,7 +155,7 @@ const [content, setContent] = useState("description")
                               
 
 
-                              <button type="button" class="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="" data-original-title="Wishlist">
+                              <button type="button" className="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="" data-original-title="Wishlist">
                               
                             <div className="product__actions-item product__actions-item--wishlist">
                                  <AiFillHeart/>

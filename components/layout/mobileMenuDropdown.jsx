@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function MobileMenuDropdown ({ children }) {
+function MobileMenuDropdown ({ children, title }) {
     
 const [dropDown, setDropDown]=useState(false)
 
@@ -15,7 +15,7 @@ const [dropDown, setDropDown]=useState(false)
   return (
     <li className={dropdownClass} data-collapse-item>
     <div className="mobile-links__item-title">
-      <a href="index.html" className="mobile-links__item-link"> Home </a>
+      <a href="index.html" className="mobile-links__item-link"> {title} </a>
       <button onClick={dropClick} className="mobile-links__item-toggle" type="button" data-collapse-trigger>
         <svg className="mobile-links__item-arrow" width="12px" height="7px">
           <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7"></use>

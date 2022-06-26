@@ -11,7 +11,7 @@ function BadgetDropdown() {
     setDropOn(!dropOn);
   };
   const onblur = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest(".indicator--trigger--click")) {
+    if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click__badget")){
       return
   }
         e.stopPropagation();
@@ -19,7 +19,7 @@ function BadgetDropdown() {
   };
 
   return (
-    <div tabIndex="-1" onBlur={onblur} onClick={dropclick} className={dropClass}>
+    <div id="indicator--trigger--click__badget" tabIndex="-1" onBlur={onblur} onClick={dropclick} className={dropClass}>
     <a className="indicator__button">
       <span className="indicator__area">
     <FaShoppingBasket className="heartSp"/>
