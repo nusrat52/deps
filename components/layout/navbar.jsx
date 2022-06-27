@@ -231,7 +231,7 @@ import {AiOutlineHeart} from "react-icons/ai"
                          <li className="menu__item nav-links__item_hoversp">
                            <div className="menu__item-submenu-offset"></div>
                            <Link href="/register">
-                                <a className="menu__item-link" > {" "} Register{" "} </a>
+                                <a className="menu__item-link" > {" "} Register {" "} </a>
                            </Link>
                          </li>
                  

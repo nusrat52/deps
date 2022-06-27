@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Link from "next/link";
+import * as Agent from "../../api/agent"
 const mockCarouselArr = [
   {
     title1: "Big choice of",
@@ -33,7 +34,16 @@ const mockCarouselArr = [
   },
 ];
 
-function Carousel() {
+function Carousel () {
+  const [slides, setSlides]=useState([])
+useEffect(() => {
+  const getSlideDatas = async () => {
+    const SlideDatas = await Agent.general.getCarousel()
+    setSlides(SlideDatas)
+  }
+  getSlideDatas()
+}, [])
+ 
   return (
     <>
       <div className="block-slideshow block-slideshow--layout--with-departments block">
