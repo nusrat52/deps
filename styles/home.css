@@ -4207,10 +4207,10 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 }
 .megamenu__links--level--0 > .megamenu__item + .megamenu__item--with-submenu,
 .megamenu__links--level--0 > .megamenu__item--with-submenu + .megamenu__item {
-  margin-top: 20px;
-}
+ }
 .megamenu__links--level--0 > .megamenu__item {
   padding: 1px 0;
+  margin-right: 60px;
 }
 .megamenu__links--level--0 > .megamenu__item > a {
   font-weight: 500;
@@ -12268,6 +12268,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   position: absolute;
   bottom: 46px;
   left: 46px;
+  max-width: 350px;
 }
 .block-slideshow__slide-title {
   font-size: 30px;

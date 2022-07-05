@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { AiOutlineUser } from "react-icons/ai"
 import Link from 'next/link';
+import {useSelector} from "react-redux"
 function DashboarDropdown () {
-    
-    const [dropOn, setDropOn] = useState(false);
-    const dropClass = dropOn
+
+     
+  const [dropOn, setDropOn] = useState(false);
+  const {logged, surname, name, email} = useSelector(state => state.loginReducer)
+     const dropClass = dropOn
       ? "indicator indicator--trigger--click  indicator--display indicator--open"
       : "indicator indicator--trigger--click";
       const dropclick = (e) => {
@@ -30,7 +33,8 @@ function DashboarDropdown () {
           <AiOutlineUser className='heartSp'/>
     </span>
   </a>
-  <div onFocus={(e)=> e.stopPropagation()} onClick={(e)=>e.stopPropagation()} className="indicator__dropdown"> <div className="account-menu">
+      <div onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()} className="indicator__dropdown"> <div className="account-menu">
+    { !logged &&   <>
       <form className="account-menu__form">
         <div className="account-menu__form-title">Log In to Your Account </div>
         <div className="form-group">
@@ -41,8 +45,7 @@ function DashboarDropdown () {
           <label htmlFor="header-signin-password" className="sr-only"> Password </label>
           <div className="account-menu__form-forgot">
             <input id="header-signin-password" type="password" className="form-control form-control-sm" placeholder="Password" />
-            <a href="#" className="account-menu__form-forgot-link"> Forgot? </a>
-          </div>
+           </div>
         </div>
         <div className="form-group account-menu__form-button">
           <button type="submit" className="btn btn-primary btn-sm"> Login </button>
@@ -51,14 +54,14 @@ function DashboarDropdown () {
           <Link href='/register'>Create An Account</Link>
         </div>
       </form>
-      <div className="account-menu__divider"></div>
+        <div className="account-menu__divider"></div>
+        </>}
+
+{  logged && <>
       <a href="account-dashboard.html" className="account-menu__user">
-        <div className="account-menu__user-avatar">
-          <img src="images/avatars/avatar-3.jpg" alt="" />
-        </div>
-        <div className="account-menu__user-info">
-          <div className="account-menu__user-name"> Helena Garcia </div>
-          <div className="account-menu__user-email"> stroyka@example.com </div>
+         <div className="account-menu__user-info">
+          <div className="account-menu__user-name"> {name} {surname} </div>
+          <div className="account-menu__user-email"> {email} </div>
         </div>
       </a>
       <div className="account-menu__divider"></div>
@@ -91,7 +94,9 @@ function DashboarDropdown () {
         <li>
           <a href="account-login.html">Logout</a>
         </li>
-      </ul>
+        </ul>
+        
+        </>}
     </div>
   </div>
 </div>

@@ -1,13 +1,18 @@
 import Head from "next/head";
  import dynamic from "next/dynamic";
- import Layout from "../components/layout/layout"
+import Layout from "../components/layout/layout"
+ import { useSelector } from "react-redux";
  const Carousel = dynamic(() => import("../components/main/carousel"), {
   ssr: false,
 });
 const FeaturedProducts = dynamic(() => import("../components/main/featuredProducts"), {
   ssr: false,
 });
-export default function Home() {
+export default function Home () {
+  
+
+  const state = useSelector(state => state)
+  console.log(state, 'state');
   return (
     <div>
       <Head>

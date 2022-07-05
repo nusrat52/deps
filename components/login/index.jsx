@@ -5,7 +5,8 @@ import { login } from '../../api/agent';
  import {useSelector, useDispatch} from "react-redux"
 import { login as loginAction } from '../../store/actions';
 import Swal from 'sweetalert2'
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+
 const SignupSchema = Yup.object().shape({
    firstName: Yup.string()
      .min(2, 'Too Short!')
@@ -33,8 +34,7 @@ const SignupSchema = Yup.object().shape({
 function Index () {
   const dispatch = useDispatch()
   const router = useRouter()
-  console.log(router);
-
+ 
    const logDetails = useSelector(state => state.loginReducer)
       return (
       <div className="container mt-4">
@@ -66,6 +66,7 @@ function Index () {
               surname:submitResponse.data.surname
             }))
             localStorage.setItem("token", submitResponse.access_token)
+            localStorage.setItem("refresh__token", submitResponse.refresh_token)
             Swal.fire({
               title: 'Conguratilations!',
               text: 'You have been registered succesfully!',

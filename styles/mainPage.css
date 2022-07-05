@@ -6,7 +6,10 @@
   padding-left: 0 !important;
 }
 
-
+.megamenu__links_top{
+  display: flex;
+  flex-wrap: wrap;
+}
 .deptRange>div>div >div>div{
   width: 30px !important;
   height: 30px !important;
@@ -47,7 +50,13 @@ border: 0;
   top: -74px;
   right: 0;
 }
-
+.teammate__avatar{
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .SamplePrevArrow {
   position: absolute;

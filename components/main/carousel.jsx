@@ -51,9 +51,9 @@ useEffect(() => {
     <div className="row">
       <div className="col-lg-3 d-none d-lg-block"></div>
       <div className="col-12 col-lg-9 p-0">
-              <OwlCarousel className="owl-theme" nav={false} dots={true} items={1} loop   >
+            {slides.length>0 && <OwlCarousel className="owl-theme" nav={false} dots={true} items={1} loop   >
                 
-       { mockCarouselArr.map((item, index)=>   <div key={index} className="item">
+       { slides.map((item, index)=>   <div key={index} className="item">
          <a className="block-slideshow__slide" >
                  <div className="block-slideshow__slide-image block-slideshow__slide-image--desktop" style={{
                         backgroundImage: `url('${item.image}')`,
@@ -63,8 +63,8 @@ useEffect(() => {
                           `url('${item.image2}')`,
                       }}></div>
               <div className="block-slideshow__slide-content">
-                <div className="block-slideshow__slide-title"> {item.title1} <br /> {item.title2} </div>
-                <div className="block-slideshow__slide-text"> {item.text1} <br /> {item.title2} </div>
+                <div className="block-slideshow__slide-title"> {item.title} </div>
+                <div className="block-slideshow__slide-text"> {item.text} <br /> {item.title2} </div>
                 <div className="block-slideshow__slide-button">
                   <span className="btn btn-primary btn-lg">Shop Now</span>
                 </div>
@@ -72,7 +72,7 @@ useEffect(() => {
               </a>
                 </div>)  
                 }
-          </OwlCarousel>
+          </OwlCarousel>}
       </div>
     </div>
   </div>
