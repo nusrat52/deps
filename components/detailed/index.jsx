@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-export default class CenterMode extends Component {
-    render () {
-      
-
-        const imageArray = [
-            'https://stroyka.html.themeforest.scompiler.ru/themes/red-ltr/images/products/product-16.jpg',
-            'https://stroyka.html.themeforest.scompiler.ru/themes/red-ltr/images/products/product-16-1.jpg',
-            'https://stroyka.html.themeforest.scompiler.ru/themes/red-ltr/images/products/product-16-2.jpg',
-            'https://stroyka.html.themeforest.scompiler.ru/themes/red-ltr/images/products/product-16-3.jpg',
-            'https://stroyka.html.themeforest.scompiler.ru/themes/red-ltr/images/products/product-16-4.jpg'
-        ]
+const CenterMode =({images})=> {
+       
+console.log(images, 'imgggg');
+  const imageArray = images.map((imagee) => {
+          return imagee.image
+        })
       const settings = {
         customPaging: function(i) {
         return (
@@ -38,5 +33,7 @@ export default class CenterMode extends Component {
         </Slider>
       </div>
     );
-  }
 }
+ 
+
+export default CenterMode;

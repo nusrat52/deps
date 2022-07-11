@@ -3,13 +3,16 @@ import Layout from "../../components/layout/layout"
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Detailed from "../../components/detailed"
-import {AiFillHeart} from "react-icons/ai"
-function index ({ idisi }) {
+import { AiFillHeart } from "react-icons/ai"
+import * as Agent from "../../api/agent"
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+ function index ({ data }) {
     
 const [content, setContent] = useState("description")
-
-   const router = useRouter()
-    return (
+  const router = useRouter()
+  
+     return (
          <div>
         <div className="site">
           <div className="site__body">
@@ -33,7 +36,7 @@ const [content, setContent] = useState("description")
                         </svg>
                       </li>
                       <li className="breadcrumb-item active" aria-current="page">
-                        Brandix Screwdriver SCREW1500ACC
+                       {data.title}
                       </li>
                     </ol>
                   </nav>
@@ -45,16 +48,11 @@ const [content, setContent] = useState("description")
                 <div className="product product--layout--standard" data-layout="standard">
                     <div className="product__content">
                        <div className="product__gallery">
-                         <Detailed />
+                         <Detailed images={data.images} />
                         
                       </div>
-                      
-
-
-
-
-
-                     <div className="product__info product__info_sp">
+                  
+                      <div className="product__info product__info_sp">
                       <div className="product__wishlist-compare">
                         <button type="button" className="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
                           <svg width="16px" height="16px">
@@ -68,21 +66,9 @@ const [content, setContent] = useState("description")
                         </button>
                       </div>
                       <h1 className="product__name">
-                        Brandix Screwdriver SCREW1500ACC
+                      {data.title}
                         </h1>
-                        
-
-
-
-                      <div className="product__rating">
-                  
-                        <div className="product__rating-legend">
-                          <a href="#">7 Reviews</a><span>/</span><a href="#">Write A Review</a>
-                        </div>
-                        </div>
-                        
-
-
+ 
                       <div className="product__description">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Curabitur ornare, mi in ornare elementum, libero nibh
@@ -100,43 +86,52 @@ const [content, setContent] = useState("description")
                         <li className="product__meta-availability">
                           Availability: <span className="text-success">In Stock</span>
                         </li>
-                        <li>Brand: <a href="#">Wakita</a></li>
-                        <li>SKU: 83690/32</li>
+                        <li>Manifacturer: <a >{data.manifacturer}</a></li>
+                        <li>{data.code}</li>
                       </ul>
                     </div>
-                    {/* .product__info / end */}{/* .product__sidebar */}
-                    <div className="product__sidebar">
+                     <div className="product__sidebar">
                       <div className="product__availability">
                         Availability: <span className="text-success">In Stock</span>
                       </div>
-                      <div className="product__prices">$1,499.00</div>
-                      {/* .product__options */}
-                      <form className="product__options">
-                        <div className="form-group product__option">
-                          <label className="product__option-label">Color</label>
-                          <div className="input-radio-color">
-                            <div className="input-radio-color__list">
-                              <label className="input-radio-color__item input-radio-color__item--white" style={{color: '#fff'}} data-toggle="tooltip" title="White"><input type="radio" name="color" /> <span /></label>
-                              <label className="input-radio-color__item" style={{color: '#ffd333'}} data-toggle="tooltip" title="Yellow"><input type="radio" name="color" /> <span /></label>
-                              <label className="input-radio-color__item" style={{color: '#ff4040'}} data-toggle="tooltip" title="Red"><input type="radio" name="color" /> <span /></label>
-                              <label className="input-radio-color__item input-radio-color__item--disabled" style={{color: '#4080ff'}} data-toggle="tooltip" title="Blue"><input type="radio" name="color" disabled="disabled" />
-                                <span /></label>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="form-group product__option">
+                      <div className="product__prices">{data.price}</div>
+                       <form className="product__options">
+                 <div className="d-flex">
+                        <div className="form-group product__option mr-2">
                           <label className="product__option-label">Material</label>
                           <div className="input-radio-label">
                             <div className="input-radio-label__list">
                               <label><input type="radio" name="material" />
-                                <span>Metal</span></label>
-                              <label><input type="radio" name="material" />
-                                <span>Wood</span></label>
-                              <label><input type="radio" name="material" disabled="disabled" />
-                                <span>Plastic</span></label>
+                                <span>{data.type.title}</span></label>
+                           
+                             
                             </div>
                           </div>
                         </div>
+                        <div className="form-group product__option  mr-2">
+                          <label className="product__option-label">Model</label>
+                          <div className="input-radio-label">
+                            <div className="input-radio-label__list">
+                              <label><input type="radio" name="material" />
+                                <span>{data.model.title}</span></label>
+                           
+                             </div>
+                          </div>
+                        </div>
+
+                        <div className="form-group product__option">
+                          <label className="product__option-label">weight</label>
+                          <div className="input-radio-label">
+                            <div className="input-radio-label__list">
+                              <label><input type="radio" name="material" />
+                                <span>{data.weight}</span></label>
+                           
+                             
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+
                         <div className="form-group product__option">
                           <label className="product__option-label" htmlFor="product-quantity">Quantity</label>
                           <div className="product__actions">
@@ -391,8 +386,12 @@ export default index;
 
 
  export async function getServerSideProps (context) {
-  const idSlug=context.params.id
+   const idSlug = context.params.id
+   const contentresponse=await axios.get(`http://194.233.173.232/api/product-detail/${idSlug}/`)
+
+   console.log(contentresponse, 'contentresponse');
+
   return {
-    props: {idisi:idSlug}, // will be passed to the page component as props
+    props: {data:contentresponse.data},
   }
 }

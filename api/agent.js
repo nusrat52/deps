@@ -1,8 +1,6 @@
 import axios from "axios"
 
-
-
- 
+   
 export const general = {
     getAboutPage: (lang) => {
         return axios.get("http://194.233.173.232/api/about/") 
@@ -56,6 +54,14 @@ export const general = {
         })
     },
 
+
+    search: (searc) => {
+        return axios.get(`http://194.233.173.232/api/product/?search=${searc}`)
+            .then((response) => {
+             return response.data
+        })
+    },
+
 };
  
 export const login = {
@@ -70,8 +76,37 @@ export const login = {
            .then((response) => {
            return response.data
        })
-    } 
-
+    }, 
+    logginWithToken: (token) => {
+         return axios.get("http://194.233.173.232/api/user-detail/",{
+            headers: {
+              'Authorization': `Bearer ${token}` 
+            }
+          })
+           .then((response) => {
+           return response.data
+       })
+    },
+    changePassword: (token, body) => {
+          return axios.post("http://194.233.173.232/api/changepassword/",body, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+           .then((response) => {
+           return response.data
+       })
+    },
+    editProfile: (token, id,  body) => {
+        return axios.put(`http://194.233.173.232/api/change-user/${id}/`,body, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+         .then((response) => {
+         return response.data
+     })
+  },
 
 };
  

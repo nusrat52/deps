@@ -1,7 +1,7 @@
 import Head from "next/head";
- import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 import Layout from "../components/layout/layout"
- import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
  const Carousel = dynamic(() => import("../components/main/carousel"), {
   ssr: false,
 });
@@ -12,8 +12,7 @@ export default function Home () {
   
 
   const state = useSelector(state => state)
-  console.log(state, 'state');
-  return (
+   return (
     <div>
       <Head>
         <title>Create Next App</title>

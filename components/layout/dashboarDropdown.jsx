@@ -1,10 +1,46 @@
 import React, {useState} from 'react'
 import { AiOutlineUser } from "react-icons/ai"
 import Link from 'next/link';
-import {useSelector} from "react-redux"
-function DashboarDropdown () {
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from "../../store/actions"
+import { useRouter } from 'next/router';
+import * as Agent from "../../api/agent"
+import { login } from "../../store/actions"
+import Swal from 'sweetalert2'
+ function DashboarDropdown () {
 
-     
+  const dispatch = useDispatch()
+  
+   const router = useRouter()
+
+  const submitfuncion = async (e) => {
+    e.preventDefault()
+   const email=e.target.email.value
+   const password=e.target.pasword.value
+   const loginResponse = await Agent.login.loggin({ email, password })
+   
+    dispatch(login({
+      address: loginResponse.data.address,
+      email: loginResponse.data.email,
+      name: loginResponse.data.name,
+      password: loginResponse.data.password,
+      phone_number: loginResponse.data.phone_number,
+      surname:loginResponse.data.surname
+   }))
+    const refresh=loginResponse.data.tokens.split(":")[1].split("'")[1]
+    const access=loginResponse.data.tokens.split(":")[2].split("'")[1]
+    localStorage.setItem("token", access)
+    localStorage.setItem("refresh__token", refresh)
+    Swal.fire({
+      title: 'Conguratilations!',
+      text: 'You have been registered succesfully!',
+      icon: 'success',
+      confirmButtonText: 'Exit'
+    }).then((result) => {
+    router.push("/")
+    })
+}
+ 
   const [dropOn, setDropOn] = useState(false);
   const {logged, surname, name, email} = useSelector(state => state.loginReducer)
      const dropClass = dropOn
@@ -24,7 +60,9 @@ function DashboarDropdown () {
     };
   
 
- 
+  const logoutFunc = () => {
+   dispatch(logout())
+ }
   return (
     <div id='indicator--trigger--click' onBlur={onblur} onClick={dropclick} tabIndex='-1' className={dropClass}>
   <a className="indicator__button">
@@ -35,16 +73,16 @@ function DashboarDropdown () {
   </a>
       <div onFocus={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()} className="indicator__dropdown"> <div className="account-menu">
     { !logged &&   <>
-      <form className="account-menu__form">
+      <form onSubmit={submitfuncion}  className="account-menu__form">
         <div className="account-menu__form-title">Log In to Your Account </div>
         <div className="form-group">
           <label htmlFor="header-signin-email" className="sr-only"> Email address </label>
-          <input onKeyDown={(e)=>e.preventDefault()} id="header-signin-email" type="email" className="form-control form-control-sm" placeholder="Email address" />
+          <input  name='email' id="header-signin-email" type="email" className="form-control form-control-sm" placeholder="Email address" />
         </div>
         <div className="form-group">
           <label htmlFor="header-signin-password" className="sr-only"> Password </label>
           <div className="account-menu__form-forgot">
-            <input id="header-signin-password" type="password" className="form-control form-control-sm" placeholder="Password" />
+            <input name='pasword' id="header-signin-password" type="password" className="form-control form-control-sm" placeholder="Password" />
            </div>
         </div>
         <div className="form-group account-menu__form-button">
@@ -58,12 +96,14 @@ function DashboarDropdown () {
         </>}
 
 {  logged && <>
-      <a href="account-dashboard.html" className="account-menu__user">
+          <a className="account-menu__user pointer">
+          <Link href="/profile/dashboard" >
          <div className="account-menu__user-info">
           <div className="account-menu__user-name"> {name} {surname} </div>
           <div className="account-menu__user-email"> {email} </div>
         </div>
-      </a>
+      </Link>
+          </a>  
       <div className="account-menu__divider"></div>
       <ul className="account-menu__links">
           <li>
@@ -91,8 +131,8 @@ function DashboarDropdown () {
       </ul>
       <div className="account-menu__divider"></div>
       <ul className="account-menu__links">
-        <li>
-          <a href="account-login.html">Logout</a>
+        <li className='pointer' onClick={logoutFunc}>
+          <a >Logout </a>
         </li>
         </ul>
         

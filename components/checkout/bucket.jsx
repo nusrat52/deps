@@ -1,7 +1,23 @@
 import React from 'react'
 import {AiOutlineRight} from "react-icons/ai"
 import Link from 'next/link'
-function Bucket() {
+import { useSelector, useDispatch } from 'react-redux'
+import {increaseItem, decreaseItem, deleteProduct} from "../../store/actions"
+function Bucket () {
+  const dispatch = useDispatch()
+  const { bucket } = useSelector(state => state)
+  const increase = (id) => {
+    dispatch(increaseItem(id))
+  }
+
+  const decrease = (id) => {
+    dispatch(decreaseItem(id))
+  }
+
+  const deleteItem = (id) => {
+    dispatch(deleteProduct(id))
+  }
+
   return (
   <div className="site__body">
     <div className="page-header">
@@ -39,7 +55,7 @@ function Bucket() {
             </tr>
           </thead>
           <tbody className="cart-table__body">
-            <tr className="cart-table__row">
+      {  bucket.map((buck, index)=>  <tr key={index} className="cart-table__row">
               <td className="cart-table__column cart-table__column--image">
                 <div className="product-image">
                   <a href="#" className="product-image__body">
@@ -48,88 +64,28 @@ function Bucket() {
                 </div>
               </td>
               <td className="cart-table__column cart-table__column--product">
-                <a href="#" className="cart-table__product-name">Electric Planer Brandix KL370090G 300 Watts</a>
-                <ul className="cart-table__options">
-                  <li>Color: Yellow</li>
-                  <li>Material: Aluminium</li>
-                </ul>
+                <Link href={"/product/"+buck.id} ><a className="cart-table__product-name"> Electric Planer Brandix KL370090G 300 Watts </a></Link>
+             
               </td>
-              <td className="cart-table__column cart-table__column--price" data-title="Price"> $699.00 </td>
+              <td className="cart-table__column cart-table__column--price" data-title="Price"> {buck.price} AZN </td>
               <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
                 <div className="input-number">
-                  <input className="form-control input-number__input" type="number" min={1} defaultValue={2} />
-                  <div className="input-number__add" />
-                  <div className="input-number__sub" />
+                  <input value={buck.count} className="form-control input-number__input" type="number"  />
+                  <div onClick={()=>increase(buck.id)} className="input-number__add" />
+                  <div onClick={()=>decrease(buck.id)} className="input-number__sub" />
                 </div>
               </td>
-              <td className="cart-table__column cart-table__column--total" data-title="Total"> $1,398.00 </td>
+              <td className="cart-table__column cart-table__column--total" data-title="Total"> {buck.price*buck.count} </td>
               <td className="cart-table__column cart-table__column--remove">
-                <button type="button" className="btn btn-light btn-sm btn-svg-icon">
+                <button onClick={()=>deleteItem(buck.id)} type="button" className="btn btn-light btn-sm btn-svg-icon">
                   <svg width="12px" height="12px">
                     <use xlinkHref="images/sprite.svg#cross-12" />
                   </svg>
                 </button>
               </td>
-            </tr>
-            <tr className="cart-table__row">
-              <td className="cart-table__column cart-table__column--image">
-                <div className="product-image">
-                  <a href="#" className="product-image__body">
-                    <img className="product-image__img" src="images/products/product-2.jpg" alt="" />
-                  </a>
-                </div>
-              </td>
-              <td className="cart-table__column cart-table__column--product">
-                <a href="#" className="cart-table__product-name">Undefined Tool IRadix DPS3000SY 2700 watts</a>
-              </td>
-              <td className="cart-table__column cart-table__column--price" data-title="Price"> $849.00 </td>
-              <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                <div className="input-number">
-                  <input className="form-control input-number__input" type="number" min={1} defaultValue={1} />
-                  <div className="input-number__add" />
-                  <div className="input-number__sub" />
-                </div>
-              </td>
-              <td className="cart-table__column cart-table__column--total" data-title="Total"> $849.00 </td>
-              <td className="cart-table__column cart-table__column--remove">
-                <button type="button" className="btn btn-light btn-sm btn-svg-icon">
-                  <svg width="12px" height="12px">
-                    <use xlinkHref="images/sprite.svg#cross-12" />
-                  </svg>
-                </button>
-              </td>
-            </tr>
-            <tr className="cart-table__row">
-              <td className="cart-table__column cart-table__column--image">
-                <div className="product-image">
-                  <a href="#" className="product-image__body">
-                    <img className="product-image__img" src="images/products/product-5.jpg" alt="" />
-                  </a>
-                </div>
-              </td>
-              <td className="cart-table__column cart-table__column--product">
-                <a href="#" className="cart-table__product-name">Brandix Router Power Tool 2017ERXPK</a>
-                <ul className="cart-table__options">
-                  <li>Color: True Red</li>
-                </ul>
-              </td>
-              <td className="cart-table__column cart-table__column--price" data-title="Price"> $1,210.00 </td>
-              <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
-                <div className="input-number">
-                  <input className="form-control input-number__input" type="number" min={1} defaultValue={3} />
-                  <div className="input-number__add" />
-                  <div className="input-number__sub" />
-                </div>
-              </td>
-              <td className="cart-table__column cart-table__column--total" data-title="Total"> $3,630.00 </td>
-              <td className="cart-table__column cart-table__column--remove">
-                <button type="button" className="btn btn-light btn-sm btn-svg-icon">
-                  <svg width="12px" height="12px">
-                    <use xlinkHref="images/sprite.svg#cross-12" />
-                  </svg>
-                </button>
-              </td>
-            </tr>
+            </tr> )    }
+            
+      
           </tbody>
         </table>
         <div className="cart__actions">
@@ -152,17 +108,8 @@ function Bucket() {
                     </tr>
                   </thead>
                   <tbody className="cart__totals-body">
-                    <tr>
-                      <th>Shipping</th>
-                      <td> $25.00 <div className="cart__calc-shipping">
-                          <a href="#">Calculate Shipping</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>Tax</th>
-                      <td>$0.00</td>
-                    </tr>
+            
+             
                   </tbody>
                   <tfoot className="cart__totals-footer">
                     <tr>

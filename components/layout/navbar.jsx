@@ -1,10 +1,9 @@
-import React ,{useState} from "react";
+import React ,{useState, useEffect} from "react";
 import {
   MobileLogo,
   SearchMobile,
   HeartMobile,
-  Cross,
-  Card,
+   Card,
 } from "../../static/svg/svg1";
 import MenuList from "./menuList";
 import RightMenuList from "./rightMenuList";
@@ -17,13 +16,32 @@ import CategoryMenu from "./categoryMenu";
 import Link from "next/link";
 import {IoIosArrowDown } from "react-icons/io"
 import {AiOutlineHeart} from "react-icons/ai"
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux"
+import { getItemsFromStorage } from "../../store/actions"
 
  function Navbar () {
+   const dispatch = useDispatch()
+   
+
+
+
 
   const [mobileSearch, setMobileSearch] = useState(false)
   const [mobileLeftMenuBar, setMobileLeftMenuBar] = useState(false)
-  
-
+  const [search, setSearch] = useState('')
+  const router=useRouter()
+   const inputKeyDown = (e) => {
+      if (e.keyCode == 13) {
+      e.preventDefault()
+       router.push(`/search/${search}`)
+     }
+ }
+   useEffect(() => {
+    
+     
+ dispatch(getItemsFromStorage())
+  }, [])
   
    return (
     <>
@@ -141,23 +159,8 @@ import {AiOutlineHeart} from "react-icons/ai"
               <div className="search search--location--header">
                 <div className="search__body">
                   <form className="search__form" action="#">
-                    <select className="search__categories" aria-label="Category">
-                      <option value="all">All Categories</option>
-                      <option>Instruments</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Power Tools</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Hand Tools</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Machine Tools</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Power Machinery</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Measurement</option>
-                      <option>&nbsp;&nbsp;&nbsp;&nbsp;Clothes and PPE</option>
-                      <option>Electronics</option>
-                      <option>Computers</option>
-                      <option>Automotive</option>
-                      <option>Furniture & Appliances</option>
-                      <option>Music & Books</option>
-                      <option>Health & Beauty</option>
-                    </select>
-                    <input className="search__input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autoomplete="off" />
+    
+                    <input onKeyDown={inputKeyDown} value={search} onChange={(e)=>setSearch(e.target.value)} className="search__input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autoomplete="off" />
                     <button className="search__button search__button--type--submit" type="submit">
                       <svg width="20px" height="20px">
                         <use xlinkHref="images/sprite.svg#search-20"></use>

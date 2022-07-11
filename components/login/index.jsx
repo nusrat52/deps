@@ -25,7 +25,7 @@ const SignupSchema = Yup.object().shape({
      .min(6, 'Too Short!')
      .max(25, 'Too Long!')
      .required('Required'),
-     adres: Yup.string()
+      adres: Yup.string()
      .min(10, 'Too Short!')
      .required('Required'),
  });
@@ -83,7 +83,7 @@ function Index () {
          
            <div className="card flex-grow-1 mb-0">
         <div className="card-body">
-          <h3 className="card-title">Register</h3>
+          <h3 className="card-title">Register </h3>
              <div className="form-group">
               <label>name</label>
                     {/* <input type="email"  placeholder="Enter email" /> */}

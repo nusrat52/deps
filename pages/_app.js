@@ -14,7 +14,7 @@ import Layout from "../components/layout/layout";
 import { reducerMain } from "../store/allreducers";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 const composeEnhancers =   compose;
 const store = createStore(
@@ -22,7 +22,14 @@ const store = createStore(
   /* preloadedState, */ composeEnhancers(applyMiddleware(thunk))
 );
 
-function MyApp({ Component, pageProps }) {
+
+
+
+
+function MyApp ({ Component, pageProps }) {
+
+
+
   return (
     <Provider store={store}>
       <Layout>

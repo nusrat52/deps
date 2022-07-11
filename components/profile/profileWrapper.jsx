@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useRouter } from "next/router";
-import {AiOutlineRight} from "react-icons/ai"
-function ProfileWrapper({ children }) {
+import { AiOutlineRight } from "react-icons/ai"
+import { useDispatch, useSelector} from "react-redux";
+import { logout } from "../../store/actions"
+ 
+function ProfileWrapper ({ children }) {
   const router = useRouter();
 
   const [route, setRoute] = useState("dashboard");
-  console.log(router, "rtrtrtrtr");
 
-  useEffect(() => {
+ const {logged}=useSelector(state=>state.loginReducer)
+  const dispatch=useDispatch()
+  
+
+   useEffect(() => {
     if (router.asPath == "/profile/dashboard") {
       setRoute("dashboard");
     } else if (router.asPath == "/profile/edit") {
@@ -22,6 +28,19 @@ function ProfileWrapper({ children }) {
       setRoute("password");
     }
   }, []);
+
+
+  useEffect(() => {
+    if (!logged)
+     router.push("/")
+  }, [logged])
+  
+
+  const logoutFunc = () => {
+    dispatch(logout())
+    router.push("/")
+   }
+
 
   return (
     <div className="site__body">
@@ -71,8 +90,8 @@ function ProfileWrapper({ children }) {
                   <li className={route=="password"?"account-nav__item account-nav__item--active":"account-nav__item"}>
                     <Link href="/profile/password">Password</Link>
                   </li>
-                  <li className="account-nav__item">
-                    <a>Logout</a>
+                  <li onClick={logoutFunc} className="account-nav__item pointer">
+                    <a>Logout </a>
                   </li>
                 </ul>
               </div>
