@@ -61,6 +61,29 @@ export const general = {
              return response.data
         })
     },
+    checkout: (body) => {
+        const token=localStorage.getItem("token")
+        return axios.post(`http://194.233.173.232/api/checkout/`, body, {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+            .then((response) => {
+             return response.data
+        })
+    },
+     featuredProducts: (limit=5, offset=0) => {
+         return axios.get(`http://194.233.173.232/api/featured-products/?limit=${limit}&offset=${offset}`)
+            .then((response) => {
+             return response.data
+        })
+    },
+    bestsellerProduct: (limit=7, offset=0) => {
+        return axios.get(`http://194.233.173.232/api/bestseller-products/?limit=${limit}&offset=${offset}`)
+           .then((response) => {
+            return response.data
+       })
+   }
 
 };
  

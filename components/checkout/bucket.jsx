@@ -18,6 +18,10 @@ function Bucket () {
     dispatch(deleteProduct(id))
   }
 
+  const total=bucket.reduce((currentValue, currentIndex )=>{
+    return  currentValue=currentValue+ currentIndex.price*currentIndex.count
+    }, 0)
+
   return (
   <div className="site__body">
     <div className="page-header">
@@ -64,7 +68,7 @@ function Bucket () {
                 </div>
               </td>
               <td className="cart-table__column cart-table__column--product">
-                <Link href={"/product/"+buck.id} ><a className="cart-table__product-name"> Electric Planer Brandix KL370090G 300 Watts </a></Link>
+                <Link href={"/product/"+buck.id} ><a className="cart-table__product-name"> {buck.title} </a></Link>
              
               </td>
               <td className="cart-table__column cart-table__column--price" data-title="Price"> {buck.price} AZN </td>
@@ -88,13 +92,7 @@ function Bucket () {
       
           </tbody>
         </table>
-        <div className="cart__actions">
-        
-          <div className="cart__buttons">
-            <a href="index.html" className="btn btn-light">Continue Shopping</a>
-            <a href="#" className="btn btn-primary cart__update-button">Update Cart</a>
-          </div>
-        </div>
+ 
         <div className="row justify-content-end pt-5">
           <div className="col-12 col-md-7 col-lg-6 col-xl-5">
             <div className="card">
@@ -102,10 +100,7 @@ function Bucket () {
                 <h3 className="card-title">Cart Totals</h3>
                 <table className="cart__totals">
                   <thead className="cart__totals-header">
-                    <tr>
-                      <th>Subtotal</th>
-                      <td>$5,877.00</td>
-                    </tr>
+               
                   </thead>
                   <tbody className="cart__totals-body">
             
@@ -114,7 +109,7 @@ function Bucket () {
                   <tfoot className="cart__totals-footer">
                     <tr>
                       <th>Total</th>
-                      <td>$5,902.00</td>
+                      <td>{total} AZN</td>
                     </tr>
                   </tfoot>
                                   </table>

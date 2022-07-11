@@ -8,9 +8,9 @@ import { Range, getTrackBackground } from 'react-range';
 
  
 
-const STEP = 0.1;
+const STEP = 1;
 const MIN = 0;
-const MAX = 100;
+const MAX = 10000;
 
 const LabeledTwoThumbs = ({ rtl, values, setValues }) => {
     return (

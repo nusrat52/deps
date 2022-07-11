@@ -4,42 +4,14 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Link from "next/link";
 import * as Agent from "../../api/agent"
-const mockCarouselArr = [
-  {
-    title1: "Big choice of",
-    title2: "Plumbing products",
-    text1: "Lorem ipsum dolor sit amet, consectetur adipiscingelit.",
-    text2: "Etiam pharetra laoreet dui quis molestie.",
-    to: "https://codebeautify.org/htmlviewer",
-    image:"images/slides/slide-1.jpg",
-    image2:"images/slides/slide-1-mobile.jpg"
-  },
-  {
-    title1: "Big choice of",
-    title2: "Plumbing products",
-    text1: "Lorem ipsum dolor sit amet, consectetur adipiscingelit.",
-    text2: "Etiam pharetra laoreet dui quis molestie.",
-    to: "https://codebeautify.org/htmlviewer",
-    image:"images/slides/slide-1.jpg",
-    image2:"images/slides/slide-1-mobile.jpg"
-  },
-  {
-    title1: "Big choice of",
-    title2: "Plumbing products",
-    text1: "Lorem ipsum dolor sit amet, consectetur adipiscingelit.",
-    text2: "Etiam pharetra laoreet dui quis molestie.",
-    to: "https://codebeautify.org/htmlviewer",
-    image:"images/slides/slide-1.jpg",
-    image2:"images/slides/slide-1-mobile.jpg"
-  },
-];
+ 
 
 function Carousel () {
   const [slides, setSlides]=useState([])
 useEffect(() => {
   const getSlideDatas = async () => {
     const SlideDatas = await Agent.general.getCarousel()
-    setSlides(SlideDatas)
+    setSlides(SlideDatas.results)
   }
   getSlideDatas()
 }, [])

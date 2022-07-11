@@ -3,10 +3,11 @@ import Footer from "./footer"
 import Navbar from "./navbar"
 import * as Agent from "../../api/agent";
 import { useDispatch, useSelector } from "react-redux";
-import {login} from "../../store/actions"
+import {login, getCategory} from "../../store/actions"
 function Layout ({ children }) {
     const dispatch = useDispatch()
-    const state = useSelector(state => state)
+  const { categories } = useSelector(state => state)
+  console.log(categories, 'categories');
      useEffect(() => {
   
        const token = localStorage.getItem("token")
@@ -24,7 +25,8 @@ function Layout ({ children }) {
         }))
        }
        if(token)
-      userDataTaker()
+         userDataTaker()
+       dispatch(getCategory())
     }, [])
      
   return (

@@ -7,6 +7,7 @@ import { addProduct, deleteProduct } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import * as Agent from "../../api/agent";
 
+
  
 function Index() {
   const params = useRouter();
@@ -20,6 +21,8 @@ function Index() {
     dispatch(addProduct(object));
   };
 
+
+
   const deleteToDispatch = (id) => {
     dispatch(deleteProduct(id));
   };
@@ -27,15 +30,14 @@ function Index() {
   useEffect(() => {
     const getSearch = async () => {
       const searchResponse = await Agent.general.search(id);
-      setProducts(searchResponse);
+      setProducts(searchResponse.results);
     };
     if (id) {
       getSearch();
     }
   }, [params.query]);
 
-console.log(bucket, 'bucket');
-
+ 
   const checkIfInBucket = (id) => {
     const inBucket = bucket.find((buck) => buck.id == id)
     console.log(bucket, 'hemen');
@@ -58,7 +60,7 @@ console.log(bucket, 'bucket');
                   <a className="pointer">Home</a>
                   <AiOutlineRight className="profileWrapperIcon" />
                 </li>
-
+                
                 <li className="breadcrumb-item active" aria-current="page">
                   Search
                 </li>
@@ -211,13 +213,7 @@ console.log(bucket, 'bucket');
                                 </div>
                               </div>
                             </div>
-                            <ul className="product-card__features-list">
-                              <li>Speed: 750 RPM</li>
-                              <li>Power Source: Cordless-Electric</li>
-                              <li>Battery Cell Type: Lithium</li>
-                              <li>Voltage: 20 Volts</li>
-                              <li>Battery Capacity: 2 Ah</li>
-                            </ul>
+                    
                           </div>
                           <div className="product-card__actions">
                             <div className="product-card__availability">

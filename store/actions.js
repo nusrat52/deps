@@ -1,6 +1,6 @@
 import * as actionType from "./actionTypes"
 import axios from "axios";
- import {Agent} from "../api/agent"
+ import * as Agent from "../api/agent"
 
 
 export const login = (userData) => {
@@ -63,3 +63,33 @@ export const decreaseItem = (id) => {
       }
 }
 
+
+
+ const getCategories = (categories) => {
+    return {
+        type: actionType.GET__CATEGORIES,
+        payload:categories
+      }
+ }
+
+
+
+ export const getCategory = () => {
+     return async (dispatch) => {
+         const categories=[]
+         const categoriesResponse = await Agent.general.getCategories()
+            categories=categoriesResponse.results
+         categoriesResponse.results.forEach(async (cat, index) => {
+             const subCategories = await Agent.general.getChilds(cat.id)
+             categories[index].childs = subCategories
+             subCategories.forEach(async (sub, subIndex) => {
+                 const realSub = await Agent.general.getSubcategories(sub.pk)
+                 categories[index].childs[subIndex].subCategories=realSub
+             })
+         })
+
+         dispatch(getCategories(categories))
+
+
+     };
+  };

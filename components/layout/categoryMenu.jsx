@@ -16,7 +16,7 @@ import * as Agent from "../../api/agent"
    useEffect(() => {
       const catTaker = async () => {
        const cats = await Agent.general.getCategories()
-       setCategories(cats)
+       setCategories(cats.results)
       }
      catTaker()
 }, [])
@@ -43,6 +43,7 @@ import * as Agent from "../../api/agent"
      <div className="departments__links-wrapper">
        <div className="departments__submenus-container"></div>
            <ul className="departments__links">
+ 
              { categories.map((category, index) =>  <MenuItems key={index} id={category.id} title={category.title} />)
              }
          </ul>
