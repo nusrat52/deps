@@ -6,6 +6,7 @@ import Link from "next/link";
 import * as Agent from "../../api/agent"
  
 
+
 function Carousel () {
   const [slides, setSlides]=useState([])
 useEffect(() => {
@@ -15,8 +16,7 @@ useEffect(() => {
   }
   getSlideDatas()
 }, [])
- 
-  return (
+   return (
     <>
       <div className="block-slideshow block-slideshow--layout--with-departments block">
   <div className="container">
@@ -32,7 +32,7 @@ useEffect(() => {
                       }}></div>
               <div className="block-slideshow__slide-image block-slideshow__slide-image--mobile" style={{
                         backgroundImage:
-                          `url('${item.image2}')`,
+                          `url('${item.mobile_image}')`,
                       }}></div>
               <div className="block-slideshow__slide-content">
                 <div className="block-slideshow__slide-title"> {item.title} </div>

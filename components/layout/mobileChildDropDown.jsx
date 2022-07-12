@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function MobileChildDropDown({ children }) {
+function MobileChildDropDown({ children, title }) {
   const [dropDown, setDropDown] = useState(false);
 
   const dropdownClass = dropDown
@@ -12,7 +12,7 @@ function MobileChildDropDown({ children }) {
   return (
     <li className={dropdownClass} data-collapse-item>
     <div className="mobile-links__item-title">
-      <a href="#" className="mobile-links__item-link"> Power Tools </a>
+      <a href="#" className="mobile-links__item-link"> {title} </a>
       <button className="mobile-links__item-toggle" type="button" data-collapse-trigger onClick={dropClick}>
         <svg className="mobile-links__item-arrow" width="12px" height="7px">
           <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7"></use>

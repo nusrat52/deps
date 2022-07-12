@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { Cross } from "../../static/svg/svg1"
 import MobileChildDropDown from './mobileChildDropDown';
 import MobileMenuDropdown from './mobileMenuDropdown';
+import { useSelector } from "react-redux"
+
 function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
+
+  const {categories}=useSelector(state=>state)
     const leftmenuClass = mobileLeftMenuBar ? "mobilemenu mobilemenu--open" : "mobilemenu"
     const onMouseDown = (e) => {
         if (e.nativeEvent.path[1].className == 'mobilemenu mobilemenu--open') {
@@ -93,76 +97,27 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
               </div>
               </li>
            </MobileMenuDropdown>
+            {
+              console.log(categories, 'categories')
+}
+
+            {categories.map(cate => <MobileMenuDropdown title={cate.title}>
+   
+{cate.childs && cate.childs.map((child)=> <MobileChildDropDown title={child.fields.title}>
+     
+  {child.subCategories && child.subCategories.map((sub)=> <li className="mobile-links__item" data-collapse-item>
+       <div className="mobile-links__item-title">
+         <a href="#" className="mobile-links__item-link"> {sub.fields.title} </a>
+       </div>
+     </li>)  }
+
+   </MobileChildDropDown> )   }
+        
+            </MobileMenuDropdown> )    }
+            
 
 
-          <MobileMenuDropdown title="categoryName">
-            <MobileChildDropDown>
-              <li className="mobile-links__item" data-collapse-item>
-                <div className="mobile-links__item-title">
-                  <a href="#" className="mobile-links__item-link"> Engravers </a>
-                </div>
-              </li>
-              <li className="mobile-links__item" data-collapse-item>
-                <div className="mobile-links__item-title">
-                  <a href="#" className="mobile-links__item-link"> Wrenches </a>
-                </div>
-              </li>
-              <li className="mobile-links__item" data-collapse-item>
-                <div className="mobile-links__item-title">
-                  <a href="#" className="mobile-links__item-link"> Wall Chaser </a>
-                </div>
-              </li>
-              <li className="mobile-links__item" data-collapse-item>
-                <div className="mobile-links__item-title">
-                  <a href="#" className="mobile-links__item-link"> Pneumatic Tools </a>
-                </div>
-              </li>
-            </MobileChildDropDown>
-            <li className="mobile-links__item" data-collapse-item>
-              <div className="mobile-links__item-title">
-                <a href="#" className="mobile-links__item-link"> Machine Tools </a>
-                <button className="mobile-links__item-toggle" type="button" data-collapse-trigger>
-                  <svg className="mobile-links__item-arrow" width="12px" height="7px">
-                    <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7"></use>
-                  </svg>
-                </button>
-              </div>
-              <div className="mobile-links__item-sub-links" data-collapse-content>
-                <ul className="mobile-links mobile-links--level--2">
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Thread Cutting </a>
-                    </div>
-                  </li>
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Chip Blowers </a>
-                    </div>
-                  </li>
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Sharpening Machines </a>
-                    </div>
-                  </li>
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Pipe Cutters </a>
-                    </div>
-                  </li>
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Slotting machines </a>
-                    </div>
-                  </li>
-                  <li className="mobile-links__item" data-collapse-item>
-                    <div className="mobile-links__item-title">
-                      <a href="#" className="mobile-links__item-link"> Lathes </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </MobileMenuDropdown>
+
           <MobileMenuDropdown title="language">
             <li className="mobile-links__item" data-collapse-item>
               <div className="mobile-links__item-title">

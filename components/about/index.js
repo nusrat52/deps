@@ -12,7 +12,7 @@ function Index () {
         const aboutData = await Agent.general.getAboutPage("en")
          setAbout(aboutData)
          const TeamsData = await Agent.general.getTeam("en")
-         setTeams(TeamsData)
+         setTeams(TeamsData.results)
      }
     fetchAboutData()
          }, [])

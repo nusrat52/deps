@@ -74,21 +74,35 @@ export const decreaseItem = (id) => {
 
 
 
+const catMaker = async (dispatch) => {
+    let categories=[]
+    const categoriesResponse = await Agent.general.getCategories()
+
+
+       categories=categoriesResponse.results
+   await categoriesResponse.results.forEach(async (cat, index) => {
+        const subCategories = await Agent.general.getChilds(cat.id)
+        categories[index].childs = subCategories
+      await  subCategories.forEach(async (sub, subIndex) => {
+            const realSub = await Agent.general.getSubcategories(sub.pk)
+          categories[index].childs[subIndex].subCategories = realSub
+          if (subIndex == subCategories.length - 1) {
+              console.log('bura girirmi');
+            dispatch(getCategories(categories))
+          }
+        })
+   })
+ }
+
+
+
+
  export const getCategory = () => {
      return async (dispatch) => {
-         const categories=[]
-         const categoriesResponse = await Agent.general.getCategories()
-            categories=categoriesResponse.results
-         categoriesResponse.results.forEach(async (cat, index) => {
-             const subCategories = await Agent.general.getChilds(cat.id)
-             categories[index].childs = subCategories
-             subCategories.forEach(async (sub, subIndex) => {
-                 const realSub = await Agent.general.getSubcategories(sub.pk)
-                 categories[index].childs[subIndex].subCategories=realSub
-             })
-         })
 
-         dispatch(getCategories(categories))
+      await catMaker(dispatch)
+   
+         
 
 
      };

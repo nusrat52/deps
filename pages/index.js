@@ -20,7 +20,11 @@ export default function Home () {
  
   const {bucket, categories} = useSelector(state => state)
   const [products, setProducts] = useState([]);
+  const [cat, setCat] = useState([]);
  
+ useEffect(() => {
+ setCat(categories)
+ }, [categories])
  
 
 
@@ -257,7 +261,7 @@ const dispatch=useDispatch()
 
                   {products.map((product, index) => {
                     if (index > 0) {
-                  return <div className="block-products__list-item">
+                  return <div key={index} className="block-products__list-item">
                   <div className="product-card product-card--hidden-actions">
                  
                     <div className="product-card__image product-image">
@@ -414,8 +418,7 @@ const dispatch=useDispatch()
                 <div className="block-header__divider"></div>
               </div>
               <div className="block-categories__list">
-
-              { categories.map(cate=> <div className="block-categories__item category-card category-card--layout--classic">
+               {   cat.map((cate, index)=> <div key={index} className="block-categories__item category-card category-card--layout--classic">
                   <div className="category-card__body">
                     <div className="category-card__image">
                       <a href="#">
@@ -426,13 +429,13 @@ const dispatch=useDispatch()
                       <div className="category-card__name">
                         <a href="#">{cate.title}</a>
                       </div>
-                    <ul className="category-card__links">
-                       {cate.childs.map(child=><li>
+           {  cate.childs && <ul className="category-card__links">
+                       {cate.childs.map((child, index) => <li key={index}>
                           <a href="#">{child.fields.title}</a>
-                        </li>)  }
+                        </li>)}
                       
                      
-                      </ul>
+                      </ul>}
                       <div className="category-card__all">
                         <a href="#">Show All</a>
                       </div>

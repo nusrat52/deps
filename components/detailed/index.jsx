@@ -3,8 +3,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 const CenterMode =({images})=> {
        
-console.log(images, 'imgggg');
-  const imageArray = images.map((imagee) => {
+   const imageArray = images.map((imagee) => {
           return imagee.image
         })
       const settings = {
@@ -26,7 +25,7 @@ console.log(images, 'imgggg');
       <div className="detailed">
          <Slider {...settings}>
   
-       {   imageArray.map((image)=> <div key={image}>
+       {   imageArray.map((image, index)=> <div key={index}>
             <img className="carouselThumbs" src={image} />
           </div>)      
           }

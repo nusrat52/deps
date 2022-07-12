@@ -7,14 +7,14 @@ import {login, getCategory} from "../../store/actions"
 function Layout ({ children }) {
     const dispatch = useDispatch()
   const { categories } = useSelector(state => state)
-  console.log(categories, 'categories');
-     useEffect(() => {
+
+
+ 
+  useEffect(() => {
+        const token = localStorage.getItem("token")
   
-       const token = localStorage.getItem("token")
-       
        const userDataTaker = async () => {
-        
-        const usedata = await Agent.login.logginWithToken(token)
+         const usedata = await Agent.login.logginWithToken(token)
          dispatch(login({
           address: usedata.address,
           email: usedata.email,

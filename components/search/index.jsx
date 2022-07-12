@@ -21,8 +21,7 @@ function Index() {
     dispatch(addProduct(object));
   };
 
-
-
+ 
   const deleteToDispatch = (id) => {
     dispatch(deleteProduct(id));
   };
@@ -37,11 +36,11 @@ function Index() {
     }
   }, [params.query]);
 
+  
  
   const checkIfInBucket = (id) => {
     const inBucket = bucket.find((buck) => buck.id == id)
-    console.log(bucket, 'hemen');
-    if (inBucket) {
+     if (inBucket) {
       return true
     }
     return false
@@ -213,8 +212,7 @@ function Index() {
                                 </div>
                               </div>
                             </div>
-                    
-                          </div>
+                           </div>
                           <div className="product-card__actions">
                             <div className="product-card__availability">
                               {" "}
@@ -249,8 +247,7 @@ function Index() {
                                 <AiOutlineHeart
                                   style={{ width: "25px", height: "25px" }}
                                 />
-                                {/* <AiFillHeart style={{"width":"25px", "height":"25px"}}/> */}
-                              </button>
+                               </button>
                             </div>
                           </div>
                         </div>

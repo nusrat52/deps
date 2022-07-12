@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
     
 const [content, setContent] = useState("description")
   const router = useRouter()
-  
+  console.log(data, 'dataaaa');
      return (
          <div>
         <div className="site">
@@ -21,8 +21,7 @@ const [content, setContent] = useState("description")
                 <div className="page-header__breadcrumb">
                   <nav aria-label="breadcrumb">
                       <ol className="breadcrumb">
-                        
-                        <li className="breadcrumb-item">
+                         <li className="breadcrumb-item">
                           <a href="index.html">Home</a>
                          <div className="breadcrumb-arrow" width="6px" height="9px">
                           <Image src="/images/sprite.svg#arrow-rounded-right-6x9" width={64} height={64} alt="" />
@@ -70,10 +69,8 @@ const [content, setContent] = useState("description")
                         </h1>
  
                       <div className="product__description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Curabitur ornare, mi in ornare elementum, libero nibh
-                        lacinia urna, quis convallis lorem erat at purus. Maecenas
-                        eu varius nisi.
+                    
+                         {data.description[0].description && data.description[0].description}
                       </div>
                       <ul className="product__features">
                         <li>Speed: 750 RPM</li>
@@ -148,8 +145,6 @@ const [content, setContent] = useState("description")
                               </button>
                               </div>
                               
-
-
                               <button type="button" className="btn btn-secondary btn-svg-icon btn-lg" data-toggle="tooltip" title="" data-original-title="Wishlist">
                               
                             <div className="product__actions-item product__actions-item--wishlist">
@@ -199,45 +194,14 @@ const [content, setContent] = useState("description")
                   </div>
                   <div className="product-tabs__content">
                     <div className={content=='description'?"product-tabs__pane product-tabs__pane--active":"product-tabs__pane"} id="tab-description">
-                      <div className="typography">
-                        <h3>Product Full Description</h3>
+              {   data.description.map((description)=><div className="typography">
+                        <h3>{description.title}</h3>
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          Maecenas fermentum, diam non iaculis finibus, ipsum arcu
-                          sollicitudin dolor, ut cursus sapien sem sed purus. Donec
-                          vitae fringilla tortor, sed fermentum nunc. Suspendisse
-                          sodales turpis dolor, at rutrum dolor tristique id.
-                          Quisque pellentesque ullamcorper felis, eget gravida mi
-                          elementum a. Maecenas consectetur volutpat ante, sit amet
-                          molestie urna luctus in. Nulla eget dolor semper urna
-                          malesuada dictum. Duis eleifend pellentesque dui et
-                          finibus. Pellentesque dapibus dignissim augue. Etiam odio
-                          est, sodales ac aliquam id, iaculis eget lacus. Aenean
-                          porta, ante vitae suscipit pulvinar, purus dui interdum
-                          tellus, sed dapibus mi mauris vitae tellus.
+                        {description.description}
                         </p>
-                        <h3>Etiam lacus lacus mollis in mattis</h3>
-                        <p>
-                          Praesent mattis eget augue ac elementum. Maecenas vel ante
-                          ut enim mollis accumsan. Vestibulum vel eros at mi
-                          suscipit feugiat. Sed tortor purus, vulputate et eros a,
-                          rhoncus laoreet orci. Proin sapien neque, commodo at porta
-                          in, vehicula eu elit. Vestibulum ante ipsum primis in
-                          faucibus orci luctus et ultrices posuere cubilia Curae;
-                          Curabitur porta vulputate augue, at sollicitudin nisl
-                          molestie eget.
-                        </p>
-                        <p>
-                          Nunc sollicitudin, nunc id accumsan semper, libero nunc
-                          aliquet nulla, nec pretium ipsum risus ac neque. Morbi eu
-                          facilisis purus. Quisque mi tortor, cursus in nulla ut,
-                          laoreet commodo quam. Pellentesque et ornare sapien. In ac
-                          est tempus urna tincidunt finibus. Integer erat ipsum,
-                          tristique ac lobortis sit amet, dapibus sit amet purus.
-                          Nam sed lorem nisi. Vestibulum ultrices tincidunt turpis,
-                          sit amet fringilla odio scelerisque non.
-                        </p>
-                      </div>
+                    
+                  
+                      </div>)     }
                     </div>
                     <div className={content=='specification'?"product-tabs__pane product-tabs__pane--active":"product-tabs__pane"} id="tab-specification">
                       <div className="spec">
