@@ -91,7 +91,7 @@ function Index() {
                         <div className="product-card product-card--hidden-actions">
                           <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
-                              <Link href={"/product/" + product.id}>
+                              <Link href={`/${product.category1.title}/${product.title}-${product.id}`}>
                                 <img
                                   className="product-image__img"
                                   src={product.images[0].image}

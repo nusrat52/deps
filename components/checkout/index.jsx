@@ -9,7 +9,7 @@ function Index () {
   const dispatch = useDispatch()
   const { bucket } = useSelector(state => state)
   
-  const total=bucket.reduce((currentValue, currentIndex )=>{
+  const total=bucket?.reduce((currentValue, currentIndex )=>{
     return  currentValue=currentValue+ currentIndex.price*currentIndex.count
   }, 0)
   

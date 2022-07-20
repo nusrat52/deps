@@ -18,7 +18,7 @@ function Bucket () {
     dispatch(deleteProduct(id))
   }
 
-  const total=bucket.reduce((currentValue, currentIndex )=>{
+  const total=bucket?.reduce((currentValue, currentIndex )=>{
     return  currentValue=currentValue+ currentIndex.price*currentIndex.count
     }, 0)
 

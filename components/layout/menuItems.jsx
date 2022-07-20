@@ -1,21 +1,22 @@
 import React, {useState} from 'react'
 import { IoIosArrowForward } from "react-icons/io"
 import Child from "./Child"
-function menuItems ({  title,id }) {
+import Link from 'next/link'
+function menuItems ({  title, id }) {
     
-
-const [listOn, setListOn] = useState(false)
+ const [listOn, setListOn] = useState(false)
   // const [subcategories, setSubcategories] = useState([])
  
 const classs= !listOn ?"departments__submenu departments__submenu--type--megamenu departments__submenu--size--xl departments__submenu--open d-none":"departments__submenu departments__submenu--type--megamenu departments__submenu--size--xl departments__submenu--open"
   
- 
-  return (
-     <li onMouseOver={()=>setListOn(true)} onMouseLeave={()=>  setListOn(false)} className="departments__item">
+   return (
+    <li onMouseOver={() => setListOn(true)} onMouseLeave={() => setListOn(false)} className="departments__item">
+      <Link href={`/${title}`}>
     <a className="departments__item-link" href="#">
       {title}
       <IoIosArrowForward className="departments__item-arrow departments__item-arrow_sp" />
     </a>
+      </Link>
      <div className={classs}>
        <div className="megamenu megamenu--departments departments__submenu--open">
         <div
@@ -32,18 +33,9 @@ const classs= !listOn ?"departments__submenu departments__submenu--type--megamen
  <Child id={id}/>
                 </ul>
                 </div>
-                
-
-
-
               
-
-
-
- 
           </div>
-
-        </div>
+         </div>
       </div>
      </div>
 

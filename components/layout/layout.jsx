@@ -9,8 +9,8 @@ function Layout ({ children }) {
   const { categories } = useSelector(state => state)
 
 
- 
-  useEffect(() => {
+  const statee = useSelector(state => state)
+   useEffect(() => {
         const token = localStorage.getItem("token")
   
        const userDataTaker = async () => {
@@ -25,7 +25,7 @@ function Layout ({ children }) {
         }))
        }
        if(token)
-         userDataTaker()
+          userDataTaker()
        dispatch(getCategory())
     }, [])
      

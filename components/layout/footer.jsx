@@ -1,6 +1,17 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Link from 'next/link'
-function footer() {
+import * as Agent from "../../api/agent"
+ function footer () {
+ 
+  const [adress, setAdress]=useState({})
+  
+  useEffect(() => {
+    const getUserAdress = async () => {
+      const adresses = await Agent.general.getAdress()
+       setAdress(adresses.results[0])
+     }
+    getUserAdress()
+  }, [])
   return (
     <footer className="site__footer">
     <div className="site-footer">
@@ -13,16 +24,16 @@ function footer() {
                   <h5 className="footer-contacts__title">Contact Us</h5>
                    <ul className="footer-contacts__contacts">
                     <li>
-                      <i className="footer-contacts__icon fas fa-globe-americas"></i> 715 Fake Street, New York 10021 USA
+                      <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress.address}
                     </li>
                     <li>
-                      <i className="footer-contacts__icon far fa-envelope"></i> stroyka@example.com
+                      <i className="footer-contacts__icon far fa-envelope"></i> {adress.email_address}
                     </li>
                     <li>
-                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> (800) 060-0730, (800) 060-0730
+                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> {adress.number1}, {adress.number2}
                   </li>
                   <li>
-                    <i className="footer-contacts__icon far fa-clock"></i> Mon-Sat 10:00pm - 7:00pm
+                    <i className="footer-contacts__icon far fa-clock"></i> {adress.openTimes}
                   </li>
                   </ul>
                 </div>

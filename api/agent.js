@@ -83,7 +83,43 @@ export const general = {
            .then((response) => {
             return response.data
        })
-   }
+    },
+    getWholeProducts: () => {
+        return axios.get(`http://194.233.173.232/api/product/`)
+           .then((response) => {
+            return response.data
+       })
+    },
+    
+
+    getBanners: () => {
+        return axios.get(`http://194.233.173.232/api/banner/`)
+           .then((response) => {
+            return response.data
+       })
+    },
+    
+     getAdress: () => {
+        return axios.get(`http://194.233.173.232/api/address/`)
+           .then((response) => {
+            return response.data
+       })
+    },
+    getProductsBychild: (body) => {
+        return axios.post(`http://194.233.173.232/api/filter-by-child/`, body)
+           .then((response) => {
+            return response.data
+       })
+    },
+    
+
+    getproductsBySub: (body) => {
+        return axios.post(`http://194.233.173.232/api/filter/`, body)
+           .then((response) => {
+            return response.data
+       })
+    },
+     
 
 };
  

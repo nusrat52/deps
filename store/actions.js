@@ -77,9 +77,7 @@ export const decreaseItem = (id) => {
 const catMaker = async (dispatch) => {
     let categories=[]
     const categoriesResponse = await Agent.general.getCategories()
-
-
-       categories=categoriesResponse.results
+         categories=categoriesResponse.results
    await categoriesResponse.results.forEach(async (cat, index) => {
         const subCategories = await Agent.general.getChilds(cat.id)
         categories[index].childs = subCategories

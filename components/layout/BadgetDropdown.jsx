@@ -24,7 +24,7 @@ function BadgetDropdown () {
         e.stopPropagation();
         setDropOn(false);
   };
-const total=bucket.reduce((currentValue, currentIndex )=>{
+const total=bucket?.reduce((currentValue, currentIndex )=>{
 return  currentValue=currentValue+ currentIndex.price*currentIndex.count
 }, 0)
    return (

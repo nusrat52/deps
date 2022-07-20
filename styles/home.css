@@ -10,7 +10,9 @@
 
 }
 
-
+.products-list__item__sp_3x{
+  width: calc(33% - 12px) !important;
+}
 
 @keyframes a {
   0% {
@@ -9810,6 +9812,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   }
   .block-banner__image--mobile {
     display: block;
+    background-size: cover;
   }
   .block-banner__button,
   .block-banner__text,

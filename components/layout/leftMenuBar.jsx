@@ -101,11 +101,11 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
               console.log(categories, 'categories')
 }
 
-            {categories.map(cate => <MobileMenuDropdown title={cate.title}>
+            {categories.map(cate => <MobileMenuDropdown key={cate.id} title={cate.title}>
    
-{cate.childs && cate.childs.map((child)=> <MobileChildDropDown title={child.fields.title}>
+{cate.childs && cate.childs.map((child, index)=> <MobileChildDropDown key={index} title={child.fields.title}>
      
-  {child.subCategories && child.subCategories.map((sub)=> <li className="mobile-links__item" data-collapse-item>
+  {child.subCategories && child.subCategories.map((sub, index)=> <li key={index} className="mobile-links__item" data-collapse-item>
        <div className="mobile-links__item-title">
          <a href="#" className="mobile-links__item-link"> {sub.fields.title} </a>
        </div>

@@ -3,7 +3,7 @@ import {
   MobileLogo,
   SearchMobile,
   HeartMobile,
-   Card,
+  Card,
 } from "../../static/svg/svg1";
 import MenuList from "./menuList";
 import RightMenuList from "./rightMenuList";
@@ -22,12 +22,7 @@ import { getItemsFromStorage } from "../../store/actions"
 
  function Navbar () {
    const dispatch = useDispatch()
-   
-
-
-
-
-  const [mobileSearch, setMobileSearch] = useState(false)
+   const [mobileSearch, setMobileSearch] = useState(false)
   const [mobileLeftMenuBar, setMobileLeftMenuBar] = useState(false)
   const [search, setSearch] = useState('')
   const router=useRouter()
@@ -39,7 +34,10 @@ import { getItemsFromStorage } from "../../store/actions"
  }
    useEffect(() => {
     
-     
+    const bucket=localStorage.getItem("bucket")
+      if(!bucket){
+         localStorage.setItem("bucket", JSON.stringify([]))
+     }
  dispatch(getItemsFromStorage())
   }, [])
   
@@ -95,15 +93,11 @@ import { getItemsFromStorage } from "../../store/actions"
             <div className="topbar__container container">
               <div className="topbar__row">
              
-           
-           
+            
               
                  <div className="topbar__spring"></div>
-                
-   
-
-                  
-                 <TopBarItemDrpDown title="Language" >
+                 
+                  <TopBarItemDrpDown title="Language" >
        <li className="menu__item">
          <div className="menu__item-submenu-offset"></div>
          <a className="menu__item-link" href="#">
@@ -185,13 +179,9 @@ import { getItemsFromStorage } from "../../store/actions"
                    
                    <div className="nav-panel__departments">
 
-
- 
+  
                     <CategoryMenu/>
-
- 
-
-                  </div>
+                   </div>
                   <div className="nav-panel__nav-links nav-links">
                      <ul className="nav-links__list">
                        

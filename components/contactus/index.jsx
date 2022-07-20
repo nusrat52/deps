@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {AiOutlineRight} from "react-icons/ai"
 import * as Agent from "../../api/agent"
 import Swal from 'sweetalert2'
@@ -7,9 +7,20 @@ function Index () {
   const [name, setName]=useState("")
   const [email, setEmail]=useState("")
   const [message, setMessage]=useState("")
-  const [subject, setSubject]=useState("")
+  const [subject, setSubject] = useState("")
   
-   
+
+  const [adress, setAdress]=useState({})
+  
+useEffect(() => {
+  const getUserAdress = async () => {
+    const adresses = await Agent.general.getAdress()
+     setAdress(adresses.results[0])
+   }
+  getUserAdress()
+}, [])
+
+    
     const submitEvent = async (e) => {
     e.preventDefault()
    
@@ -37,12 +48,12 @@ function Index () {
       }
   }
 
-
+ 
   return (
   <>
     <div className="block-map block">
     <div className="block-map__body">
-    <iframe src="https://www.google.com/maps/d/embed?mid=1RI_35ld7lWGwDKZ_z366xOlZKio&ehbc=2E312F" width="640" height="480"></iframe>
+    <iframe src={adress.coordinates} width="640" height="480"></iframe>
     </div>
   </div>
           <div>
@@ -73,15 +84,12 @@ function Index () {
                <div className="col-12 col-lg-6 pb-4 pb-lg-0">
                  <h4 className="contact-us__header card-title">Our Address</h4>
                  <div className="contact-us__address">
-                   <p> 715 Fake Ave, Apt. 34, New York, NY 10021 USA <br />Email: stroyka@example.com <br />Phone Number: +1 754 000-00-00 </p>
+                   <p> {adress.address} <br />Email: {adress.email_address} <br />Phone Number: {adress.number1} </p>
                    <p>
                      <strong>Opening Hours</strong>
-                     <br />Monday to Friday: 8am-8pm <br />Saturday: 8am-6pm <br />Sunday: 10am-4pm
+                     <br />{adress.openTimes} 
                    </p>
-                   <p>
-                     <strong>Comment</strong>
-                     <br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur suscipit suscipit mi, non tempor nulla finibus eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                   </p>
+              
                  </div>
                </div>
                <div className="col-12 col-lg-6">

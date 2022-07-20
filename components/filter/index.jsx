@@ -5,30 +5,75 @@ import ReactRange from "./range"
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { addProduct, deleteProduct } from "../../store/actions";
-
-
+import * as Agent from "../../api/agent"
+import {useSelector, useDispatch} from "react-redux"
+import {AiOutlineHeart} from "react-icons/ai"
 
 function Index () {
-  const router = useRouter()
- 
+  const params = useRouter()
+  const dispatch=useDispatch()
+  const { bucket } = useSelector((state) => state);
+
+  console.log(params.query, 'params 555');
 const [products, setProducts]=useState([])
 const [category, setCategory]=useState([])
- 
-
-
 const [values, setValues] = React.useState([0, 10000]);
 
+  
+  
+  
+  
+  
+  const getProducts = async (slug, id) => {
+    let dataforproducts
+    if (slug=="child") {
+       dataforproducts = await Agent.general.getProductsBychild({
+        "category2": [ parseInt(id)],
+        "min_price": values[0],
+        "max_price": values[1]
+       })
+      } else if (slug == "sub") {
+      dataforproducts = await Agent.general.getproductsBySub({
+        "category3": [parseInt(id)],
+        "min_price": values[0],
+        "max_price": values[1]
+       })
+     }
+
+    setProducts(dataforproducts)
+ }
+  
+   
   useEffect(() => {
-    if (router.query.id) {
-       const cate=router.query.id.split("=")[1]
-      const min=router.query.minMax.split(":")[0]
-      const max = router.query.minMax.split(":")[1]
-      if (cate && min && max) {
- console.log("bura girirmi");
-        }}
-    }, [router.query])
+
+    const timer = setTimeout(async () => {
+      if (params.query.filterCat) {
+        const cate=params.query.filterCat.split("-")[1]
+        const cateSluf=params.query.filterCat.split("-")[0]
+  
+       
+     getProducts(cateSluf, cate)
+     
+     }
+    }, 750);
+
+    return () => {
+      clearTimeout(timer);
+    };
+
+
+
+
+
+
+
+
+
+   
+    }, [params.query, values])
     
  
+
     const addToDispatch = (object) => {
       dispatch(addProduct(object));
     };
@@ -103,23 +148,7 @@ const [values, setValues] = React.useState([0, 10000]);
                         </div>
                       </div>
                     </div>
-              
-
-
-                                          
-                   
-                                          
-
-
-
-
-
-
-
-
-
-
-                          
+ 
                   </div>
                   <div className="widget-filters__actions d-flex">
                     <button className="btn btn-primary btn-sm">Filter</button>
@@ -150,40 +179,26 @@ const [values, setValues] = React.useState([0, 10000]);
                       <span className="filters-button__counter">3</span>
                     </button>
                   </div>
-  
-       
-          
+ 
                 </div>
               </div>
               <div className="products-view__list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns={2}>
                 <div className="products-list__body">
             
-                                      
+                    
 
-
-
-
-
-
-
-
-
-
-
-
-                                      
                 {products.map((product, index) => (
                       <div
                         key={index}
-                        className="products-list__item products-list__item__sp"
+                        className="products-list__item products-list__item__sp products-list__item__sp_3x"
                       >
                         <div className="product-card product-card--hidden-actions">
                           <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
-                              <Link href={"/product/" + product.id}>
+                              <Link href={`/${product.fields.category1.title}/${product.title}-${product.id}`}>
                                 <img
                                   className="product-image__img"
-                                  src={product.images[0].image}
+                                  src={product.fields.images[0].image}
                                   alt=""
                                 />
                               </Link>
@@ -191,7 +206,7 @@ const [values, setValues] = React.useState([0, 10000]);
                           </div>
                           <div className="product-card__info">
                             <div className="product-card__name">
-                              <a>{product.title}</a>
+                              <a>{product.fields.title}</a>
                             </div>
                             <div className="product-card__rating">
                               <div className="product-card__rating-stars">
@@ -316,7 +331,7 @@ const [values, setValues] = React.useState([0, 10000]);
                               <span className="text-success">In Stock</span>
                             </div>
                             <div className="product-card__prices">
-                              {product.price} AZN
+                              {product.fields.price} AZN
                             </div>
                             <div className="product-card__buttons">
                         {checkIfInBucket(product.id)  &&  <button onClick={()=>deleteToDispatch(product.id)} className="btn btn-danger product-card__addtocart" type="button"> Delete from Cart </button>}
@@ -326,7 +341,7 @@ const [values, setValues] = React.useState([0, 10000]);
                                     title: product.title,
                                     price: product.price,
                                     count: 1,
-                                    image: product.images[0].image,
+                                    image: product.fields.images[0].image,
                                     id:product.id
                                   })
                                 }

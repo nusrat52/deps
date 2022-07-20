@@ -11,6 +11,7 @@ function Index () {
   const [number, setNumber] = useState("")
   const [address, setAddress] = useState("")
   const { id } = useSelector(state => state.loginReducer)
+
   const dispatch=useDispatch()
    const submitFunc = async (e) => {
      e.preventDefault()
