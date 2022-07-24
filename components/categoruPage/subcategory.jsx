@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import * as Agent from "../../api/agent"
+import Link from 'next/link'
+
 function Subcategory ({pm}) {
     const [subcategories, setSubcategory] = useState(false)
     useEffect(() => {
@@ -10,13 +12,13 @@ function Subcategory ({pm}) {
         subTaker()
     }, [])
     
+  
 
-
-  return (
+   return (
       <div>
                 {subcategories && <ul className="category-card__links">
                        {subcategories.map((child, index) => <li key={index}>
-                          <a href="#">{child.fields.title}</a>
+                          <Link href={`/filter/sub-${child.pk}/${child.fields.title}`}>{child.fields.title}</Link>
                         </li>)}
                        </ul>}
     </div>

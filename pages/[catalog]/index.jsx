@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import * as Agent from "../../api/agent"
 import Head from "next/head"
- 
 import Subcategory from '../../components/categoruPage/subcategory';
-
+import Link from 'next/link';
 function Index ({ data }) {
-  console.log(data, 'dataaa');
-
+ 
 
 const [childs, setChilds] = useState([])
  
@@ -17,10 +15,7 @@ const [childs, setChilds] = useState([])
     }
     childTaker()
   }, [])
-  
-  
-  console.log(childs, 'childs');
-  
+    
   
    return (
     <>
@@ -39,14 +34,12 @@ const [childs, setChilds] = useState([])
                {childs.map((child, index)=> <div key={index} className="block-categories__item category-card category-card--layout--classic">
                   <div className="category-card__body">
                     <div className="category-card__image">
-              
-                    </div>
+                     </div>
                     <div className="category-card__content">
                       <div className="category-card__name">
-                        <a href="#">{child.fields.title}</a>
+                        <Link href={`/filter/child-${child.pk}/${child.fields.title}`}>{child.fields.title}</Link>
                      </div>
-                     
-                     {
+                      {
                        <Subcategory pm={child.pk}/>
 }
      
@@ -56,17 +49,8 @@ const [childs, setChilds] = useState([])
                     </div>
                   </div>
                 </div> )  }
-               
-  
-              </div>
-
-
-
-
-
-
-
-
+                </div>
+ 
     </>
   )
 }

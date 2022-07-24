@@ -37,8 +37,11 @@ useEffect(() => {
               <div className="block-slideshow__slide-content">
                 <div className="block-slideshow__slide-title"> {item.title} </div>
                 <div className="block-slideshow__slide-text"> {item.text} <br /> {item.title2} </div>
-                <div className="block-slideshow__slide-button">
-                  <span className="btn btn-primary btn-lg">Shop Now</span>
+             <div className="block-slideshow__slide-button">
+               <Link href={item.text_string}>
+                <span className="btn btn-primary btn-lg">Shop Now</span>
+               </Link>
+                  
                 </div>
              </div>
               </a>

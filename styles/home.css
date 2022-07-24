@@ -13,7 +13,21 @@
 .products-list__item__sp_3x{
   width: calc(33% - 12px) !important;
 }
+.hamburgerMenuIcon{
+  color: white;
+  width: 26px;
+  height: 26px;
 
+}
+
+.mobileCloseButton{
+  width: 30px;
+  height: 30px;
+}
+
+.searchIcon{
+  font-size: 20px;
+}
 @keyframes a {
   0% {
     transform: rotate(0deg);

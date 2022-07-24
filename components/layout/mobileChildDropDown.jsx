@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiOutlineDown } from "react-icons/ai";
 
 function MobileChildDropDown({ children, title }) {
   const [dropDown, setDropDown] = useState(false);
@@ -14,9 +15,7 @@ function MobileChildDropDown({ children, title }) {
     <div className="mobile-links__item-title">
       <a href="#" className="mobile-links__item-link"> {title} </a>
       <button className="mobile-links__item-toggle" type="button" data-collapse-trigger onClick={dropClick}>
-        <svg className="mobile-links__item-arrow" width="12px" height="7px">
-          <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7"></use>
-        </svg>
+      <AiOutlineDown />
       </button>
     </div>
     <div className="mobile-links__item-sub-links" data-collapse-content>

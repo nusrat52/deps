@@ -4,10 +4,17 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
+
+
+  
+  i18n: {
+    locales: ['en', 'az', 'ru'],
+    defaultLocale: 'en',
+  },
+
   module: {
     rules: [
-      //...
-      {
+       {
         test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
           {

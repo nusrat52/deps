@@ -1,11 +1,15 @@
 import React from 'react'
 import ProfileWrapper from '../profileWrapper'
-function Index() {
+import { dashboardTranslate } from "../../../translate"
+import { useRouter } from "next/router";
+
+function Index () {
+  const router=useRouter()
     return (
       <ProfileWrapper>
               <div className="card">
     <div className="card-header">
-      <h5>Order History</h5>
+      <h5>{dashboardTranslate['orderHistory'][router.locale]}</h5>
     </div>
     <div className="card-divider" />
     <div className="card-table">
@@ -13,10 +17,10 @@ function Index() {
         <table>
           <thead>
             <tr>
-              <th>Order</th>
-              <th>Date</th>
+              <th>{dashboardTranslate['order'][router.locale]}</th>
+              <th>{dashboardTranslate['date'][router.locale]}</th>
               <th>Status</th>
-              <th>Total</th>
+              <th>{dashboardTranslate['orderHistory'][router.locale]}total</th>
             </tr>
           </thead>
           <tbody>

@@ -6,25 +6,68 @@ import Detailed from "../../components/detailed";
 import { AiFillHeart, AiOutlineRight } from "react-icons/ai";
 import * as Agent from "../../api/agent";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllPostIds } from "../../lib/posts";
+import { addProduct, deleteProduct, decreaseItem, increaseItem } from "../../store/actions";
+
 import Head from "next/head";
 
  function index({ data }) {
   const [content, setContent] = useState("description");
    const router = useRouter();
-   console.log(data, 'dataaaa');
+
+   const { bucket } = useSelector((state) => state);
+
+const dispatch=useDispatch()
+
+   const addToDispatch = (object) => {
+    dispatch(addProduct(object));
+  };
+
+  const deleteToDispatch = (id) => {
+    dispatch(deleteProduct(id));
+  };
+  const checkIfInBucket = (id) => {
+    const inBucket = bucket.find((buck) => buck.id == id)
+    console.log(bucket, 'hemen');
+    if (inBucket) {
+      return true
+    }
+    return false
+}
+const increase = (id) => {
+  dispatch(increaseItem(id))
+}
+
+const decrease = (id) => {
+  dispatch(decreaseItem(id))
+}
+
+const deleteItem = (id) => {
+  dispatch(deleteProduct(id))
+}
+
+const bucketObject=bucket.find((buck)=>buck.id==data?.id)
+   
+    
+const total=bucket?.reduce((currentValue, currentIndex )=>{
+  return  currentValue=currentValue+ currentIndex.price*currentIndex.count
+  }, 0)
+console.log(data, 'dataaaa');
    return (
      <div>
-      <Head>
+       
+  {  data && <Head>
             <meta charset="utf-8" />
     <meta name="description" content={data.title+","+data.category1.title+","+data?.category2?.title+","+data?.category3?.title} />
     <meta name="google-site-verification" content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34=" />
     <title>{data.title}</title>
     <meta name="robots" content="noindex,nofollow" />
-       </Head>
-      <div className="site">
-        <div className="site__body">
+       </Head>}
+
+       <div className="site">
+         
+   { data &&  <div className="site__body">
           <div className="page-header">
             <div className="page-header__container container">
               <div className="page-header__breadcrumb">
@@ -155,31 +198,40 @@ import Head from "next/head";
                         </div>
                       </div>
 
-                      <div className="form-group product__option">
-                        <label
+                       <div className="form-group product__option">
+                         
+                   {  checkIfInBucket(data.id) && <label
                           className="product__option-label"
                           htmlFor="product-quantity"
                         >
                           Quantity
-                        </label>
+                        </label>}
                         <div className="product__actions">
                           <div className="product__actions-item">
-                            <div className="input-number product__quantity">
+                  {    checkIfInBucket(data.id) && <div className="input-number product__quantity">
                               <input
                                 id="product-quantity"
                                 className="input-number__input form-control form-control-lg"
                                 type="number"
-                                min={1}
-                                defaultValue={1}
+                                value={bucketObject?.count}
                               />
-                              <div className="input-number__add" />
-                              <div className="input-number__sub" />
-                            </div>
+                              <div onClick={()=>increase(data.id)} className="input-number__add" />
+                              <div onClick={()=>decrease(data.id)} className="input-number__sub" />
+                            </div>}
                           </div>
-                          <div className="product__actions-item product__actions-item--addtocart">
-                            <button className="btn btn-primary btn-lg">
-                              Add to cart
-                            </button>
+                           <div className="product__actions-item product__actions-item--addtocart">
+                           {checkIfInBucket(data.id)  &&  <button onClick={()=>deleteToDispatch(data.id)} className="btn btn-danger btn-lg" type="button"> Delete from Cart </button>}
+                             {!checkIfInBucket(data.id) && <button  onClick={() =>
+                                  addToDispatch({
+                                    title: data.title,
+                                    price: data.price,
+                                    count: 1,
+                                    image: data.images[0].image,
+                                    id:data.id
+                                  })
+                                } className="btn btn-success btn-lg">
+                               Add to cart
+                             </button>}
                           </div>
 
                           <button
@@ -334,7 +386,7 @@ import Head from "next/head";
               </div>
             </div>
           </div>
-        </div>
+        </div>}
       </div>
 
       <div className="pswp" tabIndex={-1} role="dialog" aria-hidden="true">
@@ -412,10 +464,11 @@ export async function getStaticPaths() {
     catalog: `${product.category1.title}`
      
     }}
-  })
+   })
+  
    return {
     paths:path,
-    fallback: false,
+    fallback: true,
   };
 
 }

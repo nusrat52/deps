@@ -3,9 +3,12 @@ import React from 'react'
 import ProfileWrapper from '../profileWrapper'
 import { useSelector } from "react-redux";
 import Link from 'next/link';
-
+import { dashboardTranslate } from "../../../translate";
+import { useRouter } from 'next/router';
+ 
 function Index () {
-  const {loginReducer}=useSelector(state=>state)
+  const { loginReducer } = useSelector(state => state)
+  const router=useRouter()
   return (
    
 <ProfileWrapper>
@@ -21,20 +24,20 @@ function Index () {
       </div>
     </div>
     <div className="dashboard__address card address-card address-card--featured">
-      <div className="address-card__badge">Default Address</div>
+      <div className="address-card__badge">{dashboardTranslate['default'][router.locale]}</div>
       <div className="address-card__body">
         <div className="address-card__name">{loginReducer.name}</div>
         <div className="address-card__row">
         {loginReducer.address}
         </div>
         <div className="address-card__row">
-          <div className="address-card__row-title">Phone Number</div>
+          <div className="address-card__row-title">{dashboardTranslate['phoneNumber'][router.locale]}</div>
           <div className="address-card__row-content">
           {loginReducer.phone_number}
           </div>
         </div>
         <div className="address-card__row">
-          <div className="address-card__row-title">Email Address</div>
+          <div className="address-card__row-title">{dashboardTranslate['emailAdress'][router.locale]}</div>
           <div className="address-card__row-content">
           {loginReducer.email}
           </div>
@@ -43,17 +46,17 @@ function Index () {
       </div>
     </div>
     <div className="dashboard__orders card">
-      <div className="card-header"><h5>Recent Orders</h5></div>
+      <div className="card-header"><h5>{dashboardTranslate['recentOrders'][router.locale]}</h5></div>
       <div className="card-divider" />
       <div className="card-table">
         <div className="table-responsive-sm">
           <table>
             <thead>
               <tr>
-                <th>Order</th>
-                <th>Date</th>
+                <th>{dashboardTranslate['order'][router.locale]}</th>
+                <th>{dashboardTranslate['date'][router.locale]}</th>
                 <th>Status</th>
-                <th>Total</th>
+                <th>{dashboardTranslate['total'][router.locale]}</th>
               </tr>
             </thead>
             <tbody>

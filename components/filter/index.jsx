@@ -8,27 +8,25 @@ import { addProduct, deleteProduct } from "../../store/actions";
 import * as Agent from "../../api/agent"
 import {useSelector, useDispatch} from "react-redux"
 import {AiOutlineHeart} from "react-icons/ai"
-
+ 
 function Index () {
   const params = useRouter()
   const dispatch=useDispatch()
   const { bucket } = useSelector((state) => state);
 
-  console.log(params.query, 'params 555');
 const [products, setProducts]=useState([])
 const [category, setCategory]=useState([])
 const [values, setValues] = React.useState([0, 10000]);
 
   
   
-  
-  
+const categories=useSelector(state=>state.categories)
   
   const getProducts = async (slug, id) => {
     let dataforproducts
     if (slug=="child") {
        dataforproducts = await Agent.general.getProductsBychild({
-        "category2": [ parseInt(id)],
+        "category2": [parseInt(id)],
         "min_price": values[0],
         "max_price": values[1]
        })
@@ -45,8 +43,7 @@ const [values, setValues] = React.useState([0, 10000]);
   
    
   useEffect(() => {
-
-    const timer = setTimeout(async () => {
+     const timer = setTimeout(async () => {
       if (params.query.filterCat) {
         const cate=params.query.filterCat.split("-")[1]
         const cateSluf=params.query.filterCat.split("-")[0]
@@ -60,16 +57,7 @@ const [values, setValues] = React.useState([0, 10000]);
     return () => {
       clearTimeout(timer);
     };
-
-
-
-
-
-
-
-
-
-   
+ 
     }, [params.query, values])
     
  
@@ -108,7 +96,7 @@ const [values, setValues] = React.useState([0, 10000]);
           </nav>
         </div>
         <div className="page-header__title">
-          <h1>Screwdrivers</h1>
+          <h1>{params.query.filter}</h1>
         </div>
       </div>
     </div>
@@ -129,8 +117,10 @@ const [values, setValues] = React.useState([0, 10000]);
               <div className="block-sidebar__item">
                 <div className="widget-filters widget widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
                   <h4 className="widget-filters__title widget__title"> Filters </h4>
-                                      <div className="widget-filters__list">
-                                            <SearchDropdown/>
+                    <div className="widget-filters__list">
+                     { categories.map((category)=><SearchDropdown category={category} />)
+                     }
+                      
                      <div className="widget-filters__item">
                       <div className="filter filter--opened" data-collapse-item>
                         <button type="button" className="filter__title filter__title__mb" data-collapse-trigger> Price <svg className="filter__arrow" width="12px" height="7px">
@@ -142,7 +132,7 @@ const [values, setValues] = React.useState([0, 10000]);
 
                              <ReactRange values={values} setValues={setValues}/>           
 
-                               <div className="filter-price__title"> Price: {values[0]}$ <span className="filter-price__min-value" /> -{values[1]} $ <span className="filter-price__max-value" />
+                               <div className="filter-price__title"> Price: {values[0]} AZN <span className="filter-price__min-value" /> -{values[1]}  AZN <span className="filter-price__max-value" />
                               </div>
                            </div>
                         </div>
@@ -150,10 +140,10 @@ const [values, setValues] = React.useState([0, 10000]);
                     </div>
  
                   </div>
-                  <div className="widget-filters__actions d-flex">
+                  {/* <div className="widget-filters__actions d-flex">
                     <button className="btn btn-primary btn-sm">Filter</button>
                     <button className="btn btn-secondary btn-sm">Reset</button>
-                  </div>
+                  </div> */}
                 </div>
                 </div>
                 
@@ -179,15 +169,11 @@ const [values, setValues] = React.useState([0, 10000]);
                       <span className="filters-button__counter">3</span>
                     </button>
                   </div>
- 
-                </div>
+                 </div>
               </div>
               <div className="products-view__list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns={2}>
                 <div className="products-list__body">
-            
-                    
-
-                {products.map((product, index) => (
+                  {products.map((product, index) => (
                       <div
                         key={index}
                         className="products-list__item products-list__item__sp products-list__item__sp_3x"
@@ -206,7 +192,7 @@ const [values, setValues] = React.useState([0, 10000]);
                           </div>
                           <div className="product-card__info">
                             <div className="product-card__name">
-                              <a>{product.fields.title}</a>
+                              <a>{product.fields.title}  </a>
                             </div>
                             <div className="product-card__rating">
                               <div className="product-card__rating-stars">
@@ -349,7 +335,7 @@ const [values, setValues] = React.useState([0, 10000]);
                                 type="button"
                               >
                                 {" "}
-                                Add from Cart{" "}
+                                Add from Cart 
                               </button>}
                               <button
                                 className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"

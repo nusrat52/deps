@@ -4,10 +4,14 @@ import { Cross } from "../../static/svg/svg1"
 import MobileChildDropDown from './mobileChildDropDown';
 import MobileMenuDropdown from './mobileMenuDropdown';
 import { useSelector } from "react-redux"
+import { useRouter } from 'next/router';
+import {AiOutlineClose } from "react-icons/ai"
+
+
 
 function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
-
-  const {categories}=useSelector(state=>state)
+  const router = useRouter()
+   const {categories}=useSelector(state=>state)
     const leftmenuClass = mobileLeftMenuBar ? "mobilemenu mobilemenu--open" : "mobilemenu"
     const onMouseDown = (e) => {
         if (e.nativeEvent.path[1].className == 'mobilemenu mobilemenu--open') {
@@ -21,14 +25,13 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
       <div className="mobilemenu__header">
         <div className="mobilemenu__title">Menu</div>
         <button onClick={()=>setMobileLeftMenuBar(false)} type="button" className="mobilemenu__close">
-          <Cross />
+          <AiOutlineClose className='mobileCloseButton' />
         </button>
       </div>
       <div className="mobilemenu__content">
           <ul className="mobile-links mobile-links--level--0" data-collapse data-collapse-opened-classname="mobile-links__item--open">
             
-
-     <li className={"mobile-links__item"} data-collapse-item>
+      <li className={"mobile-links__item"} data-collapse-item>
     <div className="mobile-links__item-title">
                 <Link href='/'>
               <a className="mobile-links__item-link"> Home </a>
@@ -97,10 +100,7 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
               </div>
               </li>
            </MobileMenuDropdown>
-            {
-              console.log(categories, 'categories')
-}
-
+ 
             {categories.map(cate => <MobileMenuDropdown key={cate.id} title={cate.title}>
    
 {cate.childs && cate.childs.map((child, index)=> <MobileChildDropDown key={index} title={child.fields.title}>
@@ -114,24 +114,20 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
    </MobileChildDropDown> )   }
         
             </MobileMenuDropdown> )    }
-            
-
-
-
-          <MobileMenuDropdown title="language">
+           <MobileMenuDropdown title="language">
             <li className="mobile-links__item" data-collapse-item>
               <div className="mobile-links__item-title">
-                <a href="index.html" className="mobile-links__item-link"> English </a>
+                <Link href={`/${router.asPath}`} locale="en" className="mobile-links__item-link"><a className="mobile-links__item-link">English</a></Link>
               </div>
             </li>
             <li className="mobile-links__item" data-collapse-item>
               <div className="mobile-links__item-title">
-                <a href="index.html" className="mobile-links__item-link"> Russian </a>
+              <Link href={`/${router.asPath}`} locale="ru" className="mobile-links__item-link"><a className="mobile-links__item-link"> Russian </a></Link>
               </div>
             </li>
             <li className="mobile-links__item" data-collapse-item>
               <div className="mobile-links__item-title">
-                <a href="index.html" className="mobile-links__item-link"> Azerbaijan </a>
+              <Link href={`/${router.asPath}`} locale="az" className="mobile-links__item-link"><a className="mobile-links__item-link">  Azerbaijan </a></Link>
               </div>
             </li>
           </MobileMenuDropdown>

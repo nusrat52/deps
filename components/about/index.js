@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import * as Agent from '../../api/agent'
  import Link from 'next/link'
-
-
+import {aboutTranslate} from "../../translate"
+import { useRouter } from 'next/router'
 function Index () {
     const [about, setAbout] = useState([])
     const [teams, setTeams] = useState([])
 
+  
+  const router = useRouter()
+ 
  useEffect(() => {
      const fetchAboutData = async () => {
         const aboutData = await Agent.general.getAboutPage("en")
@@ -35,8 +38,8 @@ function Index () {
                       <div className="about-us__team">
                         <h2 className="about-us__team-title">Meat Our Team</h2>
                         <div className="about-us__team-subtitle text-muted">
-                          Want to work in our friendly team?<br /><Link href="/bizimleelaqe">Contact us</Link>
-                          and we will consider your candidacy.
+                          {aboutTranslate['about1'][router.locale]}<br /> 
+                          {aboutTranslate['about2'][router.locale]}
                         </div>
                         <div className="about-us__teammates teammates">
 

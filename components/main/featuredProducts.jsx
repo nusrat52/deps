@@ -141,12 +141,12 @@ const Responsive = () => {
             </button>
           </div>
         </div>
-      </div>
+       </div>
+ {   products.length>0 &&   
       <Slider {...settings}>
         {products.map((product, index) => (
           <div key={index} className="crouselWrapper">
-            {" "}
-            <div className="block-products__list-item block-products__list-item_sp">
+             <div className="block-products__list-item block-products__list-item_sp">
               <div className="product-card product-card--hidden-actions">
                 <div className="product-card__image product-image">
                   <a className="product-image__body pointer">
@@ -206,7 +206,7 @@ const Responsive = () => {
                       type="button"
                     >
                       {" "}
-                      Add To Cart{" "}
+                      Add To Cart  {" "}
                     </button>
                     <button
                       className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
@@ -223,10 +223,9 @@ const Responsive = () => {
             </div>
           </div>
         ))}
-      </Slider>
+      </Slider>}
       <br />
-      <br />
-      <br />
+       <br />
        <br />
     </div>
   );

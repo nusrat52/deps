@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react'
 import { Formik, Form, Field } from 'formik';
  import * as Yup from 'yup';
-  import {useSelector, useDispatch} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
  import Swal from 'sweetalert2'
 import ProfileWrapper from '../profileWrapper'
- import {login} from "../../../api/agent"
+import { login } from "../../../api/agent"
+ 
+import {passwordTranslate } from "../../../translate"
+ import { useRouter } from 'next/router';
+
+
 const SignupSchema = Yup.object().shape({
  
     password: Yup.string()
@@ -18,12 +23,13 @@ const SignupSchema = Yup.object().shape({
  
 });
 
-function Index() {
+function Index () {
+  const router=useRouter()
     return (
       <ProfileWrapper>
            <div className="card">
         <div className="card-header">
-          <h5>Change Password</h5>
+          <h5>{passwordTranslate["ChangePassword"][router.locale]}</h5>
         </div>
         <div className="card-divider" />
         <div className="card-body">
@@ -65,21 +71,21 @@ function Index() {
        {({ errors, touched }) => (
          <Form>
  
-               <label>New Passwordy</label>
-                     <Field type="password" className="form-control" placeholder="Password"  name="password" />
+               <label>{passwordTranslate["newPassword"][router.locale]}</label>
+                     <Field type="password" className="form-control" placeholder="password"  name="password" />
            {errors.password && touched.password ? (
              <div>{errors.password}</div>
            ) : null}
               
            
-              <label>Reenter New Password</label>
+              <label>{passwordTranslate["newPasswordRe"][router.locale]}</label>
                      <Field type="password" className="form-control" placeholder="Password"  name="password2" />
            {errors.password && touched.password ? (
              <div>{errors.password}</div>
            ) : null}
             
             <button type="submit" className="btn btn-primary mt-4">
-            Change
+            {passwordTranslate["change"][router.locale]}
             </button>
     
               </Form>

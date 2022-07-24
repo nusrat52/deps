@@ -29,8 +29,7 @@ const classs= !listOn ?"departments__submenu departments__submenu--type--megamen
           <div className="row">
             <div className="col-12">
                               <ul className="megamenu__links megamenu__links--level--0 megamenu__links_top">
-                   
- <Child id={id}/>
+  <Child id={id}/>
                 </ul>
                 </div>
               

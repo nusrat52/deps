@@ -3,6 +3,7 @@ import react, {useState, useEffect} from "react"
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, deleteProduct } from "../store/actions";
+import { useRouter } from "next/router";
  import Link from "next/link";
 import * as Agent from "../api/agent"
 
@@ -22,7 +23,10 @@ export default function Home () {
   const [products, setProducts] = useState([]);
   const [cat, setCat] = useState([]);
   const [banners, setBanners] = useState([]);
- 
+  const { locale, locales, asPath } = useRouter()
+  console.log(locale, 'localee');
+  console.log(locales, 'localees');
+  console.log(asPath, 'aspath');
  useEffect(() => {
  setCat(categories)
  }, [categories])
@@ -426,25 +430,17 @@ const dispatch=useDispatch()
               <div className="block-categories__list">
                {   cat.map((cate, index)=> <div key={index} className="block-categories__item category-card category-card--layout--classic">
                   <div className="category-card__body">
-                    <div className="category-card__image">
-                      <a href="#">
-                        <img src="images/categories/category-1.jpg" alt="" />
-                      </a>
-                    </div>
-                    <div className="category-card__content">
+                     <div className="category-card__content">
                       <div className="category-card__name">
-                        <a href="#">{cate.title}</a>
+                        <Link href={`/${cate.title}`}>{cate.title}</Link>
                       </div>
            {  cate.childs && <ul className="category-card__links">
                        {cate.childs.map((child, index) => <li key={index}>
-                          <a href="#">{child.fields.title}</a>
+                          <Link href={`/filter/child-${child.pk}/${child.fields.title}`}>{child.fields.title}</Link>
                         </li>)}
                       
-                     
-                      </ul>}
-                      <div className="category-card__all">
-                        <a href="#">Show All</a>
-                      </div>
+                       </ul>}
+              
                       <div className="category-card__products"> 572 Products </div>
                     </div>
                   </div>

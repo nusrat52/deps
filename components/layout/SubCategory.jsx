@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import * as Agent from "../../api/agent"
-
+import Link from 'next/link'
 function SubCategory ({ pk }) {
      const [subCategory, subCategoryy]=useState([])
 useEffect(() => {
@@ -10,10 +10,10 @@ useEffect(() => {
      }
     subTaker()
 }, [])
-     
+     console.log(subCategory, 'subCategory 222');
   return (<>
     {subCategory.map((sub, indx) => <li key={indx} className="megamenu__item">
-    <a href="#">{sub.fields.title}</a>
+    <Link href={`/filter/sub-${sub.pk}/${sub.fields.title?sub.fields.title:"null"}`}>{sub.fields.title?sub.fields.title:""}</Link>
 </li>
               )}</>
   )

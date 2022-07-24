@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { AiOutlineRight } from "react-icons/ai"
 import { useDispatch, useSelector} from "react-redux";
 import { logout } from "../../store/actions"
+import {dashboardTranslate} from "../../translate"
+ 
  
 function ProfileWrapper ({ children }) {
   const router = useRouter();
@@ -14,8 +16,7 @@ function ProfileWrapper ({ children }) {
  const {logged}=useSelector(state=>state.loginReducer)
   const dispatch=useDispatch()
   
-
-   useEffect(() => {
+    useEffect(() => {
     if (router.asPath == "/profile/dashboard") {
       setRoute("dashboard");
     } else if (router.asPath == "/profile/edit") {
@@ -81,17 +82,17 @@ function ProfileWrapper ({ children }) {
                     <Link href="/profile/dashboard">Dashboard</Link>
                   </li>
                   <li className={route=="edit"?"account-nav__item account-nav__item--active":"account-nav__item"}>
-                    <Link href="/profile/edit">Edit Profile</Link>
+                    <Link href="/profile/edit">{dashboardTranslate['edit'][router.locale]}</Link>
                   </li>
                   <li className={route=="orderhistory"?"account-nav__item account-nav__item--active":"account-nav__item"}>
-                    <Link href="/profile/orderhistory">Order History</Link>
+                    <Link href="/profile/orderhistory">{dashboardTranslate['orderHistory'][router.locale]}</Link>
                   </li>
 
                   <li className={route=="password"?"account-nav__item account-nav__item--active":"account-nav__item"}>
-                    <Link href="/profile/password">Password</Link>
+                    <Link href="/profile/password">{dashboardTranslate['pass'][router.locale]}</Link>
                   </li>
                   <li onClick={logoutFunc} className="account-nav__item pointer">
-                    <a>Logout </a>
+                    <a>{dashboardTranslate['exit'][router.locale]} </a>
                   </li>
                 </ul>
               </div>
