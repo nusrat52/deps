@@ -11,12 +11,13 @@ import { getAllPostIds } from "../../lib/posts";
 import { addProduct, deleteProduct, decreaseItem, increaseItem } from "../../store/actions";
 
 import Head from "next/head";
-
+import {detailedTransfer} from "../../translate"
  function index({ data }) {
   const [content, setContent] = useState("description");
    const router = useRouter();
-
    const { bucket } = useSelector((state) => state);
+ 
+
 
 const dispatch=useDispatch()
 
@@ -53,8 +54,7 @@ const bucketObject=bucket.find((buck)=>buck.id==data?.id)
 const total=bucket?.reduce((currentValue, currentIndex )=>{
   return  currentValue=currentValue+ currentIndex.price*currentIndex.count
   }, 0)
-console.log(data, 'dataaaa');
-   return (
+    return (
      <div>
        
   {  data && <Head>
@@ -145,7 +145,7 @@ console.log(data, 'dataaaa');
                         <span className="text-success">In Stock</span>
                       </li>
                       <li>
-                        Manifacturer: <a>{data.manifacturer}</a>
+                      {detailedTransfer['WEIGHT'][router.locale]}   : <a>{data.manifacturer}</a>
                       </li>
                       <li>{data.code}</li>
                     </ul>
@@ -185,7 +185,7 @@ console.log(data, 'dataaaa');
 
                         <div className="form-group product__option">
                           <label className="product__option-label">
-                            weight
+                          {detailedTransfer['WEIGHT'][router.locale]}  
                           </label>
                           <div className="input-radio-label">
                             <div className="input-radio-label__list">
@@ -204,7 +204,7 @@ console.log(data, 'dataaaa');
                           className="product__option-label"
                           htmlFor="product-quantity"
                         >
-                          Quantity
+                         {detailedTransfer['QUANTITY'][router.locale]}
                         </label>}
                         <div className="product__actions">
                           <div className="product__actions-item">
@@ -220,7 +220,7 @@ console.log(data, 'dataaaa');
                             </div>}
                           </div>
                            <div className="product__actions-item product__actions-item--addtocart">
-                           {checkIfInBucket(data.id)  &&  <button onClick={()=>deleteToDispatch(data.id)} className="btn btn-danger btn-lg" type="button"> Delete from Cart </button>}
+                           {checkIfInBucket(data.id)  &&  <button onClick={()=>deleteToDispatch(data.id)} className="btn btn-danger btn-lg" type="button"> {detailedTransfer['delete'][router.locale]}</button>}
                              {!checkIfInBucket(data.id) && <button  onClick={() =>
                                   addToDispatch({
                                     title: data.title,
@@ -251,10 +251,7 @@ console.log(data, 'dataaaa');
                   </div>
                   <div className="product__footer">
                     <div className="product__tags tags">
-                      <div className="tags__list">
-                        <a href="#">Mounts</a> <a href="#">Electrodes</a>
-                        <a href="#">Chainsaws</a>
-                      </div>
+                
                     </div>
                     <div className="product__share-links share-links">
                       <ul className="share-links__list">
@@ -287,7 +284,7 @@ console.log(data, 'dataaaa');
                             : "product-tabs__item"
                         }
                       >
-                        Description
+                        {detailedTransfer['Description'][router.locale]}
                       </a>
                       <a
                         onClick={() => setContent("specification")}
@@ -297,7 +294,7 @@ console.log(data, 'dataaaa');
                             : "product-tabs__item"
                         }
                       >
-                        Specification
+                        {detailedTransfer['Specification'][router.locale]}
                       </a>
                     </div>
                   </div>
@@ -311,8 +308,8 @@ console.log(data, 'dataaaa');
                     }
                     id="tab-description"
                   >
-                    {data.description.map((description) => (
-                      <div className="typography">
+                    {data.description.map((description, index) => (
+                      <div key={index} className="typography">
                         <h3>{description.title}</h3>
                         <p>{description.description}</p>
                       </div>
@@ -327,7 +324,7 @@ console.log(data, 'dataaaa');
                     id="tab-specification"
                   >
                     <div className="spec">
-                      <h3 className="spec__header">Specification</h3>
+                      <h3 className="spec__header">{detailedTransfer['Specification'][router.locale]}</h3>
                       <div className="spec__section">
                         <h4 className="spec__section-title">General</h4>
                         <div className="spec__row">

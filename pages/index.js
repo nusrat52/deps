@@ -6,8 +6,8 @@ import { addProduct, deleteProduct } from "../store/actions";
 import { useRouter } from "next/router";
  import Link from "next/link";
 import * as Agent from "../api/agent"
-
- 
+import { homepageTranslate, dashboardTranslate } from "../translate";
+  
  const Carousel = dynamic(() => import("../components/main/carousel"), {
   ssr: false,
 });
@@ -24,9 +24,7 @@ export default function Home () {
   const [cat, setCat] = useState([]);
   const [banners, setBanners] = useState([]);
   const { locale, locales, asPath } = useRouter()
-  console.log(locale, 'localee');
-  console.log(locales, 'localees');
-  console.log(asPath, 'aspath');
+ 
  useEffect(() => {
  setCat(categories)
  }, [categories])
@@ -98,8 +96,8 @@ const dispatch=useDispatch()
                     </svg>
                   </div>
                   <div className="block-features__content">
-                    <div className="block-features__title">Free Shipping</div>
-                    <div className="block-features__subtitle"> For orders from $50 </div>
+                    <div className="block-features__title">{homepageTranslate['freeShipping'][locale]}</div>
+                    <div className="block-features__subtitle"> {homepageTranslate['fof'][locale]} </div>
                   </div>
                 </div>
                 <div className="block-features__divider"></div>
@@ -110,8 +108,8 @@ const dispatch=useDispatch()
                     </svg>
                   </div>
                   <div className="block-features__content">
-                    <div className="block-features__title">Support 24/7</div>
-                    <div className="block-features__subtitle"> Call us anytime </div>
+                    <div className="block-features__title">{homepageTranslate['support'][locale]}</div>
+                    <div className="block-features__subtitle"> {homepageTranslate['cua'][locale]} </div>
                   </div>
                 </div>
                 <div className="block-features__divider"></div>
@@ -122,8 +120,8 @@ const dispatch=useDispatch()
                     </svg>
                   </div>
                   <div className="block-features__content">
-                    <div className="block-features__title">100% Safety</div>
-                    <div className="block-features__subtitle"> Only secure payments </div>
+                    <div className="block-features__title">{homepageTranslate['safety'][locale]}</div>
+                    <div className="block-features__subtitle"> {homepageTranslate['osp'][locale]} </div>
                   </div>
                 </div>
                 <div className="block-features__divider"></div>
@@ -134,8 +132,8 @@ const dispatch=useDispatch()
                     </svg>
                   </div>
                   <div className="block-features__content">
-                    <div className="block-features__title">Hot Offers</div>
-                    <div className="block-features__subtitle"> Discounts up to 90% </div>
+                    <div className="block-features__title">{homepageTranslate['hotOffers'][locale]}</div>
+                    <div className="block-features__subtitle"> {homepageTranslate['dut'][locale]} </div>
                   </div>
                 </div>
               </div>
@@ -149,7 +147,7 @@ const dispatch=useDispatch()
             
             
             
-{    banners.map((banner)=> <div className="block block-banner">
+{    banners.map((banner, index)=> <div key={index} className="block block-banner">
             <div className="container">
               <a href="#" className="block-banner__body">
                 <div className="block-banner__image block-banner__image--desktop" style={{
@@ -170,7 +168,7 @@ const dispatch=useDispatch()
            <div className="block block-products block-products--layout--large-first" data-mobile-grid-columns="2">
             <div className="container">
               <div className="block-header">
-                <h3 className="block-header__title">Bestsellers</h3>
+                <h3 className="block-header__title">{homepageTranslate['Bestsellers'][locale]}</h3>
                 <div className="block-header__divider"></div>
                </div>
                
@@ -219,7 +217,7 @@ const dispatch=useDispatch()
                         type="button"
                       >
                         {" "}
-                        Delete from Cart{" "}
+                        {homepageTranslate['deletefromCard'][locale]}
                       </button>
                     )}
                     {!checkIfInBucket(products[0].id) && (
@@ -237,10 +235,10 @@ const dispatch=useDispatch()
                         type="button"
                       >
                         {" "}
-                        Add from Cart{" "}
+                        {homepageTranslate['addToCard'][locale]}{" "}
                       </button>
                     )}
-                          <button className="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button"> Add To Cart </button>
+                          <button className="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button"> {homepageTranslate['addToCard'][locale]} </button>
                           <button className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
                             <svg width="16px" height="16px">
                               <use xlinkHref="images/sprite.svg#wishlist-16"></use>
@@ -253,24 +251,9 @@ const dispatch=useDispatch()
                     </div>
                   </div>
                  </div>}
-                 
-
-
-
-
-
-
-
-
-
-
+ 
                   <div className="block-products__list">
-                    
-
-                  
-
-
-
+                   
                   {products.map((product, index) => {
                     if (index > 0) {
                   return <div key={index} className="block-products__list-item">
@@ -290,15 +273,7 @@ const dispatch=useDispatch()
                       <div className="product-card__name">
                         <a >{product.title} </a>
                         </div>
-                        
-
-
-
-
-
-
-
-                        
+          
                         <div className="product-card__rating">
                           
                         <div className="product-card__rating-stars">
@@ -374,7 +349,7 @@ const dispatch=useDispatch()
                         type="button"
                       >
                         {" "}
-                        Delete from Cart{" "}
+                        {homepageTranslate['deletefromCard'][locale]}
                       </button>
                     )}
                     {!checkIfInBucket(product.id) && (
@@ -392,11 +367,11 @@ const dispatch=useDispatch()
                         type="button"
                       >
                         {" "}
-                        Add from Cart{" "}
+                        {homepageTranslate['addToCard'][locale]}{" "}
                       </button>
                     )}
                           
-                        <button className="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button"> Add To Cart </button>
+                        <button className="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button"> {homepageTranslate['addToCard'][locale]} </button>
                         <button className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
                           <svg width="16px" height="16px">
                             <use xlinkHref="images/sprite.svg#wishlist-16"></use>
@@ -410,11 +385,7 @@ const dispatch=useDispatch()
                   </div>
                 }
               })   
-                    }
-
-                  
-
-              
+                    }              
                 </div>
               </div>
             </div>
@@ -422,7 +393,7 @@ const dispatch=useDispatch()
           <div className="block block--highlighted block-categories block-categories--layout--classic">
             <div className="container">
               <div className="block-header">
-                <h3 className="block-header__title">Popular Categories</h3>
+                <h3 className="block-header__title">{homepageTranslate['PopularCategories'][locale]}</h3>
                 <div className="block-header__divider"></div>
               </div>
 
@@ -432,7 +403,7 @@ const dispatch=useDispatch()
                   <div className="category-card__body">
                      <div className="category-card__content">
                       <div className="category-card__name">
-                        <Link href={`/${cate.title}`}>{cate.title}</Link>
+                        <Link href={`/${cate.title.replace(/#| /g,'-')}`}>{cate.title}</Link>
                       </div>
            {  cate.childs && <ul className="category-card__links">
                        {cate.childs.map((child, index) => <li key={index}>
@@ -450,24 +421,10 @@ const dispatch=useDispatch()
               </div>
             </div>
           </div>
-          
- 
-
- 
-          
-          
  
         </div>
 
-
-        
-
-
-
-
-      
-
-
+ 
 
 
       </div> 
@@ -484,8 +441,8 @@ const dispatch=useDispatch()
           <div className="pswp__ui pswp__ui--hidden">
             <div className="pswp__top-bar">
               <div className="pswp__counter"></div>
-              <button className="pswp__button pswp__button--close" title="Close (Esc)"></button> {/*
-              <!--<button className="pswp__button pswp__button&#45;&#45;share" title="Share"></button>--> */} <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+              <button className="pswp__button pswp__button--close" title="Close (Esc)"></button>
+              <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
               <button className="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
               <div className="pswp__preloader">
                 <div className="pswp__preloader__icn">
@@ -507,9 +464,7 @@ const dispatch=useDispatch()
         </div>
       </div>
 
-
-
-
+ 
     </div>
   );
 }

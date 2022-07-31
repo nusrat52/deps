@@ -2,12 +2,17 @@ import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import * as Agent from "../../api/agent";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct, deleteProduct } from "../../store/actions";
+import {
+  addProduct,
+  deleteProduct,
+  addWishlist,
+  deleteWishlist,
+} from "../../store/actions";
 import Link from "next/link";
-
-
-
-
+import { homepageTranslate } from "../../translate";
+import { useRouter } from "next/router";
+import { AiFillHeart } from "react-icons/ai";
+ 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
 
@@ -42,10 +47,19 @@ function SamplePrevArrow(props) {
 }
 
 const Responsive = () => {
+  const router = useRouter();
 
-  
   const dispatch = useDispatch();
   const { bucket } = useSelector((state) => state);
+
+  const { wishlistReducer } = useSelector((state) => state);
+
+  const checkIfInWishlist = (id) => {
+    const inWish = wishlistReducer.find((obj) => obj.id == id);
+    if (inWish) return true;
+
+    return false;
+  };
   const mockArray = [];
 
   var settings = {
@@ -111,7 +125,7 @@ const Responsive = () => {
     return false;
   };
 
-   return (
+  return (
     <div className="container">
       <div
         className="block block-products-carousel"
@@ -119,7 +133,9 @@ const Responsive = () => {
         data-mobile-grid-columns="2"
       >
         <div className="block-header">
-          <h3 className="block-header__title">Featured Products</h3>
+          <h3 className="block-header__title">
+            {homepageTranslate["featured"][router.locale]}
+          </h3>
           <div className="block-header__divider"></div>
 
           <div className="block-header__arrows-list">
@@ -141,92 +157,118 @@ const Responsive = () => {
             </button>
           </div>
         </div>
-       </div>
- {   products.length>0 &&   
-      <Slider {...settings}>
-        {products.map((product, index) => (
-          <div key={index} className="crouselWrapper">
-             <div className="block-products__list-item block-products__list-item_sp">
-              <div className="product-card product-card--hidden-actions">
-                <div className="product-card__image product-image">
-                  <a className="product-image__body pointer">
-                    <Link href={`/${product.category1.title}/${product.title}-${product.id}`}>
-                      <img
-                        className="product-image__img"
-                        src={product.images[0].image}
-                        alt=""
-                      />
-                    </Link>
-                  </a>
-                </div>
-                <div className="product-card__info">
-                  <div className="product-card__name">
-                    <a href="product.html">{product.title} </a>
-                  </div>
-                </div>
-                <div className="product-card__actions">
-                  <div className="product-card__availability">
-                    {" "}
-                    Availability: <span className="text-success">In Stock</span>
-                  </div>
-                  <div className="product-card__prices">
-                    {product.price} AZN
-                  </div>
-                  <div className="product-card__buttons">
-                    {checkIfInBucket(product.id) && (
-                      <button
-                        onClick={() => deleteToDispatch(product.id)}
-                        className="btn btn-danger product-card__addtocart"
-                        type="button"
+      </div>
+      {products.length > 0 && (
+        <Slider {...settings}>
+          {products.map((product, index) => (
+            <div key={index} className="crouselWrapper">
+              <div className="block-products__list-item block-products__list-item_sp">
+                <div className="product-card product-card--hidden-actions">
+                  <div className="product-card__image product-image">
+                    <a className="product-image__body pointer">
+                      <Link
+                        href={`/${product.category1.title}/${product.title}-${product.id}`}
                       >
-                        {" "}
-                        Delete from Cart{" "}
-                      </button>
-                    )}
-                    {!checkIfInBucket(product.id) && (
-                      <button
-                        onClick={() =>
-                          addToDispatch({
-                            title: product.title,
-                            price: product.price,
-                            count: 1,
-                            image: product.images[0].image,
-                            id: product.id,
-                          })
-                        }
-                        className="btn btn-success product-card__addtocart"
-                        type="button"
-                      >
-                        {" "}
-                        Add from Cart{" "}
-                      </button>
-                    )}
-                    <button
-                      className="btn btn-secondary product-card__addtocart product-card__addtocart--list"
-                      type="button"
-                    >
+                        <img
+                          className="product-image__img"
+                          src={product.images[0].image}
+                          alt=""
+                        />
+                      </Link>
+                    </a>
+                  </div>
+                  <div className="product-card__info">
+                    <div className="product-card__name">
+                      <a href="product.html">{product.title} </a>
+                    </div>
+                  </div>
+                  <div className="product-card__actions">
+                    <div className="product-card__availability">
                       {" "}
-                      Add To Cart  {" "}
-                    </button>
-                    <button
-                      className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
-                      type="button"
-                    >
-                      <svg width="16px" height="16px">
-                        <use xlinkHref="images/sprite.svg#wishlist-16"></use>
-                      </svg>
-                      <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
-                    </button>
+                      Availability:{" "}
+                      <span className="text-success">In Stock</span>
+                    </div>
+                    <div className="product-card__prices">
+                      {product.price} AZN
+                    </div>
+                    <div className="product-card__buttons">
+                      {checkIfInBucket(product.id) && (
+                        <button
+                          onClick={() => deleteToDispatch(product.id)}
+                          className="btn btn-danger product-card__addtocart"
+                          type="button"
+                        >
+                          {" "}
+                          {homepageTranslate["deletefromCard"][router.locale]}
+                        </button>
+                      )}
+                      {!checkIfInBucket(product.id) && (
+                        <button
+                          onClick={() =>
+                            addToDispatch({
+                              title: product.title,
+                              price: product.price,
+                              count: 1,
+                              image: product.images[0].image,
+                              id: product.id,
+                            })
+                          }
+                          className="btn btn-success product-card__addtocart"
+                          type="button"
+                        >
+                          {" "}
+                          {homepageTranslate["addToCard"][router.locale]}
+                        </button>
+                      )}
+                      <button
+                        className="btn btn-secondary product-card__addtocart product-card__addtocart--list"
+                        type="button"
+                      >
+                        {homepageTranslate["addToCard"][router.locale]}
+                      </button>
+                      <button
+                        className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                        type="button"
+                      >
+                        {!checkIfInWishlist(product.id) && (
+                          <svg
+                            onClick={() =>
+                              dispatch(
+                                addWishlist({
+                                  id: product.id,
+                                  category: product.category1.title,
+                                  title: product.title,
+                                  image: product.images[0].image,
+                                })
+                              )
+                            }
+                            width="16px"
+                            height="16px"
+                          >
+                            <use xlinkHref="images/sprite.svg#wishlist-16"></use>
+                          </svg>
+                        )}
+
+                        {checkIfInWishlist(product.id) && (
+                          <AiFillHeart
+                            onClick={() => dispatch(deleteWishlist(product.id))}
+                            className="text-danger"
+                          />
+                        )}
+
+                        <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </Slider>}
+          ))}
+        </Slider>
+      )}
       <br />
-       <br />
-       <br />
+      <br />
+      <br />
     </div>
   );
 };

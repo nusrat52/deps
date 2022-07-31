@@ -16,7 +16,7 @@ useEffect(() => {
     return (
   <>
              {childs.map((ch, index) => <li key={index} className="megamenu__item megamenu__item--with-submenu">
-      <Link href={`/filter/child-${ch.pk}/${ch.fields.title}`}>{ch.fields.title}</Link>
+      <Link href={`/filter/child-${ch.pk}/${ch.fields.title.replace(/#| /g,'-')}`}>{ch.fields.title}</Link>
      <ul className="megamenu__links megamenu__links--level--1">
     <SubCategory pk={ch.pk}/>
     

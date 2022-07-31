@@ -78,7 +78,7 @@ function Index () {
     </div>
     <div className="card-divider" />
     <div className="card-footer">
-      <ul className="pagination justify-content-center">
+      {/* <ul className="pagination justify-content-center">
         <li className="page-item disabled">
           <a className="page-link page-link--with-arrow" href="#" aria-label="Previous">
             <svg className="page-link__arrow page-link__arrow--left" aria-hidden="true" width="8px" height="13px">
@@ -103,7 +103,7 @@ function Index () {
             </svg>
           </a>
         </li>
-      </ul>
+      </ul> */}
     </div>
   </div>
       </ProfileWrapper>

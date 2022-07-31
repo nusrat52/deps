@@ -132,4 +132,314 @@ export const passwordTranslate = {
         az: "dəyiş",
     },
    
- }
+}
+ 
+
+
+
+export const homepageTranslate = {
+    home: {
+        en: "Home",
+        ru: "главная страница",
+        az: "Ana səhifə",
+    },
+    account: {
+        en: "Account",
+        ru: "учетная запись",
+        az: "Hesab",
+    },
+    login: {
+        en: "Login",
+        ru: "Авторизоваться",
+        az: "Login",
+    },
+    register: {
+        en: "Register",
+        ru: "регистр",
+        az: "Qeydiyyatdan keç",
+    },
+    contactUs: {
+        en: "Contact Us",
+        ru: "Свяжитесь с нами",
+        az: "Bizimlə əlaqə",
+    },
+    vriteDirector: {
+        en: "Write director",
+        ru: "Написать режиссера",
+        az: "Direktora yaz",
+    },
+    askQuestion: {
+        en: "Ask Question",
+        ru: "Задавать вопрос",
+        az: "Sual ver",
+    },
+    aboutUs: {
+        en: "About us",
+        ru: "О компании",
+        az: "Haqqımızda",
+    },
+    search: {
+        en: "Search over 10,000 products",
+        ru: "Поиск по более чем 10 000 продуктов",
+        az: "10,000 produkt üzrə axtarış",
+    },
+    servis: {
+        en: "Customer Service",
+        ru: "Обслуживание клиентов",
+        az: "Müştəri servisi",
+    },
+    language: {
+        en: "Language",
+        ru: "Язык",
+        az: "Dil",
+    },
+    az: {
+        en: "Aze",
+        ru: "Азе",
+        az: "Aze",
+    },
+  
+     shopByCategory: {
+        en: "Shop by category",
+        ru: "Магазин по категориям",
+        az: "Kateqoriya seçimi",
+    },
+    freeShipping: {
+        en: "Free shipping",
+        ru: "Бесплатная доставка",
+        az: "Qeydiyyatdan keç",
+    },
+    fof: {
+        en: "For orders from 50 AZN",
+        ru: "Для заказов от 50 AZN",
+        az: "50 azn də yuxarı sifarışlər",
+    },
+    support: {
+        en: "Support 24/7",
+        ru: "Поддержка 24/7",
+        az: "24/7 dəstək",
+    },
+    cua: {
+        en: "Call us anytime",
+        ru: "Звоните нам в любое время",
+        az: "İstədiyiniz zaman zng edin",
+    },
+    safety: {
+        en: "100% Safety",
+        ru: "100% безопасность",
+        az: "100% Təhlükəsiz",
+    },
+    osp: {
+        en: "Only secure payments",
+        ru: "Только безопасные платежи",
+        az: "Yalnız təhlükəsiz ödəmə",
+    },
+    hotOffers: {
+        en: "Hot offers",
+        ru: "Горячие предложения",
+        az: "qaçınılmaz təklif",
+    },
+    dut: {
+        en: "Discount up to 90 %",
+        ru: "Скидки до 90%",
+        az: "90 faizədək endirim",
+    },
+    Bestsellers: {
+        en: "Bestsellers",
+        ru: "регистр",
+        az: "Ən çox satanlar",
+    },
+    addToCard: {
+        en: "Add to card",
+        ru: "Добавить на карту",
+        az: "Qeydiyyatdan keç",
+    },
+    deletefromCard: {
+        en: "Delete from card",
+        ru: "Удалить с карты",
+        az: "Kartdan sil",
+    },
+    PopularCategories: {
+        en: "Popular Categories",
+        ru: "Популярные категории",
+        az: "Populyar kategoriyalar",
+    },
+    information: {
+        en: "İnformation",
+        ru: "регистр",
+        az: "İnformasiya",
+    },
+    myAccount: {
+        en: "My account",
+        ru: "Мой счет",
+        az: "Mənim hesabım",
+    },
+    menu: {
+        en: "Menu",
+        ru: "Mеню",
+        az: "Menyü",
+    },
+
+    featured: {
+        en: "Featured Products",
+        ru: "Рекомендуемые продукты",
+        az: "Seçilmiş Productlar",
+    }
+    
+   
+}
+ 
+
+
+
+export const detailedTransfer = {
+  
+    Manifacturer: {
+        en: "Manifacturer",
+        ru: "Производитель",
+        az: "İstehsalçı",
+    },
+
+    WEIGHT: {
+        en: "WEIGHT",
+        ru: "МАССА",
+        az: "kq",
+    },
+    delete: {
+        en: "Delete from Cart",
+        ru: "Удалить из корзины",
+        az: "Səbəti sil",
+    },
+
+    QUANTITY: {
+        en: "QUANTITY",
+        ru: "КОЛИЧЕСТВО",
+        az: "MİQDAR",
+    },
+    Description: {
+        en: "Description",
+        ru: "Описание",
+        az: "TƏSVİR",
+    },
+    Specification: {
+        en: "Specification",
+        ru: "Технические характеристики",
+        az: "Texniki Xarakter",
+    },
+}
+
+
+
+export const filterCategoriya = {
+  
+    Filters: {
+        en: "Filters",
+        ru: "Фильтры",
+        az: "Filter",
+    },
+    Price: {
+        en: "Price",
+        ru: "Цена",
+        az: "Qiymət",
+
+     },
+    add: {
+        en: "Add to card",
+        ru: "Добавить на карту",
+        az: "Karta əlavə et",
+    },
+    delete: {
+        en: "Delete from card",
+        ru: "Удалить с карты",
+        az: "kardan sil",
+    } ,
+    search: {
+        en: "Search",
+        ru: "Поиск",
+        az: "Axtar",
+    },
+
+}
+
+
+
+export const postQuestions = {
+  
+    home: {
+        en: "Home",
+        ru: "Дом",
+        az: "Ana Səhifə",
+    },
+    contactUs: {
+        en: "Contact Us",
+        ru: "Свяжитесь с нами",
+        az: "Bizimlə Əlaqə"
+      },
+    adress: {
+        en: "Our Address",
+        ru: "Наш адресс",
+        az: "Bizim adress",
+    },
+    email: {
+        en: "Email",
+        ru: "Эл. адрес",
+        az: "Email",
+    } ,
+    number: {
+        en: "Phone Number",
+        ru: "Номер телефона",
+        az: "Telefon nömrəsi",
+    },
+    openningHours: {
+        en: "Opening Hours",
+        ru: "Часы работы",
+        az: "Açılış vaxları",
+    },
+
+    leaveMessage: {
+        en: "Leave us a Message",
+        ru: "Оставьте нам сообщение",
+        az: "Bizə mesaj buraxın",
+    },
+
+    name: {
+        en: "Your Name",
+        ru: "Ваше имя",
+        az: "Adınız",
+    },
+
+    message: {
+        en: "Message",
+        ru: "Сообщение",
+        az: "Mesaj",
+    },
+
+    sendMessage: {
+        en: "Send Message",
+        ru: "Отправить сообщение",
+        az: "Mesajı göndər",
+    },
+
+    writeDirector: {
+        en: "Write Director",
+        ru: "Написать директор",
+        az: "Directora yaz",
+    },
+    city: {
+        en: "City",
+        ru: "Город",
+        az: "Şəhər",
+    },
+    companyName: {
+        en: "Company Name",
+        ru: "Название компании",
+        az: "Şəhər adı",
+    },
+
+
+    askQuestion: {
+        en: "Company Name",
+        ru: "Задавать вопрос",
+        az: "Sual ver",
+    },
+}

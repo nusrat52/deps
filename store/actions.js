@@ -11,7 +11,9 @@ export const login = (userData) => {
 }
 
 
-export const logout = (userData) => {
+
+export const logout = () => {
+    console.log('action yerinde');
     return {
        type: actionType.LOGOUT,
     }
@@ -24,6 +26,7 @@ export const addProduct = (data) => {
         payload:data
     }
 }
+
 
 
 export const deleteProduct = (id) => {
@@ -74,6 +77,36 @@ export const decreaseItem = (id) => {
 
 
 
+
+export const addWishlist = (wishlistobject) => {
+    return {
+        type: actionType.ADD_WISHLIST,
+        payload:wishlistobject
+      }
+ }
+
+
+
+ export const deleteWishlist = (id) => {
+    return {
+        type: actionType.DELETE_WISHLIST,
+        payload:id
+      }
+ }
+
+export const getWishlist = () => {
+     return {
+        type: actionType.GET_WISHLIST,
+       }
+ }
+
+
+
+
+
+
+
+
 const catMaker = async (dispatch) => {
     let categories=[]
     const categoriesResponse = await Agent.general.getCategories()
@@ -85,8 +118,7 @@ const catMaker = async (dispatch) => {
             const realSub = await Agent.general.getSubcategories(sub.pk)
           categories[index].childs[subIndex].subCategories = realSub
           if (subIndex == subCategories.length - 1) {
-              console.log('bura girirmi');
-            dispatch(getCategories(categories))
+             dispatch(getCategories(categories))
           }
         })
    })
@@ -97,11 +129,6 @@ const catMaker = async (dispatch) => {
 
  export const getCategory = () => {
      return async (dispatch) => {
-
-      await catMaker(dispatch)
-   
-         
-
-
+       await catMaker(dispatch)
      };
   };

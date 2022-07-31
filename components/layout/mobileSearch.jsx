@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SearchMobile, Cross } from "../../static/svg/svg1";
 import { useRouter } from "next/router";
-
+import { homepageTranslate, dashboardtranslate, dashboardTranslate } from "../../translate";
 function MobileSearch({mobileSearch, setMobileSearch}) {
  
   const topSearchClass = mobileSearch
@@ -23,7 +23,7 @@ function MobileSearch({mobileSearch, setMobileSearch}) {
     <div className={topSearchClass}>
   <div className="search__body">
     <form className="search__form" action="#">
-      <input onKeyDown={inputKeyDown} value={search} onChange={(e)=>setSearch(e.target.value)} className="search__input" name="search" placeholder="Search over 10,000 products" aria-label="Site search" type="text" autoomplete="off" />
+      <input onKeyDown={inputKeyDown} value={search} onChange={(e)=>setSearch(e.target.value)} className="search__input" name="search" placeholder={homepageTranslate['search'][router.locale]} aria-label="Site search" type="text" autoomplete="off" />
       <button className="search__button search__button--type--submit" type="submit">
         <SearchMobile />
       </button>

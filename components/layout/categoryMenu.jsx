@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { BiMenuAltLeft } from "react-icons/bi";
 import { IoIosArrowUp, IoIosArrowForward } from "react-icons/io";
 import * as Agent from "../../api/agent"
+import { homepageTranslate } from '../../translate';
  function CategoryMenu () {
   const router = useRouter()
   
@@ -52,7 +53,7 @@ import * as Agent from "../../api/agent"
    <button onClick={dropclick} className="departments__button">
  
          <BiMenuAltLeft className='departments__button-icon departments__button-icon_sp'/>
-         Shop By Category{" "}
+        {homepageTranslate['shopByCategory'][router.locale]}
          <IoIosArrowUp className="departments__button-arrow departments__button-arrow_sp"/>
  
    </button>

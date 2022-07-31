@@ -69,7 +69,7 @@ function Index () {
                   </thead>
                     <tbody className="checkout__totals-products">
                       
-              {bucket.map((buck)=> <tr key={buck.id}>
+              {bucket.map((buck, index)=> <tr key={index}>
                       <td> {buck.title} × {buck.count} </td>
                       <td>{buck.price*buck.count} AZN</td>
                     </tr>)}

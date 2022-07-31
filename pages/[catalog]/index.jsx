@@ -13,12 +13,15 @@ const [childs, setChilds] = useState([])
       const childsData = await Agent.general.getChilds(data.id)
        setChilds(childsData)
     }
+    if(data)
     childTaker()
-  }, [])
+  }, [data])
     
   
-   return (
-    <>
+  return (
+     <>
+ 
+    { data && <>
       <Head>
     <meta charset="utf-8" />
     <meta name="description" content={data.title} />
@@ -51,7 +54,8 @@ const [childs, setChilds] = useState([])
                 </div> )  }
                 </div>
  
-    </>
+      </>}
+      </>
   )
 }
 
@@ -62,23 +66,47 @@ export async function getStaticProps(context) {
   const cate = context.params.catalog
  
   const contentresponse = await Agent.general.getCategories()
- const category= contentresponse.results.find((res)=>res.title==cate)
+ const category= contentresponse.results.find((res)=>res.title==cate.replace("-", " "))
    return {
     props: { data: category },
   };
 }
 
-export async function getStaticPaths() {
+
+
+
+
+export async function getStaticPaths ({ locales }) {
+  console.log(locales, 'localess');
+
+
+
   const productsResponse = await Agent.general.getCategories();
-  const path = productsResponse.results.map((product) => {
+  const pathMock = productsResponse.results.map((product) => {
  
   return {params: {
      catalog: `${product.title}`
      }}
   })
-   return {
+
+const path=[]
+
+  locales.forEach(element => {
+    productsResponse.results.map((product) => {
+      path.push({params: {
+        catalog: `${product.title.replace(/#| /g,'-')}`,
+       
+      },
+      locale:element
+      })
+    })
+  });
+
+  console.log(path, 'path');
+
+    return {
     paths:path,
-    fallback: false,
+    fallback: false
   };
 
 }

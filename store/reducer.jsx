@@ -2,7 +2,7 @@ import * as ActionTypes from "./actionTypes";
 
 export const loginReducer = (
   state = {
-    logged: false,
+    logged: undefined,
     address: null,
     email: null,
     name: null,
@@ -13,9 +13,12 @@ export const loginReducer = (
 ) => {
   switch (action.type) {
     case ActionTypes.LOGIN:
+      console.log('login olan yer');
       return { ...action.payload, logged: true };
     case ActionTypes.LOGOUT:
-      localStorage.setItem("token", null)
+      console.log("logout yerune gitirmi");
+      localStorage.removeItem("token");
+
       return {
         logged: false,
         address: null,
@@ -24,7 +27,7 @@ export const loginReducer = (
         phone_number: null,
         surname: null,
       };
-     
+
     default:
       return state;
   }

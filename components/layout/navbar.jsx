@@ -23,14 +23,16 @@ import * as Agent from "../../api/agent";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineShoppingCart } from "react-icons/hi";
-
+import { homepageTranslate, dashboardtranslate, dashboardTranslate } from "../../translate";
 function Navbar() {
   const buckets = useSelector((state) => state.bucket);
   const dispatch = useDispatch();
   const [mobileSearch, setMobileSearch] = useState(false);
   const [mobileLeftMenuBar, setMobileLeftMenuBar] = useState(false);
   const [number, setNumber] = useState(false);
-
+  const state = useSelector(state => state)
+  
+  console.log(state, 'stateee');
   const [search, setSearch] = useState("");
   const router = useRouter();
   const inputKeyDown = (e) => {
@@ -128,11 +130,11 @@ function Navbar() {
               <div className="topbar__row">
                 <div className="topbar__spring"></div>
 
-                <TopBarItemDrpDown title="Language">
+                <TopBarItemDrpDown title={homepageTranslate["language"][router.locale]}>
                   <li className="menu__item">
                     <div className="menu__item-submenu-offset"></div>
                     <Link href={`/${router.asPath}`} locale="en">
-                       <a className="menu__item-link" href="#">
+                      <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
                             srcSet="
@@ -143,14 +145,14 @@ function Navbar() {
                             alt=""
                           />
                         </div>{" "}
-                        English
+                        en
                       </a>
                     </Link>
                   </li>
                   <li className="menu__item">
                     <div className="menu__item-submenu-offset"></div>
-                    <Link href={`/${router.asPath}`} locale="ru"><a className="menu__item-link" href="#">
-                      
+                    <Link href={`/${router.asPath}`} locale="ru">
+                      <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
                             srcSet="
@@ -161,14 +163,14 @@ function Navbar() {
                             alt=""
                           />
                         </div>{" "}
-                        Russian
+                        ru
                       </a>
                     </Link>
                   </li>
                   <li className="menu__item">
                     <div className="menu__item-submenu-offset"></div>
-                    <Link href={`/${router.asPath}`} locale="az"><a className="menu__item-link" href="#">
-                      
+                    <Link href={`/${router.asPath}`} locale="az">
+                      <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
                             srcSet="
@@ -179,7 +181,7 @@ function Navbar() {
                             alt=""
                           />
                         </div>{" "}
-                        Azerbaijan
+                        {homepageTranslate['az'][router.locale]}
                       </a>
                     </Link>
                   </li>
@@ -213,7 +215,7 @@ function Navbar() {
                       onChange={(e) => setSearch(e.target.value)}
                       className="search__input"
                       name="search"
-                      placeholder="Search over 10,000 products"
+                      placeholder={homepageTranslate['search'][router.locale]}
                       aria-label="Site search"
                       type="text"
                       autoomplete="off"
@@ -231,9 +233,8 @@ function Navbar() {
               </div>
             </div>
             <div className="site-header__phone">
-              <div className="site-header__phone-title">Customer Service</div>
+              <div className="site-header__phone-title">{homepageTranslate['servis'][router.locale]}</div>
               <div className="site-header__phone-number">
-                {" "}
                 <a href={`tel:${number}`}>{number}</a>
               </div>
             </div>
@@ -255,21 +256,21 @@ function Navbar() {
                     <ul className="nav-links__list">
                       <Link style={{ color: "red !important" }} href="/">
                         <a className="nav-links__item-link">
-                          <div className="nav-links__item-body">Home</div>
+                          <div className="nav-links__item-body">{homepageTranslate['home'][router.locale]}</div>
                         </a>
                       </Link>
-                      <MenuList title="Account">
+                      <MenuList title={homepageTranslate['account'][router.locale]}>
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/daxilol">
-                            <a className="menu__item-link"> Login </a>
+                            <a className="menu__item-link"> {homepageTranslate['login'][router.locale]} </a>
                           </Link>
                         </li>
 
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/register">
-                            <a className="menu__item-link"> Register </a>
+                            <a className="menu__item-link"> {homepageTranslate['home'][router.locale]} </a>
                           </Link>
                         </li>
 
@@ -283,41 +284,41 @@ function Navbar() {
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/profile/edit">
-                            <a className="menu__item-link"> Edit Profile </a>
+                            <a className="menu__item-link"> {dashboardTranslate['edit'][router.locale]} </a>
                           </Link>
                         </li>
 
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/register">
-                            <a className="menu__item-link"> Register </a>
+                            <a className="menu__item-link"> {homepageTranslate['register'][router.locale]} </a>
                           </Link>
                         </li>
 
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/profile/orderhistory">
-                            <a className="menu__item-link"> Order History </a>
+                            <a className="menu__item-link"> {dashboardTranslate['orderHistory'][router.locale]} </a>
                           </Link>
                         </li>
                       </MenuList>
-                      <MenuList title="Contact Us">
+                      <MenuList title={homepageTranslate['contactUs'][router.locale]}>
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/bizimleelaqe">
-                            <a className="menu__item-link"> Contact Us </a>
+                            <a className="menu__item-link"> {homepageTranslate['contactUs'][router.locale]} </a>
                           </Link>
                         </li>
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/direktorayaz">
-                            <a className="menu__item-link"> Write Director </a>
+                            <a className="menu__item-link"> {homepageTranslate['vriteDirector'][router.locale]} </a>
                           </Link>
                         </li>
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/sualver">
-                            <a className="menu__item-link"> Ask Question </a>
+                            <a className="menu__item-link"> {homepageTranslate['askQuestion'][router.locale]} </a>
                           </Link>
                         </li>
                       </MenuList>
@@ -382,7 +383,7 @@ function Navbar() {
                       <li className="nav-links__item">
                         <Link href="/haqqimizda">
                           <a className="nav-links__item-link">
-                            <div className="nav-links__item-body">About us</div>
+                            <div className="nav-links__item-body">{homepageTranslate['aboutUs'][router.locale]}</div>
                           </a>
                         </Link>
                       </li>

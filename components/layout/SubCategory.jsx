@@ -10,10 +10,9 @@ useEffect(() => {
      }
     subTaker()
 }, [])
-     console.log(subCategory, 'subCategory 222');
-  return (<>
+   return (<>
     {subCategory.map((sub, indx) => <li key={indx} className="megamenu__item">
-    <Link href={`/filter/sub-${sub.pk}/${sub.fields.title?sub.fields.title:"null"}`}>{sub.fields.title?sub.fields.title:""}</Link>
+    <Link href={`/filter/sub-${sub.pk}/${sub.fields.title?sub.fields.title.replace(/#| /g,'-'):"null"}`}>{sub.fields.title?sub.fields.title:""}</Link>
 </li>
               )}</>
   )

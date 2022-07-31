@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import Link from 'next/link'
 import * as Agent from "../../api/agent"
- function footer () {
+import { homepageTranslate, dashboardTranslate} from "../../translate";
+import { useRouter } from "next/router";
+  function footer () {
  
   const [adress, setAdress]=useState({})
   
@@ -12,6 +14,7 @@ import * as Agent from "../../api/agent"
      }
     getUserAdress()
   }, [])
+   const router=useRouter()
   return (
     <footer className="site__footer">
     <div className="site-footer">
@@ -21,7 +24,7 @@ import * as Agent from "../../api/agent"
             <div className="col-12 col-md-6 col-lg-4">
             <div className="site-footer__widget footer-contacts">
                   
-                  <h5 className="footer-contacts__title">Contact Us</h5>
+                  <h5 className="footer-contacts__title">{homepageTranslate['contactUs'][router.locale]}</h5>
                    <ul className="footer-contacts__contacts">
                     <li>
                       <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress.address}
@@ -40,27 +43,27 @@ import * as Agent from "../../api/agent"
             </div>
             <div className="col-6 col-md-3 col-lg-2">
               <div className="site-footer__widget footer-links">
-                <h5 className="footer-links__title">Information</h5>
+                <h5 className="footer-links__title">{homepageTranslate['information'][router.locale]}</h5>
                 <ul className="footer-links__list">
                     <li className="footer-links__item">
                       <Link href='/haqqimizda'>
-                     <a   className="footer-links__link"> About Us </a>
+                     <a   className="footer-links__link"> {homepageTranslate['aboutUs'][router.locale]} </a>
                       </Link>
                     </li>
                     <li className="footer-links__item">
                       <Link href='/bizimleelaqe'>
-                     <a   className="footer-links__link">  Contact Us </a>
+                     <a   className="footer-links__link">  {homepageTranslate['contactUs'][router.locale]} </a>
                       </Link>
                     </li>
                     <li className="footer-links__item">
                       <Link href='/direktorayaz'>
-                     <a   className="footer-links__link">  Contact Director </a>
+                     <a   className="footer-links__link">  {homepageTranslate['vriteDirector'][router.locale]} </a>
                       </Link>
                     </li>
         
                     <li className="footer-links__item">
                       <Link href='/sualver'>
-                     <a   className="footer-links__link">  Ask Question</a>
+                     <a   className="footer-links__link">  {homepageTranslate['askQuestion'][router.locale]}</a>
                       </Link>
                     </li>
                  </ul>
@@ -68,17 +71,15 @@ import * as Agent from "../../api/agent"
             </div>
             <div className="col-6 col-md-3 col-lg-2">
               <div className="site-footer__widget footer-links">
-                <h5 className="footer-links__title">My Account</h5>
+                <h5 className="footer-links__title">{homepageTranslate['myAccount'][router.locale]}</h5>
                   <ul className="footer-links__list">
                       <li className="footer-links__item">
                       <Link href='/profile/orderhistory'>
-                     <a   className="footer-links__link">  Order History</a>
+                     <a   className="footer-links__link">  {dashboardTranslate['orderHistory'][router.locale]}</a>
                       </Link>
                     </li>
                      <li className="footer-links__item">
-                      <Link href='/beyendiklerim'>
-                     <a   className="footer-links__link"> Wish list</a>
-                      </Link>
+                
                     </li>
                    </ul>
               </div>

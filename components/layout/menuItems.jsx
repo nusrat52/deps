@@ -11,7 +11,7 @@ const classs= !listOn ?"departments__submenu departments__submenu--type--megamen
   
    return (
     <li onMouseOver={() => setListOn(true)} onMouseLeave={() => setListOn(false)} className="departments__item">
-      <Link href={`/${title}`}>
+      <Link href={`/${title.replace(/#| /g,'-')}`}>
     <a className="departments__item-link" href="#">
       {title}
       <IoIosArrowForward className="departments__item-arrow departments__item-arrow_sp" />

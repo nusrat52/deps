@@ -7,9 +7,11 @@ import Link from "next/link";
 import { addProduct, deleteProduct } from "../../store/actions";
 import * as Agent from "../../api/agent"
 import {useSelector, useDispatch} from "react-redux"
-import {AiOutlineHeart} from "react-icons/ai"
- 
-function Index () {
+import { AiOutlineHeart } from "react-icons/ai"
+import {filterCategoriya} from "../../translate"
+import { Router } from 'react-router-dom';
+
+ function Index () {
   const params = useRouter()
   const dispatch=useDispatch()
   const { bucket } = useSelector((state) => state);
@@ -18,11 +20,9 @@ const [products, setProducts]=useState([])
 const [category, setCategory]=useState([])
 const [values, setValues] = React.useState([0, 10000]);
 
-  
-  
+   
 const categories=useSelector(state=>state.categories)
-  
-  const getProducts = async (slug, id) => {
+   const getProducts = async (slug, id) => {
     let dataforproducts
     if (slug=="child") {
        dataforproducts = await Agent.general.getProductsBychild({
@@ -50,8 +50,7 @@ const categories=useSelector(state=>state.categories)
   
        
      getProducts(cateSluf, cate)
-     
-     }
+      }
     }, 750);
 
     return () => {
@@ -71,8 +70,7 @@ const categories=useSelector(state=>state.categories)
     };
     const checkIfInBucket = (id) => {
       const inBucket = bucket.find((buck) => buck.id == id)
-      console.log(bucket, 'hemen');
-      if (inBucket) {
+       if (inBucket) {
         return true
       }
       return false
@@ -90,13 +88,13 @@ const categories=useSelector(state=>state.categories)
                     </li>
             
                     <li className="breadcrumb-item active" aria-current="page">
-                    Search 
+                    {filterCategoriya['search'][params.locale]} 
                     </li>
                   </ol>
           </nav>
         </div>
         <div className="page-header__title">
-          <h1>{params.query.filter}</h1>
+          <h1>{params.query.filter}  </h1>
         </div>
       </div>
     </div>
@@ -107,7 +105,7 @@ const categories=useSelector(state=>state.categories)
             <div className="block-sidebar__backdrop" />
             <div className="block-sidebar__body">
               <div className="block-sidebar__header">
-                <div className="block-sidebar__title">Filters</div>
+                <div className="block-sidebar__title"> {filterCategoriya['Filters'][params.locale]}  </div>
                 <button className="block-sidebar__close" type="button">
                   <svg width="20px" height="20px">
                     <use xlinkHref="images/sprite.svg#cross-20" />
@@ -116,14 +114,13 @@ const categories=useSelector(state=>state.categories)
               </div>
               <div className="block-sidebar__item">
                 <div className="widget-filters widget widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
-                  <h4 className="widget-filters__title widget__title"> Filters </h4>
+                  <h4 className="widget-filters__title widget__title"> {filterCategoriya['Filters'][params.locale]} </h4>
                     <div className="widget-filters__list">
-                     { categories.map((category)=><SearchDropdown category={category} />)
+                     { categories.map((category)=><SearchDropdown key={category.id} category={category} />)
                      }
-                      
-                     <div className="widget-filters__item">
+                      <div className="widget-filters__item">
                       <div className="filter filter--opened" data-collapse-item>
-                        <button type="button" className="filter__title filter__title__mb" data-collapse-trigger> Price <svg className="filter__arrow" width="12px" height="7px">
+                        <button type="button" className="filter__title filter__title__mb" data-collapse-trigger> {filterCategoriya['Price'][params.locale]} <svg className="filter__arrow" width="12px" height="7px">
                             <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7" />
                           </svg>
                         </button>
@@ -132,7 +129,7 @@ const categories=useSelector(state=>state.categories)
 
                              <ReactRange values={values} setValues={setValues}/>           
 
-                               <div className="filter-price__title"> Price: {values[0]} AZN <span className="filter-price__min-value" /> -{values[1]}  AZN <span className="filter-price__max-value" />
+                               <div className="filter-price__title"> {filterCategoriya['Price'][params.locale]}: {values[0]} AZN <span className="filter-price__min-value" /> -{values[1]}  AZN <span className="filter-price__max-value" />
                               </div>
                            </div>
                         </div>
@@ -165,7 +162,7 @@ const categories=useSelector(state=>state.categories)
                       <svg className="filters-button__icon" width="16px" height="16px">
                         <use xlinkHref="images/sprite.svg#filters-16" />
                       </svg>
-                      <span className="filters-button__title">Filters</span>
+                      <span className="filters-button__title">{filterCategoriya['Filters'][params.locale]}</span>
                       <span className="filters-button__counter">3</span>
                     </button>
                   </div>
@@ -320,7 +317,7 @@ const categories=useSelector(state=>state.categories)
                               {product.fields.price} AZN
                             </div>
                             <div className="product-card__buttons">
-                        {checkIfInBucket(product.id)  &&  <button onClick={()=>deleteToDispatch(product.id)} className="btn btn-danger product-card__addtocart" type="button"> Delete from Cart </button>}
+                        {checkIfInBucket(product.id)  &&  <button onClick={()=>deleteToDispatch(product.id)} className="btn btn-danger product-card__addtocart" type="button"> {filterCategoriya['delete'][params.locale]} </button>}
                               {!checkIfInBucket(product.id) && <button
                                 onClick={() =>
                                   addToDispatch({
@@ -335,7 +332,7 @@ const categories=useSelector(state=>state.categories)
                                 type="button"
                               >
                                 {" "}
-                                Add from Cart 
+                                {filterCategoriya['add'][params.locale]} 
                               </button>}
                               <button
                                 className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
@@ -361,7 +358,7 @@ const categories=useSelector(state=>state.categories)
                 </div>
               </div>
               <div className="products-view__pagination">
-                <ul className="pagination justify-content-center">
+                {/* <ul className="pagination justify-content-center">
                   <li className="page-item disabled">
                     <a className="page-link page-link--with-arrow" href="#" aria-label="Previous">
                       <svg className="page-link__arrow page-link__arrow--left" aria-hidden="true" width="8px" height="13px">
@@ -386,7 +383,7 @@ const categories=useSelector(state=>state.categories)
                       </svg>
                     </a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

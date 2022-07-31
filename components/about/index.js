@@ -13,12 +13,15 @@ function Index () {
  useEffect(() => {
      const fetchAboutData = async () => {
         const aboutData = await Agent.general.getAboutPage("en")
-         setAbout(aboutData)
+         setAbout(aboutData.results)
          const TeamsData = await Agent.general.getTeam("en")
          setTeams(TeamsData.results)
      }
     fetchAboutData()
-         }, [])
+ }, [])
+  
+  
+  console.log(teams, 'teams 222');
     return (
      <div>
         <div className="site">

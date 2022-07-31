@@ -32,7 +32,7 @@ function ProfileWrapper ({ children }) {
 
 
   useEffect(() => {
-    if (!logged)
+    if (logged!=undefined && !logged)
      router.push("/")
   }, [logged])
   

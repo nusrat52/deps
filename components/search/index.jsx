@@ -256,7 +256,7 @@ function Index() {
                   </div>
                 </div>
                 <div className="products-view__pagination">
-                  <ul className="pagination justify-content-center">
+                  {/* <ul className="pagination justify-content-center">
                     <li className="page-item disabled">
                       <a
                         className="page-link page-link--with-arrow"
@@ -304,7 +304,7 @@ function Index() {
                         </svg>
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>

@@ -26,7 +26,7 @@ function SearchDropdown ({category}) {
         <div className="filter__container">
                       <div className="filter-categories">
               <ul className="filter-categories__list">
-                             {category.childs.map((child)=> <SearchDr child={child}/>)}
+                             {category.childs.map((child)=> <SearchDr key={child.id} child={child}/>)}
              </ul>
           </div>
         </div>

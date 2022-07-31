@@ -3,7 +3,7 @@ import Footer from "./footer"
 import Navbar from "./navbar"
 import * as Agent from "../../api/agent";
 import { useDispatch, useSelector } from "react-redux";
-import {login, getCategory} from "../../store/actions"
+import {login, getCategory, logout} from "../../store/actions"
 function Layout ({ children }) {
     const dispatch = useDispatch()
   const { categories } = useSelector(state => state)
@@ -24,9 +24,19 @@ function Layout ({ children }) {
           id:usedata.id
         }))
        }
-       if(token)
-          userDataTaker()
-       dispatch(getCategory())
+       if(token){
+         userDataTaker()
+       } else {
+         console.log('use effectde cagirdigimiz yer');
+         dispatch(logout())
+       }
+     
+     
+     
+     dispatch(getCategory())
+     
+
+
     }, [])
      
   return (

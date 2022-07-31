@@ -15,7 +15,7 @@ export const bucket = (state = [], action) => {
       localStorage.setItem("bucket", JSON.stringify([]));
       return [];
     case ActionTypes.GETITEMSFROMSTORAGE:
-      let bcket = localStorage.getItem("bucket");
+       let bcket = localStorage.getItem("bucket");
 
       let bucketDatasfromSt = [];
       if (bcket != "undefined") {
