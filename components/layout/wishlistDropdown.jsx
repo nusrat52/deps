@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import Link from "next/link";
-import { deleteProduct } from "../../store/actions"
-import { useDispatch } from "react-redux";
-
-
-
-
-
-
+import { AiOutlineHeart } from "react-icons/ai";
+import { deleteWishlist } from "../../store/actions"
+import {useDispatch} from "react-redux"
 
 function BadgetDropdown () {
-  const {bucket}=useSelector(state=>state)
+  const bucket=useSelector(state=>state.wishlistReducer)
+
 const dispatch=useDispatch()
   const [dropOn, setDropOn] = useState(false);
 
@@ -24,7 +20,7 @@ const dispatch=useDispatch()
     setDropOn(!dropOn);
   };
   const onblur = (e) => {
-    if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click__badget")){
+    if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click__wishlist")){
       return
   }
         e.stopPropagation();
@@ -34,10 +30,10 @@ const total=bucket?.reduce((currentValue, currentIndex )=>{
 return  currentValue=currentValue+ currentIndex.price*currentIndex.count
 }, 0)
    return (
-    <div id="indicator--trigger--click__badget" tabIndex="-1" onBlur={onblur} onClick={dropclick} className={dropClass}>
+    <div id="indicator--trigger--click__wishlist" tabIndex="-1" onBlur={onblur} onClick={dropclick} className={dropClass}>
     <a className="indicator__button">
       <span className="indicator__area">
-    <FaShoppingBasket className="heartSp"/>
+      <AiOutlineHeart className="heartSp" />
         <span className="indicator__value">{bucket.length}</span>
       </span>
     </a>
@@ -46,11 +42,11 @@ return  currentValue=currentValue+ currentIndex.price*currentIndex.count
 
 
           <div className="dropcart__products-list">
-  {bucket.map((buck, index) => <div key={index} className="dropcart__product">
+  {   bucket.map((buck, index) => <div key={index} className="dropcart__product">
     <div className="product-image dropcart__product-image">
       <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.title.replace(/#| /g,'-')}-${buck.id}`}>
-                <a className="pzroduct-image__body">
-                  <img className="product-image__img product-image__img_sp" src={buck.image} alt="" />
+                <a   className="product-image__body">
+                  <img className="product-image__img" src={buck.image} alt="" />
                 </a>
      </Link>
               </div>
@@ -60,32 +56,17 @@ return  currentValue=currentValue+ currentIndex.price*currentIndex.count
                 </div>
         
                 <div className="dropcart__product-meta">
-                  <span className="dropcart__product-quantity"> {buck.count} </span> ×{" "} <span className="dropcart__product-price"> {buck.price} AZN </span>
-                </div>
+                 </div>
               </div>
-              <button onClick={()=>dispatch(deleteProduct(buck.id))} type="button" className="dropcart__product-remove btn btn-light btn-sm btn-svg-icon">
+              <button onClick={()=>dispatch(deleteWishlist(buck.id))} type="button" className="dropcart__product-remove btn btn-light btn-sm btn-svg-icon">
               X
               </button>
             </div>)}
           </div>
           
 
-
-          <div className="dropcart__totals">
-            <table>
-              <tbody>
-        
-                <tr>
-                  <th>Total</th>
-                  <td>{total} AZN</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="dropcart__buttons">
-            <Link  href={"/bucket"}><a className="btn btn-secondary" > View Cart{" "}</a></Link>
-            <Link  href={"/checkout"}><a className="btn btn-primary">Checkout{" "}</a></Link>
-          </div>
+ 
+ 
         </div>
       </div>
     </div>

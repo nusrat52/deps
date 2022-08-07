@@ -227,13 +227,7 @@ function Modal() {
       </div>
     </div>
     <div className="product__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</div>
-    <ul className="product__features">
-      <li>Speed: 750 RPM</li>
-      <li>Power Source: Cordless-Electric</li>
-      <li>Battery Cell Type: Lithium</li>
-      <li>Voltage: 20 Volts</li>
-      <li>Battery Capacity: 2 Ah</li>
-    </ul>
+ 
     <ul className="product__meta">
       <li className="product__meta-availability">Availability: <span className="text-success">In Stock</span>
       </li>

@@ -169,16 +169,17 @@ const categories=useSelector(state=>state.categories)
                  </div>
               </div>
               <div className="products-view__list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns={2}>
-                <div className="products-list__body">
-                  {products.map((product, index) => (
+                  <div className="products-list__body">
+                   {products.map((product, index) => (
                       <div
                         key={index}
                         className="products-list__item products-list__item__sp products-list__item__sp_3x"
                       >
                         <div className="product-card product-card--hidden-actions">
-                          <div className="product-card__image product-image">
+                         <div className="product-card__image product-image">
+ 
                             <a className="product-image__body pointer">
-                              <Link href={`/${product.fields.category1.title}/${product.title}-${product.id}`}>
+                              <Link href={`/${"static".replace(/#| /g,'-')}/${product.fields.title.replace(/#| /g,'-')}-${product.id}`}>
                                 <img
                                   className="product-image__img"
                                   src={product.fields.images[0].image}
@@ -323,6 +324,7 @@ const categories=useSelector(state=>state.categories)
                                   addToDispatch({
                                     title: product.title,
                                     price: product.price,
+                                    category:product.category1.title,
                                     count: 1,
                                     image: product.fields.images[0].image,
                                     id:product.id

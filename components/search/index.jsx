@@ -3,10 +3,11 @@ import { AiOutlineRight } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Link from "next/link";
-import { addProduct, deleteProduct } from "../../store/actions";
+import { addProduct, deleteProduct,  addWishlist,
+  deleteWishlist, } from "../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import * as Agent from "../../api/agent";
-
+ 
 
  
 function Index() {
@@ -46,7 +47,14 @@ function Index() {
     return false
 }
 
+const { wishlistReducer } = useSelector((state) => state);
 
+const checkIfInWishlist = (id) => {
+  const inWish = wishlistReducer.find((obj) => obj.id == id);
+  if (inWish) return true;
+
+  return false;
+};
 
   return (
     <div className="site__body">
@@ -61,7 +69,7 @@ function Index() {
                 </li>
                 
                 <li className="breadcrumb-item active" aria-current="page">
-                  Search
+                  Search 
                 </li>
               </ol>
             </nav>
@@ -91,7 +99,7 @@ function Index() {
                         <div className="product-card product-card--hidden-actions">
                           <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
-                              <Link href={`/${product.category1.title}/${product.title}-${product.id}`}>
+                              <Link href={`/${product.category1.title.replace(/#| /g,'-')}/${product.title.replace(/#| /g,'-')}-${product.id}`}>
                                 <img
                                   className="product-image__img"
                                   src={product.images[0].image}
@@ -231,7 +239,8 @@ function Index() {
                                     price: product.price,
                                     count: 1,
                                     image: product.images[0].image,
-                                    id:product.id
+                                    id: product.id,
+                                    category:product.category1.title
                                   })
                                 }
                                 className="btn btn-success product-card__addtocart"
@@ -240,14 +249,60 @@ function Index() {
                                 {" "}
                                 Add from Cart{" "}
                               </button>}
+
+
+
+
+
+                              {!checkIfInWishlist(product.id) && (
+                        <button onClick={() =>
+                          dispatch(
+                            addWishlist({
+                              id: product.id,
+                              category: product.category1.title,
+                              title: product.title,
+                              image: product.images[0].image,
+                            })
+                          )
+                        }
+                        className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
+                     <AiOutlineHeart
+                                  style={{ width: "25px", height: "25px" }}
+                                />
+
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
+
+                      {checkIfInWishlist(product.id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.id))}
+                          className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
+                          <AiFillHeart
+                          style={{ width: "25px", height: "25px" }}
+                            className="text-danger"
+                          />
+
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
+
+
+
+
+
+{/* 
                               <button
                                 className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
                                 type="button"
                               >
-                                <AiOutlineHeart
+                                  <AiOutlineHeart 
                                   style={{ width: "25px", height: "25px" }}
-                                />
-                               </button>
+                                  /> 
+                               </button> */}
                             </div>
                           </div>
                         </div>
@@ -256,55 +311,7 @@ function Index() {
                   </div>
                 </div>
                 <div className="products-view__pagination">
-                  {/* <ul className="pagination justify-content-center">
-                    <li className="page-item disabled">
-                      <a
-                        className="page-link page-link--with-arrow"
-                        href="#"
-                        aria-label="Previous"
-                      >
-                        <svg
-                          className="page-link__arrow page-link__arrow--left"
-                          aria-hidden="true"
-                          width="8px"
-                          height="13px"
-                        >
-                          <use xlinkHref="images/sprite.svg#arrow-rounded-left-8x13" />
-                        </svg>
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item active">
-                      <a className="page-link" href="#">
-                        2 <span className="sr-only">(current)</span>
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a
-                        className="page-link page-link--with-arrow"
-                        href="#"
-                        aria-label="Next"
-                      >
-                        <svg
-                          className="page-link__arrow page-link__arrow--right"
-                          aria-hidden="true"
-                          width="8px"
-                          height="13px"
-                        >
-                          <use xlinkHref="images/sprite.svg#arrow-rounded-right-8x13" />
-                        </svg>
-                      </a>
-                    </li>
-                  </ul> */}
+                 
                 </div>
               </div>
             </div>

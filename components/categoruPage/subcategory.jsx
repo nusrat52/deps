@@ -18,7 +18,7 @@ function Subcategory ({pm}) {
       <div>
                 {subcategories && <ul className="category-card__links">
                        {subcategories.map((child, index) => <li key={index}>
-                          <Link href={`/filter/sub-${child.pk}/${child.fields.title}`}>{child.fields.title}</Link>
+                          <Link href={`/filter/sub-${child.pk}/${child.fields.title.replace(/#| /g,'-')}`}>{child.fields.title}</Link>
                         </li>)}
                        </ul>}
     </div>

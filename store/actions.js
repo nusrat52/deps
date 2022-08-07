@@ -76,6 +76,7 @@ export const decreaseItem = (id) => {
  }
 
 
+ 
 
 
 export const addWishlist = (wishlistobject) => {
@@ -87,6 +88,8 @@ export const addWishlist = (wishlistobject) => {
 
 
 
+
+
  export const deleteWishlist = (id) => {
     return {
         type: actionType.DELETE_WISHLIST,
@@ -95,17 +98,10 @@ export const addWishlist = (wishlistobject) => {
  }
 
 export const getWishlist = () => {
-     return {
+      return {
         type: actionType.GET_WISHLIST,
        }
  }
-
-
-
-
-
-
-
 
 const catMaker = async (dispatch) => {
     let categories=[]

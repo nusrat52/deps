@@ -39,19 +39,18 @@ const [childs, setChilds] = useState([])
                     <div className="category-card__image">
                      </div>
                     <div className="category-card__content">
-                      <div className="category-card__name">
-                        <Link href={`/filter/child-${child.pk}/${child.fields.title}`}>{child.fields.title}</Link>
+                    <div className="category-card__name">
+                        <Link href={`/filter/child-${child.pk}/${child.fields.title.replace(/#| /g,'-')}`}>{child.fields.title}</Link>
                      </div>
                       {
                        <Subcategory pm={child.pk}/>
-}
-     
-                      <div className="category-card__all">
+  }
+                       <div className="category-card__all">
                        </div>
                       <div className="category-card__products"> 572 Products </div>
                     </div>
                   </div>
-                </div> )  }
+                </div> )}
                 </div>
  
       </>}

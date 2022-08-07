@@ -24,6 +24,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { homepageTranslate, dashboardtranslate, dashboardTranslate } from "../../translate";
+import WishlistDropdown from "./wishlistDropdown"
 function Navbar() {
   const buckets = useSelector((state) => state.bucket);
   const dispatch = useDispatch();
@@ -32,8 +33,7 @@ function Navbar() {
   const [number, setNumber] = useState(false);
   const state = useSelector(state => state)
   
-  console.log(state, 'stateee');
-  const [search, setSearch] = useState("");
+   const [search, setSearch] = useState("");
   const router = useRouter();
   const inputKeyDown = (e) => {
     if (e.keyCode == 13) {
@@ -41,6 +41,14 @@ function Navbar() {
       router.push(`/search/${search}`);
     }
   };
+
+
+const {wishlistReducer} =useSelector(state=>state)
+
+  
+  
+
+
   useEffect(() => {
     const bucket = localStorage.getItem("bucket");
     if (!bucket) {
@@ -95,7 +103,7 @@ function Navbar() {
                     </button>
                   </div>
                   <div className="indicator indicator--mobile d-sm-flex d-none">
-                    <a href="wishlist.html" className="indicator__button">
+                    <a className="indicator__button">
                       <span className="indicator__area">
                         <HeartMobile />
                         <span className="indicator__value">0</span>
@@ -322,64 +330,7 @@ function Navbar() {
                           </Link>
                         </li>
                       </MenuList>
-                      {/* <MenuList title="Shop">
-                        <RightMenuList title="Shop Grid">
-                          <li className="menu__item nav-links__item_hoversp">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link " href="shop-grid-3-columns-sidebar.html"> {" "} 3 Columns Sidebar{" "} </a>
-                          </li>
-                          <li className="menu__item nav-links__item_hoversp">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link nav-links__item_hoversp" href="shop-grid-4-columns-full.html"> {" "} 4 Columns Full{" "} </a>
-                          </li>
-                          <li className="menu__item nav-links__item_hoversp">
-                            <div className="menu__item-submenu-offset"></div>
-                            <a className="menu__item-link nav-links__item_hoversp" href="shop-grid-5-columns-full.html"> {" "} 5 Columns Full{" "} </a>
-                          </li>
-                        </RightMenuList>
-                        <li className="menu__item nav-links__item_hoversp">
-                          <div className="menu__item-submenu-offset"></div>
-                          <a className="menu__item-link" href="shop-list.html"> {" "} Shop List{" "} </a>
-                        </li>
-                        <li className="menu__item nav-links__item_hoversp">
-                          <div className="menu__item-submenu-offset"></div>
-                          <a className="menu__item-link" href="shop-right-sidebar.html"> {" "} Shop Right Sidebar{" "} </a>
-                        </li>
-                        <li className="menu__item nav-links__item_hoversp">
-                          <div className="menu__item-submenu-offset"></div>
-                          <a className="menu__item-link" href="product.html"> {" "} Product{" "} <svg className="menu__item-arrow" width="6px" height="9px">
-                              <use xlinkHref="images/sprite.svg#arrow-rounded-right-6x9"></use>
-                            </svg>
-                          </a>
-                          <div className="menu__submenu">
-                            <div className="menu menu--layout--classic">
-                              <div className="menu__submenus-container"></div>
-                              <ul className="menu__list">
-                                <li className="menu__item nav-links__item_hoversp">
-                                  <div className="menu__item-submenu-offset"></div>
-                                  <a className="menu__item-link" href="product.html"> {" "} Product{" "} </a>
-                                </li>
-                                <li className="menu__item nav-links__item_hoversp">
-                                  <div className="menu__item-submenu-offset"></div>
-                                  <a className="menu__item-link" href="product-alt.html"> {" "} Product Alt{" "} </a>
-                                </li>
-                                <li className="menu__item nav-links__item_hoversp">
-                                  <div className="menu__item-submenu-offset"></div>
-                                  <a className="menu__item-link" href="product-sidebar.html"> {" "} Product Sidebar{" "} </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </li>
-                        <li className="menu__item">
-                          <div className="menu__item-submenu-offset"></div>
-                          <a className="menu__item-link" href="cart.html"> {" "} Cart{" "} </a>
-                        </li>
-                        <li className="menu__item">
-                          <div className="menu__item-submenu-offset"></div>
-                          <a className="menu__item-link" href="cart-empty.html"> {" "} Cart Empty{" "} </a>
-                        </li>
-                       </MenuList> */}
+                 
                       <li className="nav-links__item">
                         <Link href="/haqqimizda">
                           <a className="nav-links__item-link">
@@ -390,14 +341,20 @@ function Navbar() {
                     </ul>
                   </div>
                   <div className="nav-panel__indicators">
-                    <div className="indicator">
-                      <a href="wishlist.html" className="indicator__button">
+
+
+
+                    {/* <div className="indicator">
+                      <a className="indicator__button">
                         <span className="indicator__area">
                           <AiOutlineHeart className="heartSp" />
-                          <span className="indicator__value">0</span>
+                          <span className="indicator__value">{wishlistReducer.length}</span>
                         </span>
                       </a>
-                    </div>
+                    </div> */}
+
+<WishlistDropdown/>
+ 
                     <BadgetDrpdown />
                     <DashboarDropdown />
                   </div>

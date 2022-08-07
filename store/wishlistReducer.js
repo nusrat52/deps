@@ -9,14 +9,13 @@ export const wishlistReducer = (state = [], action) => {
       );
       return [...state, action.payload];
     case ActionTypes.DELETE_WISHLIST:
-      console.log('delete wishhh');
-      let newState = state;
+       let newState = state;
       newState = newState.filter((item) => item.id != action.payload);
-      localStorage.setItem("wishlist", newState);
+      localStorage.setItem("wishlist", JSON.stringify(newState));
 
 
     case ActionTypes.GET_WISHLIST:
-       let newState2
+        let newState2
       const localSt = localStorage.getItem("wishlist");
       if (localSt) {
         newState2 = JSON.parse(localSt);

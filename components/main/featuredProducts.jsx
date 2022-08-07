@@ -12,7 +12,7 @@ import Link from "next/link";
 import { homepageTranslate } from "../../translate";
 import { useRouter } from "next/router";
 import { AiFillHeart } from "react-icons/ai";
- 
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
 
@@ -61,6 +61,7 @@ const Responsive = () => {
     return false;
   };
   const mockArray = [];
+  console.log(bucket, 'bucket');
 
   var settings = {
     dots: false,
@@ -167,7 +168,7 @@ const Responsive = () => {
                   <div className="product-card__image product-image">
                     <a className="product-image__body pointer">
                       <Link
-                        href={`/${product.category1.title}/${product.title}-${product.id}`}
+                        href={`/${product.category1.title.replace(/#| /g,'-')}/${product.title.replace(/#| /g,'-')}-${product.id}`}
                       >
                         <img
                           className="product-image__img"
@@ -211,6 +212,7 @@ const Responsive = () => {
                               count: 1,
                               image: product.images[0].image,
                               id: product.id,
+                              category:product.category1.title
                             })
                           }
                           className="btn btn-success product-card__addtocart"
@@ -226,38 +228,46 @@ const Responsive = () => {
                       >
                         {homepageTranslate["addToCard"][router.locale]}
                       </button>
-                      <button
-                        className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
-                        type="button"
-                      >
-                        {!checkIfInWishlist(product.id) && (
+
+                      {!checkIfInWishlist(product.id) && (
+                        <button onClick={() =>
+                          dispatch(
+                            addWishlist({
+                              id: product.id,
+                              category: product.category1.title,
+                              title: product.title,
+                              image: product.images[0].image,
+                            })
+                          )
+                        }
+                          className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
                           <svg
-                            onClick={() =>
-                              dispatch(
-                                addWishlist({
-                                  id: product.id,
-                                  category: product.category1.title,
-                                  title: product.title,
-                                  image: product.images[0].image,
-                                })
-                              )
-                            }
+                            
                             width="16px"
                             height="16px"
                           >
                             <use xlinkHref="images/sprite.svg#wishlist-16"></use>
                           </svg>
-                        )}
 
-                        {checkIfInWishlist(product.id) && (
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
+
+                      {checkIfInWishlist(product.id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.id))}
+                          className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
                           <AiFillHeart
-                            onClick={() => dispatch(deleteWishlist(product.id))}
+                          
                             className="text-danger"
                           />
-                        )}
 
-                        <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
-                      </button>
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
