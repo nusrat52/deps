@@ -23,19 +23,19 @@ export const general = {
         })
     },
     getCategories: () => {
-        return axios.get("http://194.233.173.232/api/categories/")
+        return axios.get("http://142.93.240.128:3000/api/stroyka/get/categories")
             .then((response) => {
              return response.data
         })
     },
     askQuestions: (body) => {
-        return axios.post("http://194.233.173.232/api/ask-question/", body)
+        return axios.post("http://142.93.240.128:3000/api/stroyka/contactus/", body)
             .then((response) => {
              return response.data
         })
     },
     writeDirector: (body) => {
-        return axios.post("http://194.233.173.232/api/write-director/", body)
+        return axios.post("http://142.93.240.128:3000/api/stroyka/contactus/", body)
             .then((response) => {
              return response.data
         })
@@ -125,7 +125,7 @@ export const general = {
  
 export const login = {
     register: (lang, body) => {
-         return axios.post("http://194.233.173.232/api/register/", body)
+         return axios.post("http://142.93.240.128:3000/api/stroyka/register/user", body)
             .then((response) => {
             return response.data
         })

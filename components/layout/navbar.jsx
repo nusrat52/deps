@@ -38,10 +38,16 @@ function Navbar() {
   const inputKeyDown = (e) => {
     if (e.keyCode == 13) {
       e.preventDefault();
+      if (!search)
+        return
       router.push(`/search/${search}`);
     }
   };
-
+  const buttonClickSearch = () => {
+    if (!search)
+    return
+  router.push(`/search/${search}`);
+}
 
 const {wishlistReducer} =useSelector(state=>state)
 
@@ -216,7 +222,7 @@ const {wishlistReducer} =useSelector(state=>state)
             <div className="site-header__search">
               <div className="search search--location--header">
                 <div className="search__body">
-                  <form className="search__form" action="#">
+                  <form onSubmit={e=>e.preventDefault()} className="search__form" action="#">
                     <input
                       onKeyDown={inputKeyDown}
                       value={search}
@@ -230,7 +236,7 @@ const {wishlistReducer} =useSelector(state=>state)
                     />
                     <button
                       className="search__button search__button--type--submit"
-                      type="submit"
+                       onClick={buttonClickSearch}
                     >
                       <BsSearch className="searchIcon" />
                     </button>

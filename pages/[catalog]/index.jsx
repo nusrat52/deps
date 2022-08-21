@@ -60,12 +60,13 @@ const [childs, setChilds] = useState([])
 
 export default Index
 
+// burda evvala bir bax gor eyni apini cagirmiya bilirsen
  
 export async function getStaticProps(context) {
   const cate = context.params.catalog
  
   const contentresponse = await Agent.general.getCategories()
- const category= contentresponse.results.find((res)=>res.title==cate.replace("-", " "))
+ const category= contentresponse.find((res)=>res.slug==cate)
    return {
     props: { data: category },
   };
@@ -76,24 +77,21 @@ export async function getStaticProps(context) {
 
 
 export async function getStaticPaths ({ locales }) {
-  console.log(locales, 'localess');
-
-
+ 
 
   const productsResponse = await Agent.general.getCategories();
-  const pathMock = productsResponse.results.map((product) => {
- 
-  return {params: {
-     catalog: `${product.title}`
+  const pathMock = productsResponse.map((product) => {
+   return {params: {
+     catalog: `${product.slug}`
      }}
   })
 
 const path=[]
 
   locales.forEach(element => {
-    productsResponse.results.map((product) => {
+    productsResponse.map((product) => {
       path.push({params: {
-        catalog: `${product.title.replace(/#| /g,'-')}`,
+        catalog: `${product.slug.replace(/#| /g,'-')}`,
        
       },
       locale:element
@@ -101,9 +99,9 @@ const path=[]
     })
   });
 
-  console.log(path, 'path');
+  console.log(path, 'pathhh');
 
-    return {
+     return {
     paths:path,
     fallback: false
   };

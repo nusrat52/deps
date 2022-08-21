@@ -12,7 +12,7 @@ import Link from "next/link";
 import { homepageTranslate } from "../../translate";
 import { useRouter } from "next/router";
 import { AiFillHeart } from "react-icons/ai";
-
+import Image from "next/image";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
 
@@ -174,6 +174,7 @@ const Responsive = () => {
                           className="product-image__img"
                           src={product.images[0].image}
                           alt=""
+                          layout='fill'
                         />
                       </Link>
                     </a>

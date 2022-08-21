@@ -25,10 +25,12 @@ const [adress, setAdress]=useState({})
     
     
     const postResponse = await Agent.general.askQuestions({
+ 
       name,
       email,
-      "phone_number": subject,
-      "question": message
+      phone: subject,
+      message: message,
+      source: "askQuestion",
     })
 
     if (postResponse) {

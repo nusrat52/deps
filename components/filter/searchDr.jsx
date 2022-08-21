@@ -11,12 +11,12 @@ function SearchDr ({ child }) {
 
   return (
     <li  onClick={e=>e.stopPropagation()}  className={dropDownSubClass}  >
-    <button onClick={onclickFuncSub} className="filter-categories-alt__expander" data-collapse-trigger />
-    <Link href={`/filter/child-${child.pk}/${child.fields.title.replace(/#| /g,'-')}`}>{child.fields.title}</Link>
+    <button onClick={onclickFuncSub} className="filter-categories-alt__expander" />
+    <Link href={`/filter/child-${child.uniq_id}/${child.slug.replace(/#| /g,'-')}`}>{child.name_en}</Link>
     <div className="filter-categories-alt__children" data-collapse-content>
       <ul className="filter-categories-alt__list filter-categories-alt__list--level--2">
-    {  child.subCategories &&  child.subCategories.map((sub, index)=> <li key={index} className="filter-categories-alt__item" data-collapse-item>
-          <Link href={`/filter/sub-${sub.pk}/${sub.fields.title.replace(/#| /g,'-')}`}>{sub.fields.title}</Link>
+    {  child.altcategory &&  child.altcategory.map((sub, index)=> <li key={index} className="filter-categories-alt__item" data-collapse-item>
+          <Link href={`/filter/sub-${sub.uniq_id}/${sub.slug.replace(/#| /g,'-')}`}>{sub.name_en}</Link>
         </li> ) }
      
       </ul>

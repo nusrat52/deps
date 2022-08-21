@@ -19,7 +19,8 @@ import {
 
 import Head from "next/head";
 import { detailedTransfer } from "../../translate";
-function index({ data }) {
+function index ({ data }) {
+
   const [content, setContent] = useState("description");
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
@@ -544,10 +545,8 @@ try{
     `http://194.233.173.232/api/product-detail/${idSlug}/`
   );
 } catch (e) {
-  console.log(e, 'error');
-}
-console.log(contentresponse?.data?contentresponse.data:null, `contentresponse.data?contentresponse.data:null`);
-
+ }
+ 
 
   return {
     props: { data: contentresponse?.data?contentresponse.data:null },
@@ -565,6 +564,8 @@ export async function getStaticPaths() {
     };
   });
 
+  console.log(path, 'dassax');
+  
   return {
     paths: path,
     fallback: true

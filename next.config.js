@@ -6,6 +6,13 @@ module.exports = {
   entry: "./src/index.js",
 
 
+
+
+  experimental: {
+    images: {
+      domains: ['**.194.233.173.232/**'],
+    },
+  },
   
   i18n: {
     locales: ['en', 'az', 'ru'],
@@ -13,6 +20,7 @@ module.exports = {
   },
 
   module: {
+ 
     rules: [
        {
         test: /\.(png|jp(e*)g|svg|gif)$/,

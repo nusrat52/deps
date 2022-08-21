@@ -532,6 +532,7 @@ export default function Home() {
               </div>
 
               <div className="block-categories__list">
+ 
                 {cat.map((cate, index) => (
                   <div
                     key={index}
@@ -540,18 +541,16 @@ export default function Home() {
                     <div className="category-card__body">
                       <div className="category-card__content">
                         <div className="category-card__name">
-                          <Link href={`/${cate.title.replace(/#| /g, "-")}`}>
-                            {cate.title}
-                          </Link>
+                          <Link href={`/${cate.slug.replace(/#| /g, "-")}`}>{cate.name_en}</Link>
                         </div>
-                        {cate.childs && (
+                        {cate.subcategory && (
                           <ul className="category-card__links">
-                            {cate.childs.map((child, index) => (
+                            {cate.subcategory.map((child, index) => (
                               <li key={index}>
                                 <Link
-                                  href={`/filter/child-${child.pk}/${child.fields.title.replace(/#| /g,'-')}`}
+                                  href={`/filter/child-${child.pk}/${child.slug.replace(/#| /g,'-')}`}
                                 >
-                                  {child.fields.title}
+                                  {child.name_en}
                                 </Link>
                               </li>
                             ))}

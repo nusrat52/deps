@@ -18,7 +18,7 @@ function SearchDropdown ({category}) {
     <div onClick={onclickFunc} className="widget-filters__item">
           <div className={dropDownClass} data-collapse-item>
               <div className='search__dropdown'>
-               <button type="button" className="filter__title" data-collapse-trigger> {category.title}  
+               <button type="button" className="filter__title" data-collapse-trigger> {category.name_en}  
              </button>
              <AiOutlineDown/>
               </div>
@@ -26,15 +26,12 @@ function SearchDropdown ({category}) {
         <div className="filter__container">
                       <div className="filter-categories">
               <ul className="filter-categories__list">
-                             {category.childs.map((child)=> <SearchDr key={child.id} child={child}/>)}
+                             {category.subcategory.map((child)=> <SearchDr key={child.uniq_id}  child={child}/>)}
              </ul>
           </div>
         </div>
       </div>
       </div>
-      
-
-
   </div>
                         
   )

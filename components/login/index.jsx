@@ -53,12 +53,12 @@ function Index () {
           "email": values.email,
           "name": values.firstName,
           "password": values.password,
-          "phone_number": values.number,
-          "surname": values.lastName,
-          "address": values.adres
+          "phone": values.number,
+          "lastname": values.lastName,
+             "adress": values.adres
+             
           })
-
-              dispatch(loginAction({
+               dispatch(loginAction({
               address: submitResponse.data.address,
               email: submitResponse.data.email,
               name: submitResponse.data.name,

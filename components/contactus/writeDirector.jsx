@@ -27,10 +27,9 @@ const [adress, setAdress]=useState({})
       const postResponse = await Agent.general.writeDirector({
         name,
         email,
-        "phone_number": subject,
-        "question": message,
-        "company_name": compname,
-        "city": city
+        phone: subject,
+        message: message,
+        source: "writeDirector",
        
 
       })
@@ -116,16 +115,16 @@ const [adress, setAdress]=useState({})
                          <input value={subject} onChange={(e)=>setSubject(e.target.value)}  type="text" id="form-subject" className="form-control" placeholder="Subject" />
                       </div>
                       
-                      <div className="form-group">
+                      {/* <div className="form-group">
                          <label htmlFor="form-subject">{postQuestions['city'][router.locale]}</label>
                          <input value={city} onChange={(e)=>setCity(e.target.value)}  type="text" id="form-subject" className="form-control" placeholder="Subject" />
-                      </div>
+                      </div> */}
                       
 
-                      <div className="form-group">
+                      {/* <div className="form-group">
                          <label htmlFor="form-subject">{postQuestions['companyName'][router.locale]}</label>
                          <input value={compname} onChange={(e)=>setCompName(e.target.value)}  type="text" id="form-subject" className="form-control" placeholder="Subject" />
-                      </div>
+                      </div> */}
                       
                        <div className="form-group">
                          <label htmlFor="form-message">{postQuestions['message'][router.locale]}</label>
