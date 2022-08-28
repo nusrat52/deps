@@ -44,9 +44,9 @@ return  currentValue=currentValue+ currentIndex.price*currentIndex.count
           <div className="dropcart__products-list">
   {   bucket.map((buck, index) => <div key={index} className="dropcart__product">
     <div className="product-image dropcart__product-image">
-      <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.title.replace(/#| /g,'-')}-${buck.id}`}>
+      <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.slug.replace(/#| /g,'-')}-${buck.id}`}>
                 <a   className="product-image__body">
-                  <img className="product-image__img" src={buck.image} alt="" />
+                  <img className="product-image__img" src={"http://142.93.240.128:3000/api/getImage/"+buck.image} alt="" />
                 </a>
      </Link>
               </div>

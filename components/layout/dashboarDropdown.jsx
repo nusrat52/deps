@@ -17,28 +17,40 @@ import Swal from 'sweetalert2'
     e.preventDefault()
    const email=e.target.email.value
    const password=e.target.pasword.value
-   const loginResponse = await Agent.login.loggin({ email, password })
-   
-    dispatch(login({
-      address: loginResponse.data.address,
-      email: loginResponse.data.email,
-      name: loginResponse.data.name,
-      password: loginResponse.data.password,
-      phone_number: loginResponse.data.phone_number,
-      surname:loginResponse.data.surname
-   }))
-    const refresh=loginResponse.data.tokens.split(":")[1].split("'")[1]
-    const access=loginResponse.data.tokens.split(":")[2].split("'")[1]
-    localStorage.setItem("token", access)
-    localStorage.setItem("refresh__token", refresh)
-    Swal.fire({
-      title: 'Conguratilations!',
-      text: 'You have been registered succesfully!',
-      icon: 'success',
-      confirmButtonText: 'Exit'
-    }).then((result) => {
-    router.push("/")
-    })
+    const loginResponse = await Agent.login.loggin({ email, password })
+    console.log(loginResponse, 'loginResponse');
+    if (loginResponse) {
+      localStorage.setItem("token", loginResponse)
+      
+      const userDetails = await Agent.login.getUserData(loginResponse)
+      
+
+ 
+      dispatch(login({
+        address: userDetails.adress,
+        email: userDetails.email,
+        name: userDetails.name,
+        password: userDetails.password,
+        phone_number: userDetails.phone,
+        surname: userDetails.lastname,
+        id: userDetails.uniq_id,
+        checkout:userDetails.checkout
+      }))
+      
+
+      Swal.fire({
+        title: 'Conguratilations!',
+        text: 'You have been registered succesfully!',
+        icon: 'success',
+        confirmButtonText: 'Exit'
+      }).then((result) => {
+      router.push("/")
+      })
+    }
+
+ 
+    
+ 
 }
  
   const [dropOn, setDropOn] = useState(false);
@@ -106,11 +118,11 @@ import Swal from 'sweetalert2'
           </a>  
       <div className="account-menu__divider"></div>
       <ul className="account-menu__links">
-          <li>
+          {/* <li>
             <Link href="/profile/edit">
             <a >Edit Profile</a>
             </Link>
-         </li>
+         </li> */}
           <li>
           <Link href="/profile/orderhistory">
           <a  >Order History</a>

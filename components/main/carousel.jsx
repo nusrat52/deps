@@ -4,19 +4,27 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Link from "next/link";
 import * as Agent from "../../api/agent"
- 
-
+import { useRouter } from 'next/router'
 
 function Carousel () {
-  const [slides, setSlides]=useState([])
+
+  const router = useRouter()
+  
+
+
+
+  const [slides, setSlides] = useState([])
+  console.log(slides, 'slides 555');
 useEffect(() => {
   const getSlideDatas = async () => {
     const SlideDatas = await Agent.general.getCarousel()
-    setSlides(SlideDatas.results)
+    setSlides(SlideDatas)
   }
   getSlideDatas()
 }, [])
-   return (
+  
+  
+    return (
     <>
       <div className="block-slideshow block-slideshow--layout--with-departments block">
   <div className="container">
@@ -28,18 +36,18 @@ useEffect(() => {
        { slides.map((item, index)=>   <div key={index} className="item">
          <a className="block-slideshow__slide" >
                  <div className="block-slideshow__slide-image block-slideshow__slide-image--desktop" style={{
-                        backgroundImage: `url('${item.image}')`,
+                        backgroundImage: `url('http://142.93.240.128:3000/api/getImage/${item.image}')`,
                       }}></div>
               <div className="block-slideshow__slide-image block-slideshow__slide-image--mobile" style={{
                         backgroundImage:
-                          `url('${item.mobile_image}')`,
+                          `url('http://142.93.240.128:3000/api/getImage/${item.mobile_image}')`,
                       }}></div>
               <div className="block-slideshow__slide-content">
-                <div className="block-slideshow__slide-title"> {item.title} </div>
-                <div className="block-slideshow__slide-text"> {item.text} <br /> {item.title2} </div>
+                <div className="block-slideshow__slide-title"> { JSON.parse(item.title)[router.locale] } </div>
+                <div className="block-slideshow__slide-text">{ JSON.parse(item.description)[router.locale] }  <br />  </div>
              <div className="block-slideshow__slide-button">
-               <Link href={item.text_string}>
-                <span className="btn btn-primary btn-lg">Shop Now</span>
+               <Link href={item.path}>
+                <span className="btn btn-primary btn-lg">{  item.mobile_description }</span>
                </Link>
                   
                 </div>

@@ -24,6 +24,9 @@ const SignupSchema = Yup.object().shape({
 });
 
 function Index () {
+
+
+  const {id, email} =useSelector(state=>state.loginReducer)
   const router=useRouter()
     return (
       <ProfileWrapper>
@@ -47,15 +50,16 @@ function Index () {
                     
                     if (values.password === values.password2) {
                       const submitResponse =await login.changePassword(token, {
-                        "password":values.password,
-                        "password2":values.password2
+                        "uniq_id": id,
+                        "email": email,
+                        "password": values.password
                       })
            
        
                       if (submitResponse) {
                        values.password=''
                        values.password2=''
-                      }
+                      
        
          
             Swal.fire({
@@ -66,7 +70,9 @@ function Index () {
             }).then((result) => {
              })
             }
-        }}
+                  }}
+                  
+                }
      >
        {({ errors, touched }) => (
          <Form>

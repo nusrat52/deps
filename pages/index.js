@@ -13,7 +13,7 @@ import Link from "next/link";
 import * as Agent from "../api/agent";
 import { homepageTranslate, dashboardTranslate } from "../translate";
 import { AiFillHeart } from "react-icons/ai";
-const Carousel = dynamic(() => import("../components/main/carousel"), {
+ const Carousel = dynamic(() => import("../components/main/carousel"), {
   ssr: false,
 });
 const FeaturedProducts = dynamic(
@@ -48,7 +48,7 @@ export default function Home() {
   useEffect(() => {
     const getBannerData = async () => {
       const banners = await Agent.general.getBanners();
-      setBanners(banners.results);
+      setBanners(banners);
     };
     getBannerData();
   }, []);
@@ -66,7 +66,7 @@ export default function Home() {
   useEffect(() => {
     const featuredPrTaker = async () => {
       const featuredResponse = await Agent.general.bestsellerProduct();
-      setProducts(featuredResponse.results);
+      setProducts(featuredResponse);
     };
     featuredPrTaker();
   }, []);
@@ -78,7 +78,7 @@ export default function Home() {
     }
     return false;
   };
-
+const router=useRouter()
   return (
     <div>
       <Head>
@@ -170,38 +170,38 @@ export default function Home() {
           </div>
 
           <FeaturedProducts />
-
-          {banners.map((banner, index) => (
-            <div key={index} className="block block-banner">
+          {
+            console.log(banners, 'bannnn')
+}
+          {  banners && banners[0] && <div className="block block-banner">
               <div className="container">
                 <a href="#" className="block-banner__body">
                   <div
                     className="block-banner__image block-banner__image--desktop"
                     style={{
-                      backgroundImage: `url(${banner.image})`,
+                      backgroundImage: `url(http://142.93.240.128:3000/api/getImage/${banners[0].image})`,
                     }}
                   ></div>
                   <div
                     className="block-banner__image block-banner__image--mobile"
                     style={{
-                      backgroundImage: `url(${banner.image})`,
+                      backgroundImage: `url(http://142.93.240.128:3000/api/getImage/${banners[0].mobile_image})`,
                     }}
                   ></div>
                   <div className="block-banner__title">
                     {" "}
                     {
-                      banner.title
+                      JSON.parse(banners[0].title)[router.locale]
                     } <br className="block-banner__mobile-br" />{" "}
                   </div>
                   <div className="block-banner__text">
-                    {banner.description}{" "}
+                    {JSON.parse(banners[0].description)[router.locale]}{" "}
                   </div>
                   <div className="block-banner__button"></div>
                 </a>
               </div>
-            </div>
-          ))}
-
+            </div>}
+ 
           <div
             className="block block-products block-products--layout--large-first"
             data-mobile-grid-columns="2"
@@ -222,11 +222,11 @@ export default function Home() {
                         <div className="product-card__image product-image">
                           <a className="product-image__body pointer">
                             <Link
-                              href={`/${products[0].category1.title.replace(/#| /g,'-')}/${products[0].title.replace(/#| /g,'-')}-${products[0].id}`}
+                              href={`/${products[0].category.slug.replace(/#| /g,'-')}/${products[0].slug.replace(/#| /g,'-')}`}
                             >
                               <img
                                 className="product-image__img"
-                                src={products[0].images[0].image}
+                                src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+products[0].images[0].image}
                                 alt=""
                               />
                             </Link>
@@ -234,23 +234,22 @@ export default function Home() {
                         </div>
                         <div className="product-card__info">
                           <div className="product-card__name">
-                            <a href="product.html"> {products[0].title} </a>
+                            <a href="product.html"> {products[0][`name_${router.locale}`]} </a>
                           </div>
                           <div className="product-card__rating"></div>
                         </div>
                         <div className="product-card__actions">
                           <div className="product-card__availability">
-                            {" "}
-                            Availability:{" "}
+                             Availability:{" "}
                             <span className="text-success">In Stock</span>
                           </div>
                           <div className="product-card__prices">
                             {products[0].price}
                           </div>
                           <div className="product-card__buttons">
-                            {checkIfInBucket(products[0].id) && (
+                            {checkIfInBucket(products[0].uniq_id) && (
                               <button
-                                onClick={() => deleteToDispatch(products[0].id)}
+                                onClick={() => deleteToDispatch(products[0].uniq_id)}
                                 className="btn btn-danger product-card__addtocart"
                                 type="button"
                               >
@@ -258,16 +257,17 @@ export default function Home() {
                                 {homepageTranslate["deletefromCard"][locale]}
                               </button>
                             )}
-                            {!checkIfInBucket(products[0].id) && (
+                            {!checkIfInBucket(products[0].uniq_id) && (
                               <button
                                 onClick={() =>
                                   addToDispatch({
-                                    title: products[0].title,
+                                    title: products[0][`title_${router.locale}`],
                                     price: products[0].price,
                                     count: 1,
                                     image: products[0].images[0].image,
-                                    id: products[0].id,
-                                    category:products[0].category1.title
+                                    id: products[0].uniq_id,
+                                    category: products[0].category.slug,
+                                    slug:products[0].slug
                                   })
                                 }
                                 className="btn btn-success product-card__addtocart"
@@ -286,14 +286,15 @@ export default function Home() {
                             </button>
 
 
-                            {!checkIfInWishlist(products[0].id) && (
+                            {!checkIfInWishlist(products[0].uniq_id) && (
                         <button onClick={() =>
                           dispatch(
                             addWishlist({
-                              id: products[0].id,
-                              category: products[0].category1.title,
-                              title: products[0].title,
+                              id: products[0].uniq_id,
+                              category: products[0].category.slug,
+                              title: products[0][`title_${router.locale}`],
                               image: products[0].images[0].image,
+                              slug:products[0].slug
                             })
                           )
                         }
@@ -312,8 +313,8 @@ export default function Home() {
                         </button>
                       )}
 
-                      {checkIfInWishlist(products[0].id) && (
-                        <button onClick={() => dispatch(deleteWishlist(products[0].id))}
+                      {checkIfInWishlist(products[0].uniq_id) && (
+                        <button onClick={() => dispatch(deleteWishlist(products[0].uniq_id))}
                           className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
                           type="button"
                         >
@@ -334,8 +335,10 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-
-                <div className="block-products__list">
+                {
+                  console.log(products, 'products')
+}
+                <div className="block-products__list w-100">
                   {products.map((product, index) => {
                     if (index > 0) {
                       return (
@@ -344,11 +347,11 @@ export default function Home() {
                             <div className="product-card__image product-image">
                               <a className="product-image__body pointer">
                                 <Link
-                                  href={`/${product.category1.title.replace(/#| /g,'-')}/${product.title.replace(/#| /g,'-')}-${product.id}`}
+                                  href={`/${product.category.slug.replace(/#| /g,'-')}/${product.slug.replace(/#| /g,'-')}`}
                                 >
                                   <img
                                     className="product-image__img"
-                                    src={product.images[0].image}
+                                    src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+product.images[0].image}
                                     alt=""
                                   />
                                 </Link>
@@ -356,9 +359,11 @@ export default function Home() {
                             </div>
                             <div className="product-card__info">
                               <div className="product-card__name">
-                                <a>{product.title} </a>
+                                <a>{product[`name_${router.locale}`]} </a>
                               </div>
-
+                              {
+                                console.log(product, `lojnij`)
+}
                               <div className="product-card__rating">
                                 <div className="product-card__rating-stars">
                                   <div className="rating">
@@ -429,9 +434,9 @@ export default function Home() {
                                 {product.price} AZN
                               </div>
                               <div className="product-card__buttons">
-                                {checkIfInBucket(product.id) && (
+                                {checkIfInBucket(product.uniq_id) && (
                                   <button
-                                    onClick={() => deleteToDispatch(product.id)}
+                                    onClick={() => deleteToDispatch(product.uniq_id)}
                                     className="btn btn-danger product-card__addtocart"
                                     type="button"
                                   >
@@ -443,16 +448,17 @@ export default function Home() {
                                     }
                                   </button>
                                 )}
-                                {!checkIfInBucket(product.id) && (
+                                {!checkIfInBucket(product.uniq_id) && (
                                   <button
                                     onClick={() =>
                                       addToDispatch({
-                                        title: product.title,
+                                        title: product[`title_${router.locale}`],
                                         price: product.price,
                                         count: 1,
                                         image: product.images[0].image,
-                                        id: product.id,
-                                        category:product.category1.title
+                                        id: product.uniq_id,
+                                        category: product.category.slug,
+                                        slug:product.slug
                                       })
                                     }
                                     className="btn btn-success product-card__addtocart"
@@ -472,14 +478,15 @@ export default function Home() {
                                   {" "}
                                   {homepageTranslate["addToCard"][locale]}{" "}
                                 </button>
-                                {!checkIfInWishlist(product.id) && (
+                                {!checkIfInWishlist(product.uniq_id) && (
                         <button onClick={() =>
                           dispatch(
                             addWishlist({
-                              id: product.id,
-                              category: product.category1.title,
-                              title: product.title,
+                              id: product.uniq_id,
+                              category: product.category.slug,
+                              title: product[`title_${router.locale}`],
                               image: product.images[0].image,
+                              slug:product.slug
                             })
                           )
                         }
@@ -498,8 +505,8 @@ export default function Home() {
                         </button>
                       )}
 
-                      {checkIfInWishlist(product.id) && (
-                        <button onClick={() => dispatch(deleteWishlist(product.id))}
+                      {checkIfInWishlist(product.uniq_id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.uniq_id))}
                           className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
                           type="button"
                         >
@@ -541,16 +548,16 @@ export default function Home() {
                     <div className="category-card__body">
                       <div className="category-card__content">
                         <div className="category-card__name">
-                          <Link href={`/${cate.slug.replace(/#| /g, "-")}`}>{cate.name_en}</Link>
+                          <Link href={`/${cate.slug.replace(/#| /g, "-")}`}>{cate[`name_${router.locale}`]}</Link>
                         </div>
                         {cate.subcategory && (
                           <ul className="category-card__links">
                             {cate.subcategory.map((child, index) => (
                               <li key={index}>
                                 <Link
-                                  href={`/filter/child-${child.pk}/${child.slug.replace(/#| /g,'-')}`}
+                                  href={`/filter/child-${child.uniq_id}/${child.slug.replace(/#| /g,'-')}`}
                                 >
-                                  {child.name_en}
+                                  {child[`name_${router.locale}`]}
                                 </Link>
                               </li>
                             ))}

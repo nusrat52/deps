@@ -19,7 +19,7 @@ function Index () {
         <div className="profile-card__name">{loginReducer.name} </div>
         <div className="profile-card__email">{loginReducer.email}</div>
         <div className="profile-card__edit">
-          <Link href="/profile/edit" className="btn btn-secondary btn-sm">Edit Profile</Link>
+          <Link href="/profile/password" className="btn btn-secondary btn-sm">change password</Link>
         </div>
       </div>
     </div>
@@ -46,40 +46,10 @@ function Index () {
       </div>
     </div>
     <div className="dashboard__orders card">
-      <div className="card-header"><h5>{dashboardTranslate['recentOrders'][router.locale]}</h5></div>
-      <div className="card-divider" />
+       <div className="card-divider" />
       <div className="card-table">
         <div className="table-responsive-sm">
-          <table>
-            <thead>
-              <tr>
-                <th>{dashboardTranslate['order'][router.locale]}</th>
-                <th>{dashboardTranslate['date'][router.locale]}</th>
-                <th>Status</th>
-                <th>{dashboardTranslate['total'][router.locale]}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><a href="#">#8132</a></td>
-                <td>02 April, 2019</td>
-                <td>Pending</td>
-                <td>$2,719.00 for 5 item(s)</td>
-              </tr>
-              <tr>
-                <td><a href="#">#7592</a></td>
-                <td>28 March, 2019</td>
-                <td>Pending</td>
-                <td>$374.00 for 3 item(s)</td>
-              </tr>
-              <tr>
-                <td><a href="#">#7192</a></td>
-                <td>15 March, 2019</td>
-                <td>Shipped</td>
-                <td>$791.00 for 4 item(s)</td>
-              </tr>
-            </tbody>
-          </table>
+         
         </div>
       </div>
       </div>

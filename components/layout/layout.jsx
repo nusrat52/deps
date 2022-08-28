@@ -10,18 +10,23 @@ function Layout ({ children }) {
 
 
   const statee = useSelector(state => state)
+
+
+  console.log(statee, 'staeee');
    useEffect(() => {
         const token = localStorage.getItem("token")
   
        const userDataTaker = async () => {
-         const usedata = await Agent.login.logginWithToken(token)
+         const userDetails = await Agent.login.getUserData(token)
          dispatch(login({
-          address: usedata.address,
-          email: usedata.email,
-          name: usedata.name,
-          phone_number: usedata.phone_number,
-          surname: usedata.surname, 
-          id:usedata.id
+          address: userDetails.adress,
+         email: userDetails.email,
+         name: userDetails.name,
+         password: userDetails.password,
+         phone_number: userDetails.phone,
+         surname: userDetails.lastname,
+         id: userDetails.uniq_id,
+         checkout:userDetails.checkout
         }))
        }
        if(token){

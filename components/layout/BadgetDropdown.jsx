@@ -7,10 +7,6 @@ import { useDispatch } from "react-redux";
 
 
 
-
-
-
-
 function BadgetDropdown () {
   const {bucket}=useSelector(state=>state)
 const dispatch=useDispatch()
@@ -48,9 +44,9 @@ return  currentValue=currentValue+ currentIndex.price*currentIndex.count
           <div className="dropcart__products-list">
   {bucket.map((buck, index) => <div key={index} className="dropcart__product">
     <div className="product-image dropcart__product-image">
-      <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.title.replace(/#| /g,'-')}-${buck.id}`}>
+      <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.slug.replace(/#| /g,'-')}-${buck.id}`}>
                 <a className="pzroduct-image__body">
-                  <img className="product-image__img product-image__img_sp" src={buck.image} alt="" />
+                  <img className="product-image__img product-image__img_sp" src={"http://142.93.240.128:3000/api/getImage/"+buck.image} alt="" />
                 </a>
      </Link>
               </div>

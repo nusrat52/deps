@@ -260,9 +260,9 @@ export const homepageTranslate = {
         az: "Kartdan sil",
     },
     PopularCategories: {
-        en: "Popular Categories",
-        ru: "Популярные категории",
-        az: "Populyar kategoriyalar",
+        en: "Categories",
+        ru: "Kатегории",
+        az: "Kategoriyalar",
     },
     information: {
         en: "İnformation",

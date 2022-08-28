@@ -14,8 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const {categories}=useSelector(state=>state)
 
- console.log(categories, 'categories');
- 
+  
      const dropClass = dropOn
       ? "departments departments--open"
       : "departments"
@@ -31,6 +30,14 @@ const {categories}=useSelector(state=>state)
         }
       }, [router])
   
+   
+   
+   console.log(router.locale, 'routerrrr');
+
+
+console.log(categories);
+   
+
    return (
     <div className={dropClass} data-departments-fixed-by=".block-slideshow">
    <div className="departments__body">
@@ -38,7 +45,7 @@ const {categories}=useSelector(state=>state)
        <div className="departments__submenus-container"></div>
            <ul className="departments__links">
  
-             { categories.map((category, index) =>  <MenuItems key={index} id={category.id} slug={category.slug} subcategory={category.subcategory} title={category.name_en} />)
+             { categories.map((category, index) =>  <MenuItems key={index} id={category.id} slug={category.slug} subcategory={category.subcategory} title={category[`name_${router.locale}`]} />)
              }
          </ul>
      </div>

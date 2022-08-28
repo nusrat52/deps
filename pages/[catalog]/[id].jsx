@@ -20,7 +20,7 @@ import {
 import Head from "next/head";
 import { detailedTransfer } from "../../translate";
 function index ({ data }) {
-
+console.log(data, 'data');
   const [content, setContent] = useState("description");
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
@@ -36,8 +36,7 @@ function index ({ data }) {
   };
   const checkIfInBucket = (id) => {
     const inBucket = bucket.find((buck) => buck.id == id);
-    console.log(bucket, "hemen");
-    if (inBucket) {
+     if (inBucket) {
       return true;
     }
     return false;
@@ -62,7 +61,7 @@ function index ({ data }) {
     return false;
   };
 
-  const bucketObject = bucket.find((buck) => buck.id == data?.id);
+  const bucketObject = bucket.find((buck) => buck.id == data?.uniq_id);
 
   const total = bucket?.reduce((currentValue, currentIndex) => {
     return (currentValue =
@@ -76,20 +75,20 @@ function index ({ data }) {
           <meta
             name="description"
             content={
-              data.title +
+              data[`name_${router.locale}`] +
               "," +
-              data.category1.title +
+              data.category[`name_${router.locale}`] +
               "," +
-              data?.category2?.title +
+              data?.subcategory[`name_${router.locale}`] +
               "," +
-              data?.category3?.title
+              data?.altcategory[`name_${router.locale}`]
             }
           />
           <meta
             name="google-site-verification"
             content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34="
           />
-          <title>{data.title}</title>
+          <title>{data[`name_${router.locale}`]}</title>
           <meta name="robots" content="noindex,nofollow" />
         </Head>
       )}
@@ -108,14 +107,14 @@ function index ({ data }) {
                       </li>
 
                       <li className="breadcrumb-item">
-                        <a href="#">{data.category1.title}</a>
+                        <a href="#">{data.category.slug}</a>
                         <AiOutlineRight />
                       </li>
                       <li
                         className="breadcrumb-item active"
                         aria-current="page"
                       >
-                        {data.title}
+                        {data[`name_${router.locale}`]}
                       </li>
                     </ol>
                   </nav>
@@ -158,7 +157,7 @@ function index ({ data }) {
                           </svg>
                         </button>
                       </div>
-                      <h1 className="product__name">{data.title}</h1>
+                      <h1 className="product__name">{data[`name_${router.locale}`]}</h1>
 
                       <div className="product__description">
                         {data.description[0]?.description &&
@@ -177,10 +176,13 @@ function index ({ data }) {
                           <span className="text-success">In Stock</span>
                         </li>
                         <li>
-                          {detailedTransfer["WEIGHT"][router.locale]} :{" "}
-                          <a>{data.manifacturer}</a>
+                          {detailedTransfer["Manifacturer"][router.locale]} :{" "}
+                          <a>{data.manufacturer}</a>
                         </li>
-                        <li>{data.code}</li>
+                        <li>
+                        Code :
+                          <a>{data.code}</a>
+                           </li>
                       </ul>
                     </div>
                     <div className="product__sidebar">
@@ -191,19 +193,7 @@ function index ({ data }) {
                       <div className="product__prices">{data.price}</div>
                       <form className="product__options">
                         <div className="d-flex">
-                          <div className="form-group product__option mr-2">
-                            <label className="product__option-label">
-                              Material
-                            </label>
-                            <div className="input-radio-label">
-                              <div className="input-radio-label__list">
-                                <label>
-                                  <input type="radio" name="material" />
-                                  <span>{data.type.title}</span>
-                                </label>
-                              </div>
-                            </div>
-                          </div>
+                
                           <div className="form-group product__option  mr-2">
                             <label className="product__option-label">
                               Model
@@ -212,7 +202,7 @@ function index ({ data }) {
                               <div className="input-radio-label__list">
                                 <label>
                                   <input type="radio" name="material" />
-                                  <span>{data.model.title}</span>
+                                  <span>{data.model}</span>
                                 </label>
                               </div>
                             </div>
@@ -234,7 +224,7 @@ function index ({ data }) {
                         </div>
 
                         <div className="form-group product__option">
-                          {checkIfInBucket(data.id) && (
+                          {checkIfInBucket(data.uniq_id) && (
                             <label
                               className="product__option-label"
                               htmlFor="product-quantity"
@@ -244,7 +234,7 @@ function index ({ data }) {
                           )}
                           <div className="product__actions">
                             <div className="product__actions-item">
-                              {checkIfInBucket(data.id) && (
+                              {checkIfInBucket(data.uniq_id) && (
                                 <div className="input-number product__quantity">
                                   <input
                                     id="product-quantity"
@@ -253,36 +243,37 @@ function index ({ data }) {
                                     value={bucketObject?.count}
                                   />
                                   <div
-                                    onClick={() => increase(data.id)}
+                                    onClick={() => increase(data.uniq_id)}
                                     className="input-number__add"
                                   />
                                   <div
-                                    onClick={() => decrease(data.id)}
+                                    onClick={() => decrease(data.uniq_id)}
                                     className="input-number__sub"
                                   />
                                 </div>
                               )}
                             </div>
                             <div className="product__actions-item product__actions-item--addtocart">
-                              {checkIfInBucket(data.id) && (
+                              {checkIfInBucket(data.uniq_id) && (
                                 <button
-                                  onClick={() => deleteToDispatch(data.id)}
+                                  onClick={() => deleteToDispatch(data.uniq_id)}
                                   className="btn btn-danger btn-lg"
                                   type="button"
                                 >
                                    {detailedTransfer["delete"][router.locale]}
                                 </button>
                               )}
-                              {!checkIfInBucket(data.id) && (
+                              {!checkIfInBucket(data.uniq_id) && (
                                 <button
                                   onClick={() =>
                                     addToDispatch({
-                                      title: data.title,
+                                      title: data[`name_${router.locale}`],
                                       price: data.price,
                                       count: 1,
                                       image: data.images[0].image,
-                                      id: data.id,
-                                      category:data.category1.title
+                                      id: data.uniq_id,
+                                      category: data.category.slug,
+                                      slug:data.slug
                                     })
                                   }
                                   className="btn btn-success btn-lg"
@@ -292,15 +283,16 @@ function index ({ data }) {
                               )}
                             </div>
 
-                            {!checkIfInWishlist(data.id) && (
+                            {!checkIfInWishlist(data.uniq_id) && (
                               <button
                                 onClick={() =>
                                   dispatch(
                                     addWishlist({
-                                      id: data.id,
-                                      category: data.category1.title,
-                                      title: data.title,
+                                      id: data.uniq_id,
+                                      category: data.category.slug,
+                                      title: data[`name_${router.locale}`],
                                       image: data.images[0].image,
+                                      slug:data.slug
                                     })
                                   )
                                 }
@@ -310,10 +302,10 @@ function index ({ data }) {
                                 <AiFillHeart />
                               </button>
                             )}
-                            {checkIfInWishlist(data.id) && (
+                            {checkIfInWishlist(data.uniq_id) && (
                               <button
                                 onClick={() =>
-                                  dispatch(deleteWishlist(data.id))
+                                  dispatch(deleteWishlist(data.uniq_id))
                                 }
                                 className="btn btn-secondary btn-svg-icon btn-lg"
                                 type="button"
@@ -393,10 +385,10 @@ function index ({ data }) {
                       }
                       id="tab-description"
                     >
-                      {data.description.map((description, index) => (
+                      {data.description && [].map((description, index) => (
                         <div key={index} className="typography">
-                          <h3>{description.title}</h3>
-                          <p>{description.description}</p>
+                          <h3>{description[`name_${router.locale}`]}</h3>
+                          <p>{description[`description_${router.locale}`]}</p>
                         </div>
                       ))}
                     </div>
@@ -536,36 +528,28 @@ export async function getStaticProps (context) {
   
   const idSlugArrLengtf = context.params.id.split("-").length;
 
-
-  const idSlug = context.params.id.split("-")[idSlugArrLengtf-1];
-  let contentresponse
-
-try{
-   contentresponse = await axios.get(
-    `http://194.233.173.232/api/product-detail/${idSlug}/`
-  );
-} catch (e) {
- }
+const detaildedData=await Agent.general.getProductBySlug(context.params.id)
+  
+ console.log(detaildedData, 'detaildedData 444')
  
 
   return {
-    props: { data: contentresponse?.data?contentresponse.data:null },
+    props: { data: detaildedData?detaildedData:null },
   };
 }
 
 export async function getStaticPaths() {
   const productsResponse = await Agent.general.getWholeProducts();
-  const path = productsResponse.results.map((product) => {
+  const path = productsResponse.map((product) => {
     return {
       params: {
-        id: `${product.title.replace(/#| /g,'-')}-${product.id}`,
-        catalog: `${product.category1.title.replace(/#| /g,'-')}`
+        id: product.slug.replace(/#| /g,'-'),
+        catalog: `${product.category.slug.replace(/#| /g,'-')}`
       },
     };
   });
 
-  console.log(path, 'dassax');
-  
+   
   return {
     paths: path,
     fallback: true

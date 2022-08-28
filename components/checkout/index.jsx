@@ -7,25 +7,59 @@ import Swal from 'sweetalert2'
 
 function Index () {
   const dispatch = useDispatch()
-  const { bucket } = useSelector(state => state)
+  const { bucket, loginReducer } = useSelector(state => state)
   
   const total=bucket?.reduce((currentValue, currentIndex )=>{
     return  currentValue=currentValue+ currentIndex.price*currentIndex.count
   }, 0)
   
- 
+  
   const submitCheckout = async () => {
-    const checkotResponse = await Agent.general.checkout({})
-    if (checkotResponse.statusCode == 200) {
-      Swal.fire({
-        title: 'Conguratilations!',
-        text: 'The process was done successfully!',
-        icon: 'success',
-        confirmButtonText: 'Exit'
-      })
-      dispatch(checkout())
+
+
+
+    const userDataTaker = async () => {
+      const token=localStorage.getItem("token")
+      const userDetails = await Agent.login.getUserData(token)
+      dispatch(login({
+       address: userDetails.adress,
+      email: userDetails.email,
+      name: userDetails.name,
+      password: userDetails.password,
+      phone_number: userDetails.phone,
+      surname: userDetails.lastname,
+      id: userDetails.uniq_id,
+      checkout:userDetails.checkout
+     }))
     }
-}
+    
+    bucket.forEach(async (buck, index) => {
+      
+      const checkoutResponse = await Agent.general.checkout({
+        "uniq_id":loginReducer.id ,
+        "count": buck.count,
+        "adress": loginReducer.address,
+        "productId": buck.id
+      })
+
+      if (((bucket.length - 1) == index) && checkoutResponse.includes("Successfuly")) {
+        Swal.fire({
+          title: 'Conguratilations!',
+          text: 'The process was done successfully!',
+          icon: 'success',
+          confirmButtonText: 'Exit'
+        })
+        dispatch(checkout())
+
+       
+
+
+        userDataTaker()
+      }
+
+    })
+  
+ }
 
   return (
     <div className="site__body">

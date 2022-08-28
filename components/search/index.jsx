@@ -29,8 +29,8 @@ function Index() {
 
   useEffect(() => {
     const getSearch = async () => {
-      const searchResponse = await Agent.general.search(id);
-      setProducts(searchResponse.results);
+      const searchResponse = await Agent.general.search(id, params.locale);
+      setProducts(searchResponse.data);
     };
     if (id) {
       getSearch();
@@ -99,10 +99,10 @@ const checkIfInWishlist = (id) => {
                         <div className="product-card product-card--hidden-actions">
                           <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
-                              <Link href={`/${product.category1.title.replace(/#| /g,'-')}/${product.title.replace(/#| /g,'-')}-${product.id}`}>
+                              <Link href={`/${product.category.slug.replace(/#| /g,'-')}/${product.slug.replace(/#| /g,'-')}`}>
                                 <img
                                   className="product-image__img"
-                                  src={product.images[0].image}
+                                  src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+product.images[0].image}
                                   alt=""
                                 />
                               </Link>
@@ -110,7 +110,7 @@ const checkIfInWishlist = (id) => {
                           </div>
                           <div className="product-card__info">
                             <div className="product-card__name">
-                              <a>{product.title}</a>
+                              <a>{product[`name_${params.locale}`]}</a>
                             </div>
                             <div className="product-card__rating">
                               <div className="product-card__rating-stars">
@@ -231,16 +231,17 @@ const checkIfInWishlist = (id) => {
                               {product.price} AZN
                             </div>
                             <div className="product-card__buttons">
-                        {checkIfInBucket(product.id)  &&  <button onClick={()=>deleteToDispatch(product.id)} className="btn btn-danger product-card__addtocart" type="button"> Delete from Cart </button>}
-                              {!checkIfInBucket(product.id) && <button
+                        {checkIfInBucket(product.uniq_id)  &&  <button onClick={()=>deleteToDispatch(product.uniq_id)} className="btn btn-danger product-card__addtocart" type="button"> Delete from Cart </button>}
+                              {!checkIfInBucket(product.uniq_id) && <button
                                 onClick={() =>
                                   addToDispatch({
-                                    title: product.title,
+                                    title: product[`name_${params.locale}`],
                                     price: product.price,
                                     count: 1,
                                     image: product.images[0].image,
-                                    id: product.id,
-                                    category:product.category1.title
+                                    id: product.uniq_id,
+                                    category: product.category.slug,
+                                    slug:product.slug
                                   })
                                 }
                                 className="btn btn-success product-card__addtocart"
@@ -254,14 +255,15 @@ const checkIfInWishlist = (id) => {
 
 
 
-                              {!checkIfInWishlist(product.id) && (
+                              {!checkIfInWishlist(product.uniq_id) && (
                         <button onClick={() =>
                           dispatch(
                             addWishlist({
-                              id: product.id,
-                              category: product.category1.title,
-                              title: product.title,
+                              id: product.uniq_id,
+                              category: product.category.slug,
+                              title: product[`name_${params.locale}`],
                               image: product.images[0].image,
+                              slug:product.slug
                             })
                           )
                         }
@@ -276,8 +278,8 @@ const checkIfInWishlist = (id) => {
                         </button>
                       )}
 
-                      {checkIfInWishlist(product.id) && (
-                        <button onClick={() => dispatch(deleteWishlist(product.id))}
+                      {checkIfInWishlist(product.uniq_id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.uniq_id))}
                           className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
                           type="button"
                         >

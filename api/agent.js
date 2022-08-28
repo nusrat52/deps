@@ -17,7 +17,7 @@ export const general = {
         })
     },
     getCarousel: () => {
-        return axios.get("http://194.233.173.232/api/slide/")
+        return axios.get("http://142.93.240.128:3000/api/stroyka/get/slider")
             .then((response) => {
              return response.data
         })
@@ -55,15 +55,15 @@ export const general = {
     },
 
 
-    search: (searc) => {
-        return axios.get(`http://194.233.173.232/api/product/?search=${searc}`)
+    search: (search, lang) => {
+        return axios.get(`http://142.93.240.128:3000/api/stroyka/product/livesearch?search=${search}&lang=${lang}`)
             .then((response) => {
              return response.data
         })
     },
     checkout: (body) => {
         const token=localStorage.getItem("token")
-        return axios.post(`http://194.233.173.232/api/checkout/`, body, {
+        return axios.post(`http://142.93.240.128:3000/api/stroyka/checkout`, body, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -73,19 +73,19 @@ export const general = {
         })
     },
      featuredProducts: (limit=5, offset=0) => {
-         return axios.get(`http://194.233.173.232/api/featured-products/?limit=${limit}&offset=${offset}`)
+         return axios.get(`http://142.93.240.128:3000/api/stroyka/get/product/featured`)
             .then((response) => {
              return response.data
         })
     },
     bestsellerProduct: (limit=7, offset=0) => {
-        return axios.get(`http://194.233.173.232/api/bestseller-products/?limit=${limit}&offset=${offset}`)
+        return axios.get(`http://142.93.240.128:3000/api/stroyka/get/product/bestseller`)
            .then((response) => {
             return response.data
        })
     },
     getWholeProducts: () => {
-        return axios.get(`http://194.233.173.232/api/product/`)
+        return axios.get(`http://142.93.240.128:3000/api/stroyka/get/products/all`)
            .then((response) => {
             return response.data
        })
@@ -93,7 +93,7 @@ export const general = {
     
 
     getBanners: () => {
-        return axios.get(`http://194.233.173.232/api/banner/`)
+        return axios.get(`http://142.93.240.128:3000/api/stroyka/banners/list`)
            .then((response) => {
             return response.data
        })
@@ -106,7 +106,7 @@ export const general = {
        })
     },
     getProductsBychild: (body) => {
-        return axios.post(`http://194.233.173.232/api/filter-by-child/`, body)
+        return axios.post(`http://142.93.240.128:3000/api/stroyka/filter/product/subcategory`, body)
            .then((response) => {
             return response.data
        })
@@ -114,13 +114,18 @@ export const general = {
     
 
     getproductsBySub: (body) => {
-        return axios.post(`http://194.233.173.232/api/filter/`, body)
+        return axios.post(`http://142.93.240.128:3000/api/stroyka/filter/product/altcategory`, body)
            .then((response) => {
             return response.data
        })
     },
      
-
+    getProductBySlug: (slug) => {
+        return axios.get(`http://142.93.240.128:3000/api/stroyka/get/products/${slug}`)
+           .then((response) => {
+            return response.data
+       })
+    },
 };
  
 export const login = {
@@ -131,7 +136,7 @@ export const login = {
         })
     },
     loggin: (body) => {
-        return axios.post("http://194.233.173.232/api/login/", body)
+        return axios.post("http://142.93.240.128:3000/api/stroyka/login/user", body)
            .then((response) => {
            return response.data
        })
@@ -147,7 +152,7 @@ export const login = {
        })
     },
     changePassword: (token, body) => {
-          return axios.post("http://194.233.173.232/api/changepassword/",body, {
+          return axios.put("http://142.93.240.128:3000/api/stroyka/user/update/password",body, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -165,7 +170,18 @@ export const login = {
          .then((response) => {
          return response.data
      })
-  },
+    },
+    
+    getUserData: (token) => {
+        return axios.get("http://142.93.240.128:3000/api/stroyka/user/me",{
+           headers: {
+             'Authorization': `Bearer ${token}` 
+           }
+         })
+          .then((response) => {
+          return response.data
+      })
+   },
 
 };
  

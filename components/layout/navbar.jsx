@@ -295,12 +295,12 @@ const {wishlistReducer} =useSelector(state=>state)
                           </Link>
                         </li>
 
-                        <li className="menu__item nav-links__item_hoversp">
+                        {/* <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>
                           <Link href="/profile/edit">
                             <a className="menu__item-link"> {dashboardTranslate['edit'][router.locale]} </a>
                           </Link>
-                        </li>
+                        </li> */}
 
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>

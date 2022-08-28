@@ -10,7 +10,7 @@ const CenterMode =({images})=> {
         customPaging: function(i) {
         return (
           <a>
-            <img  className="carouselBigPicture" src={imageArray[i]}  />
+            <img  className="carouselBigPicture" src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+imageArray[i]}  />
           </a>
         );
       },
@@ -26,7 +26,7 @@ const CenterMode =({images})=> {
          <Slider {...settings}>
   
        {   imageArray.map((image, index)=> <div key={index}>
-            <img className="carouselThumbs" src={image} />
+            <img className="carouselThumbs" src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+image} />
           </div>)      
           }
         </Slider>

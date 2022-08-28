@@ -61,8 +61,7 @@ const Responsive = () => {
     return false;
   };
   const mockArray = [];
-  console.log(bucket, 'bucket');
-
+ 
   var settings = {
     dots: false,
     infinite: false,
@@ -113,12 +112,13 @@ const Responsive = () => {
   useEffect(() => {
     const featuredPrTaker = async () => {
       const featuredResponse = await Agent.general.featuredProducts();
-      setProducts(featuredResponse.results);
+      setProducts(featuredResponse);
     };
     featuredPrTaker();
   }, []);
 
   const checkIfInBucket = (id) => {
+    
     const inBucket = bucket.find((buck) => buck.id == id);
     if (inBucket) {
       return true;
@@ -168,52 +168,51 @@ const Responsive = () => {
                   <div className="product-card__image product-image">
                     <a className="product-image__body pointer">
                       <Link
-                        href={`/${product.category1.title.replace(/#| /g,'-')}/${product.title.replace(/#| /g,'-')}-${product.id}`}
+                        href={`/${product.category.slug.replace(/#| /g,'-')}/${product.slug.replace(/#| /g,'-')}`}
                       >
                         <img
                           className="product-image__img"
-                          src={product.images[0].image}
+                          src={"http://142.93.240.128:3000/api/getImage/"+product.images[0].path}
                           alt=""
-                          layout='fill'
+                           layout='fill'
                         />
                       </Link>
                     </a>
                   </div>
                   <div className="product-card__info">
                     <div className="product-card__name">
-                      <a href="product.html">{product.title} </a>
+                      <a href="product.html">{product[`name_${router.locale}`]} </a>
                     </div>
                   </div>
                   <div className="product-card__actions">
                     <div className="product-card__availability">
-                      {" "}
-                      Availability:{" "}
+                       Availability:{" "}
                       <span className="text-success">In Stock</span>
                     </div>
                     <div className="product-card__prices">
                       {product.price} AZN
                     </div>
                     <div className="product-card__buttons">
-                      {checkIfInBucket(product.id) && (
+                      {checkIfInBucket(product.uniq_id) && (
                         <button
-                          onClick={() => deleteToDispatch(product.id)}
+                          onClick={() => deleteToDispatch(product.uniq_id)}
                           className="btn btn-danger product-card__addtocart"
                           type="button"
                         >
-                          {" "}
-                          {homepageTranslate["deletefromCard"][router.locale]}
+                           {homepageTranslate["deletefromCard"][router.locale]}
                         </button>
                       )}
-                      {!checkIfInBucket(product.id) && (
+                      {!checkIfInBucket(product.uniq_id) && (
                         <button
                           onClick={() =>
                             addToDispatch({
-                              title: product.title,
+                              title: product[`name_${router.locale}`],
                               price: product.price,
                               count: 1,
-                              image: product.images[0].image,
-                              id: product.id,
-                              category:product.category1.title
+                              image: product.images[0].path,
+                              id: product.uniq_id,
+                              category: product.category.slug,
+                              slug:product.slug.replace(/#| /g,'-')
                             })
                           }
                           className="btn btn-success product-card__addtocart"
@@ -230,14 +229,15 @@ const Responsive = () => {
                         {homepageTranslate["addToCard"][router.locale]}
                       </button>
 
-                      {!checkIfInWishlist(product.id) && (
+                      {!checkIfInWishlist(product.uniq_id) && (
                         <button onClick={() =>
                           dispatch(
                             addWishlist({
-                              id: product.id,
-                              category: product.category1.title,
-                              title: product.title,
-                              image: product.images[0].image,
+                              id: product.uniq_id,
+                              category: product.category.slug,
+                              title: product[`name_${router.locale}`],
+                              image: product.images[0].path,
+                              slug:product.slug.replace(/#| /g,'-')
                             })
                           )
                         }
@@ -256,8 +256,8 @@ const Responsive = () => {
                         </button>
                       )}
 
-                      {checkIfInWishlist(product.id) && (
-                        <button onClick={() => dispatch(deleteWishlist(product.id))}
+                      {checkIfInWishlist(product.uniq_id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.uniq_id))}
                           className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
                           type="button"
                         >

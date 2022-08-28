@@ -81,9 +81,9 @@ function ProfileWrapper ({ children }) {
                   <li className={route=="dashboard"?"account-nav__item account-nav__item--active":"account-nav__item"}>
                     <Link href="/profile/dashboard">Dashboard</Link>
                   </li>
-                  <li className={route=="edit"?"account-nav__item account-nav__item--active":"account-nav__item"}>
+                  {/* <li className={route=="edit"?"account-nav__item account-nav__item--active":"account-nav__item"}>
                     <Link href="/profile/edit">{dashboardTranslate['edit'][router.locale]}</Link>
-                  </li>
+                  </li> */}
                   <li className={route=="orderhistory"?"account-nav__item account-nav__item--active":"account-nav__item"}>
                     <Link href="/profile/orderhistory">{dashboardTranslate['orderHistory'][router.locale]}</Link>
                   </li>

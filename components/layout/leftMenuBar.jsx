@@ -62,9 +62,9 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
               </li>
               <li className="mobile-links__item" data-collapse-item>
                 <div className="mobile-links__item-title">
-                  <Link href="/profile/edit">
+                  {/* <Link href="/profile/edit">
                 <a className="mobile-links__item-link"> {dashboardTranslate['edit'][router.locale]} </a>
-                  </Link>
+                  </Link> */}
               </div>
               </li>
               <li className="mobile-links__item" data-collapse-item>

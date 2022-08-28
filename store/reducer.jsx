@@ -8,16 +8,16 @@ export const loginReducer = (
     name: null,
     phone_number: null,
     surname: null,
+    id: null,
+    checkout:[]
   },
   action
 ) => {
   switch (action.type) {
     case ActionTypes.LOGIN:
-      console.log('login olan yer');
-      return { ...action.payload, logged: true };
+       return { ...action.payload, logged: true };
     case ActionTypes.LOGOUT:
-      console.log("logout yerune gitirmi");
-      localStorage.removeItem("token");
+       localStorage.removeItem("token");
 
       return {
         logged: false,

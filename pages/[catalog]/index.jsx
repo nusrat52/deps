@@ -6,27 +6,21 @@ import Link from 'next/link';
 function Index ({ data }) {
  
 
-const [childs, setChilds] = useState([])
- 
-  useEffect(() => {
-    const childTaker = async () => {
-      const childsData = await Agent.general.getChilds(data.id)
-       setChilds(childsData)
-    }
-    if(data)
-    childTaker()
-  }, [data])
+  
+  
+  
+
     
   
   return (
      <>
  
-    { data && <>
+    { data.subcategory && <>
       <Head>
     <meta charset="utf-8" />
     <meta name="description" content={data.title} />
     <meta name="google-site-verification" content="+nxGUDJ4QpAZ5l9Bsjdi102tLVC21AIh5d1Nl23908vVuFHs34=" />
-    <title>{data.title}</title>
+    <title>{data.name_en}</title>
     <meta name="robots" content="noindex, nofollow" />
       </Head>
  
@@ -34,16 +28,16 @@ const [childs, setChilds] = useState([])
  <br />
  <br />
        <div className="block-categories__list">
-               {childs.map((child, index)=> <div key={index} className="block-categories__item category-card category-card--layout--classic">
+               {data.subcategory.map((child, index)=> <div key={index} className="block-categories__item category-card category-card--layout--classic">
                   <div className="category-card__body">
                     <div className="category-card__image">
                      </div>
                     <div className="category-card__content">
                     <div className="category-card__name">
-                        <Link href={`/filter/child-${child.pk}/${child.fields.title.replace(/#| /g,'-')}`}>{child.fields.title}</Link>
+                        <Link href={`/filter/child-${child.uniq_id}/${child.slug.replace(/#| /g,'-')}`}>{child.name_az}</Link>
                      </div>
                       {
-                       <Subcategory pm={child.pk}/>
+                       <Subcategory altcategory={child.altcategory} pm={child.pk}/>
   }
                        <div className="category-card__all">
                        </div>
@@ -66,7 +60,8 @@ export async function getStaticProps(context) {
   const cate = context.params.catalog
  
   const contentresponse = await Agent.general.getCategories()
- const category= contentresponse.find((res)=>res.slug==cate)
+   const category = contentresponse.find((res) => res.slug.replace(/#| /g,'-') == cate)
+  
    return {
     props: { data: category },
   };
@@ -99,8 +94,7 @@ const path=[]
     })
   });
 
-  console.log(path, 'pathhh');
-
+ 
      return {
     paths:path,
     fallback: false

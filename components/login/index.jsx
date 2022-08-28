@@ -6,7 +6,8 @@ import { login } from '../../api/agent';
 import { login as loginAction } from '../../store/actions';
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router';
-
+import jwt_decode from "jwt-decode";
+import * as Agent from "../../api/agent"
 const SignupSchema = Yup.object().shape({
    firstName: Yup.string()
      .min(2, 'Too Short!')
@@ -30,12 +31,15 @@ const SignupSchema = Yup.object().shape({
      .required('Required'),
  });
   
+
  
 function Index () {
   const dispatch = useDispatch()
   const router = useRouter()
  
-   const logDetails = useSelector(state => state.loginReducer)
+  const logDetails = useSelector(state => state.loginReducer)
+  
+  console.log(logDetails, 'logDetails');
       return (
       <div className="container mt-4">
  <Formik
@@ -55,19 +59,33 @@ function Index () {
           "password": values.password,
           "phone": values.number,
           "lastname": values.lastName,
-             "adress": values.adres
+          "adress": values.adres
              
-          })
-               dispatch(loginAction({
-              address: submitResponse.data.address,
-              email: submitResponse.data.email,
-              name: submitResponse.data.name,
-              phone_number: submitResponse.data.phone_number,
-              surname:submitResponse.data.surname
-            }))
-            localStorage.setItem("token", submitResponse.access_token)
-            localStorage.setItem("refresh__token", submitResponse.refresh_token)
-            Swal.fire({
+           })
+            
+            if (submitResponse.msg.includes("Successfuly")) {
+              console.log(jwt_decode(submitResponse.token, { header: true }), 'das  sax');
+              
+
+              
+        
+              
+              
+              
+              localStorage.setItem("token", submitResponse.token)
+              const userData = await Agent.login.getUserData(submitResponse.token)
+              
+              dispatch(loginAction({
+                address: userData.adress,
+                email: userData.email,
+                name: userData.name,
+                phone_number: userData.phone,
+                surname: userData.lastname,
+                id: userData.uniq_id,
+                checkout:userData.checkout
+              }))
+
+             Swal.fire({
               title: 'Conguratilations!',
               text: 'You have been registered succesfully!',
               icon: 'success',
@@ -75,7 +93,7 @@ function Index () {
             }).then((result) => {
             router.push("/")
             })
-
+          }
         }}
      >
        {({ errors, touched }) => (

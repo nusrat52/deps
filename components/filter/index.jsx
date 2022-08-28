@@ -1,188 +1,237 @@
-import React, {useState, useEffect} from 'react'
-import {AiOutlineRight, AiFillHeart} from "react-icons/ai"
-import SearchDropdown from './searchDropdown'
-import ReactRange from "./range"
+import React, { useState, useEffect } from "react";
+import { AiOutlineRight, AiFillHeart } from "react-icons/ai";
+import SearchDropdown from "./searchDropdown";
+import ReactRange from "./range";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { addProduct, deleteProduct } from "../../store/actions";
-import * as Agent from "../../api/agent"
-import {useSelector, useDispatch} from "react-redux"
-import { AiOutlineHeart } from "react-icons/ai"
-import {filterCategoriya} from "../../translate"
-import { Router } from 'react-router-dom';
+import {
+  addProduct,
+  deleteProduct,
+  addWishlist,
+  deleteWishlist,
+} from "../../store/actions";
+import * as Agent from "../../api/agent";
+import { useSelector, useDispatch } from "react-redux";
+import { AiOutlineHeart } from "react-icons/ai";
+import { filterCategoriya } from "../../translate";
 
- function Index () {
-  const params = useRouter()
-  const dispatch=useDispatch()
-  const { bucket } = useSelector((state) => state);
+function Index() {
+  const params = useRouter();
+  const dispatch = useDispatch();
+  const { bucket, wishlistReducer } = useSelector((state) => state);
 
-const [products, setProducts]=useState([])
-const [category, setCategory]=useState([])
-const [values, setValues] = React.useState([0, 10000]);
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [values, setValues] = React.useState([0, 10000]);
 
-   
-const categories=useSelector(state=>state.categories)
-   const getProducts = async (slug, id) => {
-    let dataforproducts
-    if (slug=="child") {
-       dataforproducts = await Agent.general.getProductsBychild({
-        "category2": [parseInt(id)],
-        "min_price": values[0],
-        "max_price": values[1]
-       })
-      } else if (slug == "sub") {
+  const categories = useSelector((state) => state.categories);
+  const getProducts = async (slug, id) => {
+    let dataforproducts;
+    if (slug == "child") {
+      dataforproducts = await Agent.general.getProductsBychild({
+        subcategory: id,
+        min_price: values[0],
+        max_price: values[1],
+      });
+    } else if (slug == "sub") {
       dataforproducts = await Agent.general.getproductsBySub({
-        "category3": [parseInt(id)],
-        "min_price": values[0],
-        "max_price": values[1]
-       })
-     }
+        altcategory: id,
+        min_price: values[0],
+        max_price: values[1],
+      });
+    }
 
-    setProducts(dataforproducts)
- }
-  
-   
+    setProducts(dataforproducts.data);
+  };
+
   useEffect(() => {
-     const timer = setTimeout(async () => {
+    const timer = setTimeout(async () => {
       if (params.query.filterCat) {
-        const cate=params.query.filterCat.split("-")[1]
-        const cateSluf=params.query.filterCat.split("-")[0]
-  
-       
-     getProducts(cateSluf, cate)
+        const cate = params.query.filterCat.split("-")[1];
+        const cateSluf = params.query.filterCat.split("-")[0];
+
+        getProducts(cateSluf, cate);
       }
     }, 750);
 
     return () => {
       clearTimeout(timer);
     };
- 
-    }, [params.query, values])
-    
- 
+  }, [params.query, values]);
 
-    const addToDispatch = (object) => {
-      dispatch(addProduct(object));
-    };
-  
-    const deleteToDispatch = (id) => {
-      dispatch(deleteProduct(id));
-    };
-    const checkIfInBucket = (id) => {
-      const inBucket = bucket.find((buck) => buck.id == id)
-       if (inBucket) {
-        return true
-      }
-      return false
-  }
+  const addToDispatch = (object) => {
+    dispatch(addProduct(object));
+  };
+
+  const deleteToDispatch = (id) => {
+    dispatch(deleteProduct(id));
+  };
+  const checkIfInBucket = (id) => {
+    const inBucket = bucket.find((buck) => buck.id == id);
+    if (inBucket) {
+      return true;
+    }
+    return false;
+  };
+
+  const checkIfInWishlist = (id) => {
+    const inWish = wishlistReducer.find((obj) => obj.id == id);
+    if (inWish) return true;
+
+    return false;
+  };
   return (
     <div className="site__body">
-    <div className="page-header">
-      <div className="page-header__container container">
-        <div className="page-header__breadcrumb">
-          <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                      <a className="pointer">Home</a>
-                      <AiOutlineRight className="profileWrapperIcon"/>
-                    </li>
-            
-                    <li className="breadcrumb-item active" aria-current="page">
-                    {filterCategoriya['search'][params.locale]} 
-                    </li>
-                  </ol>
-          </nav>
-        </div>
-        <div className="page-header__title">
-          <h1>{params.query.filter}  </h1>
+      <div className="page-header">
+        <div className="page-header__container container">
+          <div className="page-header__breadcrumb">
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <a className="pointer">Home</a>
+                  <AiOutlineRight className="profileWrapperIcon" />
+                </li>
+
+                <li className="breadcrumb-item active" aria-current="page">
+                  {filterCategoriya["search"][params.locale]}
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div className="page-header__title">
+            <h1>{params.query.filter} </h1>
+          </div>
         </div>
       </div>
-    </div>
-    <div className="container">
-      <div className="shop-layout shop-layout--sidebar--start">
-        <div className="shop-layout__sidebar">
-          <div className="block block-sidebar block-sidebar--offcanvas--mobile">
-            <div className="block-sidebar__backdrop" />
-            <div className="block-sidebar__body">
-              <div className="block-sidebar__header">
-                <div className="block-sidebar__title"> {filterCategoriya['Filters'][params.locale]}  </div>
-                <button className="block-sidebar__close" type="button">
-                  <svg width="20px" height="20px">
-                    <use xlinkHref="images/sprite.svg#cross-20" />
-                  </svg>
-                </button>
-              </div>
-              <div className="block-sidebar__item">
-                <div className="widget-filters widget widget-filters--offcanvas--mobile" data-collapse data-collapse-opened-class="filter--opened">
-                  <h4 className="widget-filters__title widget__title"> {filterCategoriya['Filters'][params.locale]} </h4>
+      <div className="container">
+        <div className="shop-layout shop-layout--sidebar--start">
+          <div className="shop-layout__sidebar">
+            <div className="block block-sidebar block-sidebar--offcanvas--mobile">
+              <div className="block-sidebar__backdrop" />
+              <div className="block-sidebar__body">
+                <div className="block-sidebar__header">
+                  <div className="block-sidebar__title">
+                    {" "}
+                    {filterCategoriya["Filters"][params.locale]}{" "}
+                  </div>
+                  <button className="block-sidebar__close" type="button">
+                    <svg width="20px" height="20px">
+                      <use xlinkHref="images/sprite.svg#cross-20" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="block-sidebar__item">
+                  <div
+                    className="widget-filters widget widget-filters--offcanvas--mobile"
+                    data-collapse
+                    data-collapse-opened-class="filter--opened"
+                  >
+                    <h4 className="widget-filters__title widget__title">
+                      {" "}
+                      {filterCategoriya["Filters"][params.locale]}{" "}
+                    </h4>
                     <div className="widget-filters__list">
-                     { categories.map((category)=><SearchDropdown key={category.id} category={category} />)
-                     }
+                      {categories.map((category) => (
+                        <SearchDropdown key={category.id} category={category} />
+                      ))}
                       <div className="widget-filters__item">
-                      <div className="filter filter--opened" data-collapse-item>
-                        <button type="button" className="filter__title filter__title__mb" data-collapse-trigger> {filterCategoriya['Price'][params.locale]} <svg className="filter__arrow" width="12px" height="7px">
-                            <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7" />
-                          </svg>
-                        </button>
-                        <div className="filter__body" data-collapse-content>
-                          <div className="filter__container">
+                        <div
+                          className="filter filter--opened"
+                          data-collapse-item
+                        >
+                          <button
+                            type="button"
+                            className="filter__title filter__title__mb"
+                            data-collapse-trigger
+                          >
+                            {" "}
+                            {filterCategoriya["Price"][params.locale]}{" "}
+                            <svg
+                              className="filter__arrow"
+                              width="12px"
+                              height="7px"
+                            >
+                              <use xlinkHref="images/sprite.svg#arrow-rounded-down-12x7" />
+                            </svg>
+                          </button>
+                          <div className="filter__body" data-collapse-content>
+                            <div className="filter__container">
+                              <ReactRange
+                                values={values}
+                                setValues={setValues}
+                              />
 
-                             <ReactRange values={values} setValues={setValues}/>           
-
-                               <div className="filter-price__title"> {filterCategoriya['Price'][params.locale]}: {values[0]} AZN <span className="filter-price__min-value" /> -{values[1]}  AZN <span className="filter-price__max-value" />
+                              <div className="filter-price__title">
+                                {" "}
+                                {filterCategoriya["Price"][params.locale]}:{" "}
+                                {values[0]} AZN{" "}
+                                <span className="filter-price__min-value" /> -
+                                {values[1]} AZN{" "}
+                                <span className="filter-price__max-value" />
                               </div>
-                           </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
- 
-                  </div>
-                  {/* <div className="widget-filters__actions d-flex">
+                    {/* <div className="widget-filters__actions d-flex">
                     <button className="btn btn-primary btn-sm">Filter</button>
                     <button className="btn btn-secondary btn-sm">Reset</button>
                   </div> */}
+                  </div>
                 </div>
-                </div>
-                
-
- 
+              </div>
             </div>
           </div>
-        </div>
-        <div className="shop-layout__content">
-          <div className="block">
-            <div className="products-view">
-                              <div className="products-view__options">
-                                  
-
-                                  
-                <div className="view-options view-options--offcanvas--mobile">
-                  <div className="view-options__filters-button">
-                    <button type="button" className="filters-button">
-                      <svg className="filters-button__icon" width="16px" height="16px">
-                        <use xlinkHref="images/sprite.svg#filters-16" />
-                      </svg>
-                      <span className="filters-button__title">{filterCategoriya['Filters'][params.locale]}</span>
-                      <span className="filters-button__counter">3</span>
-                    </button>
+          <div className="shop-layout__content">
+            <div className="block">
+              <div className="products-view">
+                <div className="products-view__options">
+                  <div className="view-options view-options--offcanvas--mobile">
+                    <div className="view-options__filters-button">
+                      <button type="button" className="filters-button">
+                        <svg
+                          className="filters-button__icon"
+                          width="16px"
+                          height="16px"
+                        >
+                          <use xlinkHref="images/sprite.svg#filters-16" />
+                        </svg>
+                        <span className="filters-button__title">
+                          {filterCategoriya["Filters"][params.locale]}
+                        </span>
+                        <span className="filters-button__counter">3</span>
+                      </button>
+                    </div>
                   </div>
-                 </div>
-              </div>
-              <div className="products-view__list products-list" data-layout="grid-3-sidebar" data-with-features="false" data-mobile-grid-columns={2}>
+                </div>
+                <div
+                  className="products-view__list products-list"
+                  data-layout="grid-3-sidebar"
+                  data-with-features="false"
+                  data-mobile-grid-columns={2}
+                >
                   <div className="products-list__body">
-                   {products.map((product, index) => (
+                    {products.map((product, index) => (
                       <div
                         key={index}
                         className="products-list__item products-list__item__sp products-list__item__sp_3x"
                       >
                         <div className="product-card product-card--hidden-actions">
-                         <div className="product-card__image product-image">
- 
+                          <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
-                              <Link href={`/${"static".replace(/#| /g,'-')}/${product.fields.title.replace(/#| /g,'-')}-${product.id}`}>
+                              <Link
+                                href={`/${"product.category.slug".replace(
+                                  /#| /g,
+                                  "-"
+                                )}/${product.slug.replace(/#| /g, "-")}`}
+                              >
                                 <img
                                   className="product-image__img"
-                                  src={product.fields.images[0].image}
+                                  src={
+                                    "http://142.93.240.128:3000/api/getImage/public/uploads/products/" +
+                                    product.images[0].image
+                                  }
                                   alt=""
                                 />
                               </Link>
@@ -190,7 +239,7 @@ const categories=useSelector(state=>state.categories)
                           </div>
                           <div className="product-card__info">
                             <div className="product-card__name">
-                              <a>{product.fields.title}  </a>
+                              <a>{product[`name_${params.locale}`]} </a>
                             </div>
                             <div className="product-card__rating">
                               <div className="product-card__rating-stars">
@@ -315,85 +364,98 @@ const categories=useSelector(state=>state.categories)
                               <span className="text-success">In Stock</span>
                             </div>
                             <div className="product-card__prices">
-                              {product.fields.price} AZN
+                              {product.price} AZN
                             </div>
                             <div className="product-card__buttons">
-                        {checkIfInBucket(product.id)  &&  <button onClick={()=>deleteToDispatch(product.id)} className="btn btn-danger product-card__addtocart" type="button"> {filterCategoriya['delete'][params.locale]} </button>}
-                              {!checkIfInBucket(product.id) && <button
-                                onClick={() =>
-                                  addToDispatch({
-                                    title: product.title,
-                                    price: product.price,
-                                    category:product.category1.title,
-                                    count: 1,
-                                    image: product.fields.images[0].image,
-                                    id:product.id
-                                  })
-                                }
-                                className="btn btn-success product-card__addtocart"
-                                type="button"
-                              >
-                                {" "}
-                                {filterCategoriya['add'][params.locale]} 
-                              </button>}
-                              <button
-                                className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
-                                type="button"
-                              >
-                                <AiOutlineHeart
+                              {checkIfInBucket(product.uniq_id) && (
+                                <button
+                                  onClick={() =>
+                                    deleteToDispatch(product.uniq_id)
+                                  }
+                                  className="btn btn-danger product-card__addtocart"
+                                  type="button"
+                                >
+                                  {" "}
+                                  {
+                                    filterCategoriya["delete"][params.locale]
+                                  }{" "}
+                                </button>
+                              )}
+                              {!checkIfInBucket(product.uniq_id) && (
+                                <button
+                                  onClick={() =>
+                                    addToDispatch({
+                                      title: product[`name_${params.locale}`],
+                                      price: product.price,
+                                      category: product.slug,
+                                      count: 1,
+                                      image: product.images[0],
+                                      id: product.uniq_id,
+                                      slug: product.slug,
+                                    })
+                                  }
+                                  className="btn btn-success product-card__addtocart"
+                                  type="button"
+                                >
+                                  {" "}
+                                  {filterCategoriya["add"][params.locale]}
+                                </button>
+                              )}
+                       
+                      {!checkIfInWishlist(product.uniq_id) && (
+                        <button onClick={() =>
+                          dispatch(
+                            addWishlist({
+                              id: product.uniq_id,
+                              category: 'product.category.slug',
+                              title: product[`name_${params.locale}`],
+                              image: product.images[0].path,
+                              slug:product.slug.replace(/#| /g,'-')
+                            })
+                          )
+                        }
+                          className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
+                     <AiOutlineHeart
                                   style={{ width: "25px", height: "25px" }}
                                 />
-                                {/* <AiFillHeart style={{"width":"25px", "height":"25px"}}/> */}
-                              </button>
+
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
+
+                      {checkIfInWishlist(product.uniq_id) && (
+                        <button onClick={() => dispatch(deleteWishlist(product.uniq_id))}
+                          className="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                          type="button"
+                        >
+                          <AiFillHeart
+                          
+                            className="text-danger"
+                          />
+
+                          <span className="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                        </button>
+                      )}
+                              
+
+
                             </div>
                           </div>
                         </div>
                       </div>
                     ))}
-
-
-
-
-
-
-
+                  </div>
                 </div>
-              </div>
-              <div className="products-view__pagination">
-                {/* <ul className="pagination justify-content-center">
-                  <li className="page-item disabled">
-                    <a className="page-link page-link--with-arrow" href="#" aria-label="Previous">
-                      <svg className="page-link__arrow page-link__arrow--left" aria-hidden="true" width="8px" height="13px">
-                        <use xlinkHref="images/sprite.svg#arrow-rounded-left-8x13" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">1</a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">2 <span className="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">3</a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link page-link--with-arrow" href="#" aria-label="Next">
-                      <svg className="page-link__arrow page-link__arrow--right" aria-hidden="true" width="8px" height="13px">
-                        <use xlinkHref="images/sprite.svg#arrow-rounded-right-8x13" />
-                      </svg>
-                    </a>
-                  </li>
-                </ul> */}
+                <div className="products-view__pagination"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  )
+  );
 }
 
-export default Index
+export default Index;
