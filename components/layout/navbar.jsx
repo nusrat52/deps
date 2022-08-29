@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
   MobileLogo,
-  SearchMobile,
-  HeartMobile,
-  Card,
-} from "../../static/svg/svg1";
+   HeartMobile,
+ } from "../../static/svg/svg1";
 import MenuList from "./menuList";
 import RightMenuList from "./rightMenuList";
 import BadgetDrpdown from "./BadgetDropdown";
@@ -117,9 +115,9 @@ const {wishlistReducer} =useSelector(state=>state)
                     </a>
                   </div>
                   <div className="indicator indicator--mobile">
-                    <a href="cart.html" className="indicator__button">
+                    <a  className="indicator__button">
                       <span className="indicator__area">
-                        <Link href="/checkout">
+                        <Link href={"/checkout"}>
                           <HiOutlineShoppingCart className="searchIcon" />
                         </Link>
                         <span className="indicator__value">

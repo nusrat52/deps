@@ -5,8 +5,7 @@ import Link from 'next/link'
 import {useRouter} from "next/router"
  function Child ({childs}) {
     const router=useRouter()
-   console.log();
- 
+  
     return (
   <>
              {childs && childs.map((ch, index) => <li key={index} className="megamenu__item megamenu__item--with-submenu">

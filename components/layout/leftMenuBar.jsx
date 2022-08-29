@@ -100,7 +100,7 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
               </li>
            </MobileMenuDropdown>
  
-            {categories.map(cate => <MobileMenuDropdown key={cate.id} title={cate.title}>
+            {categories.map(cate => <MobileMenuDropdown key={cate.uniq_id} title={cate.title}>
    
 {cate.childs && cate.childs.map((child, index)=> <MobileChildDropDown key={index} title={child.fields.title}>
    {child.subCategories && child.subCategories.map((sub, index)=> <li key={index} className="mobile-links__item" data-collapse-item>

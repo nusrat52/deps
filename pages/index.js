@@ -170,9 +170,7 @@ const router=useRouter()
           </div>
 
           <FeaturedProducts />
-          {
-            console.log(banners, 'bannnn')
-}
+ 
           {  banners && banners[0] && <div className="block block-banner">
               <div className="container">
                 <a href="#" className="block-banner__body">
@@ -335,9 +333,7 @@ const router=useRouter()
                     </div>
                   </div>
                 )}
-                {
-                  console.log(products, 'products')
-}
+ 
                 <div className="block-products__list w-100">
                   {products.map((product, index) => {
                     if (index > 0) {
@@ -361,9 +357,7 @@ const router=useRouter()
                               <div className="product-card__name">
                                 <a>{product[`name_${router.locale}`]} </a>
                               </div>
-                              {
-                                console.log(product, `lojnij`)
-}
+ 
                               <div className="product-card__rating">
                                 <div className="product-card__rating-stars">
                                   <div className="rating">

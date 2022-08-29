@@ -10,8 +10,7 @@ function Index() {
 
   const { checkout } = useSelector((state) => state.loginReducer);
 
-  console.log(checkout, "checkout555");
-  return (
+   return (
     <ProfileWrapper>
       <div className="card">
         <div className="card-header">
@@ -34,7 +33,7 @@ function Index() {
               <tbody>
                 
                 {checkout.map((product) => (
-                   <Link href={`/${product.product.category.slug.replace(/#| /g, '-')}/${product.product.slug.replace(/#| /g, '-')}-${product.product.uniq_id}`}> 
+                   <Link href={`/${product.product.category.slug.replace(/#| /g, '-')}/${product.product.slug.replace(/#| /g, '-')}`}> 
                   <tr>
                     <td>
                       <a >

@@ -132,7 +132,7 @@ function Index() {
                     </h4>
                     <div className="widget-filters__list">
                       {categories.map((category) => (
-                        <SearchDropdown key={category.id} category={category} />
+                        <SearchDropdown key={category.uniq_id} category={category} />
                       ))}
                       <div className="widget-filters__item">
                         <div
@@ -174,10 +174,7 @@ function Index() {
                         </div>
                       </div>
                     </div>
-                    {/* <div className="widget-filters__actions d-flex">
-                    <button className="btn btn-primary btn-sm">Filter</button>
-                    <button className="btn btn-secondary btn-sm">Reset</button>
-                  </div> */}
+           
                   </div>
                 </div>
               </div>
@@ -221,7 +218,7 @@ function Index() {
                           <div className="product-card__image product-image">
                             <a className="product-image__body pointer">
                               <Link
-                                href={`/${"product.category.slug".replace(
+                                href={`/${product.category.slug.replace(
                                   /#| /g,
                                   "-"
                                 )}/${product.slug.replace(/#| /g, "-")}`}

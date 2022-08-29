@@ -56,8 +56,7 @@ useEffect(() => {
    }
   getUserAdress()
 }, [])
-console.log(adress);
-  return (
+   return (
             <div>
                <div className="page-header">
             <div className="page-header__container container">

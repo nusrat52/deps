@@ -39,8 +39,7 @@ function Index () {
  
   const logDetails = useSelector(state => state.loginReducer)
   
-  console.log(logDetails, 'logDetails');
-      return (
+       return (
       <div className="container mt-4">
  <Formik
        initialValues={{
@@ -64,8 +63,7 @@ function Index () {
            })
             
             if (submitResponse.msg.includes("Successfuly")) {
-              console.log(jwt_decode(submitResponse.token, { header: true }), 'das  sax');
-              
+               
 
               
         

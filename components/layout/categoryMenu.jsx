@@ -32,11 +32,9 @@ const {categories}=useSelector(state=>state)
   
    
    
-   console.log(router.locale, 'routerrrr');
+ 
 
-
-console.log(categories);
-   
+    
 
    return (
     <div className={dropClass} data-departments-fixed-by=".block-slideshow">

@@ -14,8 +14,7 @@ function Carousel () {
 
 
   const [slides, setSlides] = useState([])
-  console.log(slides, 'slides 555');
-useEffect(() => {
+ useEffect(() => {
   const getSlideDatas = async () => {
     const SlideDatas = await Agent.general.getCarousel()
     setSlides(SlideDatas)

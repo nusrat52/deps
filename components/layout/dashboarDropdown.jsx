@@ -18,8 +18,7 @@ import Swal from 'sweetalert2'
    const email=e.target.email.value
    const password=e.target.pasword.value
     const loginResponse = await Agent.login.loggin({ email, password })
-    console.log(loginResponse, 'loginResponse');
-    if (loginResponse) {
+     if (loginResponse) {
       localStorage.setItem("token", loginResponse)
       
       const userDetails = await Agent.login.getUserData(loginResponse)
@@ -63,8 +62,7 @@ import Swal from 'sweetalert2'
           setDropOn(!dropOn);
     };
   const onblur = (e) => {
-      console.log(e.target==e.relatedTarget, 'etarget');
-        if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click")) {
+         if (e.relatedTarget && e.relatedTarget.closest("#indicator--trigger--click")) {
               return
           }
           e.stopPropagation();

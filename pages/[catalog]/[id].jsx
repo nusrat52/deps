@@ -20,8 +20,7 @@ import {
 import Head from "next/head";
 import { detailedTransfer } from "../../translate";
 function index ({ data }) {
-console.log(data, 'data');
-  const [content, setContent] = useState("description");
+   const [content, setContent] = useState("description");
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
 
@@ -530,8 +529,7 @@ export async function getStaticProps (context) {
 
 const detaildedData=await Agent.general.getProductBySlug(context.params.id)
   
- console.log(detaildedData, 'detaildedData 444')
- 
+  
 
   return {
     props: { data: detaildedData?detaildedData:null },

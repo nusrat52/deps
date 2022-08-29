@@ -14,8 +14,7 @@ function Index () {
     const email=e.target.email.value
     const password=e.target.pasword.value
      const loginResponse = await Agent.login.loggin({ email, password })
-     console.log(loginResponse, 'loginResponse');
-     if (loginResponse) {
+      if (loginResponse) {
        localStorage.setItem("token", loginResponse)
        
        const userDetails = await Agent.login.getUserData(loginResponse)

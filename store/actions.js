@@ -13,8 +13,7 @@ export const login = (userData) => {
 
 
 export const logout = () => {
-    console.log('action yerinde');
-    return {
+     return {
        type: actionType.LOGOUT,
     }
 }

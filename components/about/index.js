@@ -21,8 +21,7 @@ function Index () {
  }, [])
   
   
-  console.log(teams, 'teams 222');
-    return (
+     return (
      <div>
         <div className="site">
             <div className="site__body">
