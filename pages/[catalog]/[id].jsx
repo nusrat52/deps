@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout/layout";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -24,6 +24,25 @@ function index ({ data }) {
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
 
+
+  const [description, setDescription] = useState([])
+  
+  const [spesification, setSpesification] = useState([])
+  
+
+  useEffect(() => {
+    if (data) {
+     setDescription(JSON.parse(data.description)[router.locale]) 
+    }
+
+
+    if (data ) {
+      setSpesification(JSON.parse(data.specification)[router.locale]) 
+     }
+
+  }, [data])
+  
+console.log(description, 'descriptiom');
   const dispatch = useDispatch();
 
   const addToDispatch = (object) => {
@@ -189,7 +208,7 @@ function index ({ data }) {
                         Availability:{" "}
                         <span className="text-success">In Stock</span>
                       </div>
-                      <div className="product__prices">{data.price}</div>
+                      <div className="product__prices">{data.price} AZN</div>
                       <form className="product__options">
                         <div className="d-flex">
                 
@@ -384,10 +403,13 @@ function index ({ data }) {
                       }
                       id="tab-description"
                     >
-                      {data.description && [].map((description, index) => (
+                      {
+                        console.log( data , 'data')
+                      }
+                      {description.map((description, index) => (
                         <div key={index} className="typography">
-                          <h3>{description[`name_${router.locale}`]}</h3>
-                          <p>{description[`description_${router.locale}`]}</p>
+                          <h3>{description.title}</h3>
+                          <p>{description.context}</p>
                         </div>
                       ))}
                     </div>
@@ -404,60 +426,25 @@ function index ({ data }) {
                           {detailedTransfer["Specification"][router.locale]}
                         </h3>
                         <div className="spec__section">
-                          <h4 className="spec__section-title">General</h4>
-                          <div className="spec__row">
-                            <div className="spec__name">Material</div>
-                            <div className="spec__value">
-                              Aluminium, Plastic
-                            </div>
+                           <div className="spec__row">
+                        
                           </div>
+
+
+                    {  spesification.map((spes, index)=><>
                           <div className="spec__row">
-                            <div className="spec__name">Engine Type</div>
-                            <div className="spec__value">Brushless</div>
+                            <div className="spec__name">{spes.title}</div>
+                            <div className="spec__value">{spes.context}</div>
                           </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Battery Voltage</div>
-                            <div className="spec__value">18 V</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Battery Type</div>
-                            <div className="spec__value">Li-lon</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Number of Speeds</div>
-                            <div className="spec__value">2</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Charge Time</div>
-                            <div className="spec__value">1.08 h</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Weight</div>
-                            <div className="spec__value">1.5 kg</div>
-                          </div>
+                        
+                      
+                      
+                          </>)  }
+
+
                         </div>
-                        <div className="spec__section">
-                          <h4 className="spec__section-title">Dimensions</h4>
-                          <div className="spec__row">
-                            <div className="spec__name">Length</div>
-                            <div className="spec__value">99 mm</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Width</div>
-                            <div className="spec__value">207 mm</div>
-                          </div>
-                          <div className="spec__row">
-                            <div className="spec__name">Height</div>
-                            <div className="spec__value">208 mm</div>
-                          </div>
-                        </div>
-                        <div className="spec__disclaimer">
-                          Information on technical characteristics, the delivery
-                          set, the country of manufacture and the appearance of
-                          the goods is for reference only and is based on the
-                          latest information available at the time of
-                          publication.
-                        </div>
+                 
+                
                       </div>
                     </div>
                   </div>
