@@ -242,7 +242,7 @@ const router=useRouter()
                             <span className="text-success">In Stock</span>
                           </div>
                           <div className="product-card__prices">
-                            {products[0].price}
+                            {products[0].price} AZN
                           </div>
                           <div className="product-card__buttons">
                             {checkIfInBucket(products[0].uniq_id) && (

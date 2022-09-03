@@ -3,7 +3,7 @@ import axios from "axios"
    
 export const general = {
     getAboutPage: (lang) => {
-        return axios.get("http://194.233.173.232/api/about/") 
+        return axios.get("http://142.93.240.128:3000/api/stroyka/get/about") 
             .then((response) => {
                 if(response.statusText==='OK'){
                     return response.data
@@ -100,7 +100,7 @@ export const general = {
     },
     
      getAdress: () => {
-        return axios.get(`http://194.233.173.232/api/address/`)
+        return axios.get(`http://142.93.240.128:3000/api/admin/get/adress`)
            .then((response) => {
             return response.data
        })

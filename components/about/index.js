@@ -4,7 +4,8 @@ import * as Agent from '../../api/agent'
 import {aboutTranslate} from "../../translate"
 import { useRouter } from 'next/router'
 function Index () {
-    const [about, setAbout] = useState([])
+    const [about, setAbout] = useState()
+    const [context, setContext] = useState()
     const [teams, setTeams] = useState([])
 
   
@@ -13,14 +14,14 @@ function Index () {
  useEffect(() => {
      const fetchAboutData = async () => {
         const aboutData = await Agent.general.getAboutPage("en")
-         setAbout(aboutData.results)
+         setAbout(aboutData.results[0][0].title )
+         setContext(aboutData.results[0][0].context )
          const TeamsData = await Agent.general.getTeam("en")
          setTeams(TeamsData.results)
      }
     fetchAboutData()
  }, [])
-  
-  
+   
      return (
      <div>
         <div className="site">
@@ -31,10 +32,14 @@ function Index () {
                 <div className="row justify-content-center">
                   <div className="col-12 col-xl-10">
                     <div className="about-us__body">
-                      <h1 className="about-us__title">{about[0]&&about[0]['title']}</h1>
+                      <h1 className="about-us__title">{about && about[router.locale]}</h1>
                       <div className="about-us__text typography">
-                        <p>
-                         {about[0] && about[0]['context']}
+                         <p>
+                           
+                           {/* {
+                             console.log(about[0][0].context['az'], 'abbb')
+                           } */}
+                         {context && context[router.locale]}
                         </p>
                        </div>
                       <div className="about-us__team">

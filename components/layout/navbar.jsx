@@ -64,7 +64,7 @@ const {wishlistReducer} =useSelector(state=>state)
   useEffect(() => {
     const getCustomerDetails = async () => {
       const customerDetails = await Agent.general.getAdress();
-      setNumber(customerDetails.results[0].number1);
+      setNumber(customerDetails[0].number1);
     };
 
     getCustomerDetails();

@@ -54,7 +54,7 @@ const [adress, setAdress]=useState({})
   useEffect(() => {
     const getUserAdress = async () => {
       const adresses = await Agent.general.getAdress()
-       setAdress(adresses.results[0])
+       setAdress(adresses[0])
      }
     getUserAdress()
   }, [])
@@ -89,7 +89,7 @@ const [adress, setAdress]=useState({})
                    <div className="col-12 col-lg-6 pb-4 pb-lg-0">
                      <h4 className="contact-us__header card-title">{postQuestions['adress'][router.locale]}</h4>
                      <div className="contact-us__address">
-                       <p> {adress.address} <br />{postQuestions['email'][router.locale]}: {adress.email_address} <br />{postQuestions['number'][router.locale]}: {adress.number1} </p>
+                       <p> {adress.adress} <br />{postQuestions['email'][router.locale]}: {adress.email} <br />{postQuestions['number'][router.locale]}: {adress.number1} </p>
                        <p>
                          <strong>{postQuestions['openningHours'][router.locale]}</strong>
                          <br />{adress.openTimes}

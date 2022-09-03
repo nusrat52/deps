@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
   useEffect(() => {
     const getUserAdress = async () => {
       const adresses = await Agent.general.getAdress()
-       setAdress(adresses.results[0])
+       setAdress(adresses[0])
      }
     getUserAdress()
   }, [])
@@ -27,13 +27,13 @@ import { useRouter } from "next/router";
                   <h5 className="footer-contacts__title">{homepageTranslate['contactUs'][router.locale]}</h5>
                    <ul className="footer-contacts__contacts">
                     <li>
-                      <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress.address}
+                      <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress.adress}
                     </li>
                     <li>
-                      <i className="footer-contacts__icon far fa-envelope"></i> {adress.email_address}
+                      <i className="footer-contacts__icon far fa-envelope"></i> {adress.email}
                     </li>
                     <li>
-                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> {adress.number1}, {adress.number2}
+                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> {adress.number1}, {adress.number2} 
                   </li>
                   <li>
                     <i className="footer-contacts__icon far fa-clock"></i> {adress.openTimes}

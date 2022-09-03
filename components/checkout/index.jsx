@@ -1,6 +1,6 @@
 import React from 'react'
 import { AiOutlineRight } from "react-icons/ai"
-import { checkout } from '../../store/actions'
+import { checkout, login } from '../../store/actions'
 import { useSelector, useDispatch } from 'react-redux'
 import * as Agent from "../../api/agent"
 import Swal from 'sweetalert2'

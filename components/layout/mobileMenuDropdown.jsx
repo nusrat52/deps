@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-function MobileMenuDropdown({ children, title }) {
+import Link from "next/link";
+function MobileMenuDropdown({ children, title, slug }) {
   const [dropDown, setDropDown] = useState(false);
   const dropdownClass = dropDown
     ? "mobile-links__item mobile-links__item--open"
@@ -11,10 +12,12 @@ function MobileMenuDropdown({ children, title }) {
   return (
     <li className={dropdownClass} data-collapse-item>
       <div className="mobile-links__item-title">
-        <a className="mobile-links__item-link">
-          {" "}
-          {title}{" "}
-        </a>
+        {slug && (
+          <Link href={`/${slug.replace(/#| /g, "-")}`}>
+            <a className="mobile-links__item-link"> {title} </a>
+          </Link>
+        )}
+        {!slug && <a className="mobile-links__item-link"> {title} </a>}
         <button
           onClick={dropClick}
           className="mobile-links__item-toggle"

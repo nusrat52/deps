@@ -15,7 +15,7 @@ function Index() {
   useEffect(() => {
     const getUserAdress = async () => {
       const adresses = await Agent.general.getAdress();
-      setAdress(adresses.results[0]);
+      setAdress(adresses[0]);
     };
     getUserAdress();
   }, []);
@@ -87,8 +87,8 @@ function Index() {
                       <div className="contact-us__address">
                         <p>
                           {" "}
-                          {adress.address} <br />
-                          Email: {adress.email_address} <br />
+                          {adress.adress} <br />
+                          Email: {adress.email} <br />
                           {postQuestions["number"][router.locale]}:{" "}
                           {adress.number1}{" "}
                         </p>

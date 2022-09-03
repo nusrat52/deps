@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-
-function MobileChildDropDown({ children, title }) {
+import Link from "next/link";
+function MobileChildDropDown({ children, title, slug, id }) {
   const [dropDown, setDropDown] = useState(false);
 
   const dropdownClass = dropDown
@@ -12,16 +12,26 @@ function MobileChildDropDown({ children, title }) {
 
   return (
     <li className={dropdownClass} data-collapse-item>
-    <div className="mobile-links__item-title">
-      <a href="#" className="mobile-links__item-link"> {title} </a>
-      <button className="mobile-links__item-toggle" type="button" data-collapse-trigger onClick={dropClick}>
-      <AiOutlineDown />
-      </button>
-    </div>
-    <div className="mobile-links__item-sub-links" data-collapse-content>
-      <ul className="mobile-links mobile-links--level--2">{children}</ul>
-    </div>
-  </li>
+      <div className="mobile-links__item-title">
+        <Link href={`/filter/child-${id}/${slug.replace(/#| /g,'-')}`}>
+          <a  className="mobile-links__item-link">
+            {" "}
+            {title}
+          </a>
+        </Link>
+        <button
+          className="mobile-links__item-toggle"
+          type="button"
+          data-collapse-trigger
+          onClick={dropClick}
+        >
+          <AiOutlineDown />
+        </button>
+      </div>
+      <div className="mobile-links__item-sub-links" data-collapse-content>
+        <ul className="mobile-links mobile-links--level--2">{children}</ul>
+      </div>
+    </li>
   );
 }
 
