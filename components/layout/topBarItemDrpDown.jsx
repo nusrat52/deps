@@ -26,8 +26,7 @@ function TopBarItemDrpDown({children, title}) {
     <div   tabIndex="-1" onBlur={onblur} className="topbar__item">
   <div className={dropClass}>
         <button onClick={dropclick} className="topbar-dropdown__btn" type="button"> {" "} {title} 
-          
-       <svg width="7px" height="5px">
+        <svg width="7px" height="5px">
         <use xlinkHref="images/sprite.svg#arrow-rounded-down-7x5"></use>
       </svg>
         </button>

@@ -335,8 +335,8 @@ const router=useRouter()
                 )}
  
                 <div className="block-products__list w-100">
-                  {products.map((product, index) => {
-                    if (index > 0) {
+                  {products.slice(1, 8).map((product, index) => {
+                    if (index > 0 ) {
                       return (
                         <div key={index} className="block-products__list-item">
                           <div className="product-card product-card--hidden-actions">

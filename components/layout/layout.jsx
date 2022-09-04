@@ -13,7 +13,12 @@ function Layout ({ children }) {
 
 
   console.log(statee, 'staeee');
-   useEffect(() => {
+  useEffect(() => {
+     
+
+console.log('how mannyb should one');
+
+
         const token = localStorage.getItem("token")
   
        const userDataTaker = async () => {

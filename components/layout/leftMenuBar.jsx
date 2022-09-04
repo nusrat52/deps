@@ -101,7 +101,7 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
            </MobileMenuDropdown>
  
             {categories.map(cate => <MobileMenuDropdown key={cate.uniq_id} slug={cate.slug} title={cate[`name_${router.locale}`]} >
- { cate.subcategory.map((child, index)=> <MobileChildDropDown key={index} id={child.uniq_id} slug={child.slug} title={child[`name_${router.locale}`]}>
+ {cate.subcategory.map((child, index)=> <MobileChildDropDown key={index} id={child.uniq_id} slug={child.slug} title={child[`name_${router.locale}`]}>
    {child.altcategory && child.altcategory.map((sub, index)=> <li key={index} className="mobile-links__item" data-collapse-item>
        <div className="mobile-links__item-title">
          <Link href={`/filter/sub-${sub.uniq_id}/${sub.slug.replace(/#| /g,'-')}`} ><a  className="mobile-links__item-link"> {sub[`name_${router.locale}`]} </a></Link>

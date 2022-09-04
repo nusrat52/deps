@@ -149,11 +149,7 @@ const {wishlistReducer} =useSelector(state=>state)
                       <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
-                            srcSet="
-                                    images/languages/language-1.png,
-                                    images/languages/language-1@2x.png 2x
-                                  "
-                            src="images/languages/language-1.png"
+                             src="/images/languages/language-1.png"
                             alt=""
                           />
                         </div>{" "}
@@ -167,11 +163,7 @@ const {wishlistReducer} =useSelector(state=>state)
                       <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
-                            srcSet="
-                                    images/languages/language-4.png,
-                                    images/languages/language-4@2x.png 2x
-                                  "
-                            src="images/languages/language-4.png"
+                             src="/images/languages/language-4.png"
                             alt=""
                           />
                         </div>{" "}
@@ -185,12 +177,9 @@ const {wishlistReducer} =useSelector(state=>state)
                       <a className="menu__item-link" href="#">
                         <div className="menu__item-icon">
                           <img
-                            srcSet="
-                                    images/languages/language-5.png,
-                                    images/languages/language-5@2x.png 2x
-                                  "
-                            src="images/languages/language-5.png"
+                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Flag_of_Azerbaijan_%283-2%29.svg/1200px-Flag_of_Azerbaijan_%283-2%29.svg.png"
                             alt=""
+                            width={22}
                           />
                         </div>{" "}
                         {homepageTranslate['az'][router.locale]}
@@ -252,9 +241,7 @@ const {wishlistReducer} =useSelector(state=>state)
             </div>
           </div>
           <div className="site-header__nav-panel">
-            {" "}
-            {/*
-            <!-- data-sticky-mode - one of [pullToShow, alwaysOnTop] --> */}{" "}
+ 
             <div
               className="nav-panel nav-panel--sticky"
               data-sticky-mode="pullToShow"
@@ -293,12 +280,7 @@ const {wishlistReducer} =useSelector(state=>state)
                           </Link>
                         </li>
 
-                        {/* <li className="menu__item nav-links__item_hoversp">
-                          <div className="menu__item-submenu-offset"></div>
-                          <Link href="/profile/edit">
-                            <a className="menu__item-link"> {dashboardTranslate['edit'][router.locale]} </a>
-                          </Link>
-                        </li> */}
+       
 
                         <li className="menu__item nav-links__item_hoversp">
                           <div className="menu__item-submenu-offset"></div>

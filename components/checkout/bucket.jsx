@@ -68,7 +68,7 @@ function Bucket () {
                 </div>
               </td>
               <td className="cart-table__column cart-table__column--product">
-                <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.slug.replace(/#| /g,'-')}-${buck.id}`} ><a className="cart-table__product-name"> {buck.title} </a></Link>
+                <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.slug.replace(/#| /g,'-')}`} ><a className="cart-table__product-name"> {buck.title} </a></Link>
                </td>
               <td className="cart-table__column cart-table__column--price" data-title="Price"> {buck.price} AZN </td>
               <td className="cart-table__column cart-table__column--quantity" data-title="Quantity">
