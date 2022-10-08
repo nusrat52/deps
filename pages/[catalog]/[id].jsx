@@ -403,9 +403,7 @@ console.log(description, 'descriptiom');
                       }
                       id="tab-description"
                     >
-                      {
-                        console.log( data , 'data')
-                      }
+           
                       {description.map((description, index) => (
                         <div key={index} className="typography">
                           <h3>{description.title}</h3>
@@ -443,9 +441,7 @@ console.log(description, 'descriptiom');
 
 
                         </div>
-                 
-                
-                      </div>
+                       </div>
                     </div>
                   </div>
                 </div>

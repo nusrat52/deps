@@ -153,7 +153,7 @@ const {wishlistReducer} =useSelector(state=>state)
                             alt=""
                           />
                         </div>{" "}
-                        en
+                        EN
                       </a>
                     </Link>
                   </li>
@@ -167,7 +167,7 @@ const {wishlistReducer} =useSelector(state=>state)
                             alt=""
                           />
                         </div>{" "}
-                        ru
+                        RU
                       </a>
                     </Link>
                   </li>

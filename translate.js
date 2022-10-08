@@ -155,7 +155,7 @@ export const homepageTranslate = {
     },
     register: {
         en: "Register",
-        ru: "регистр",
+        ru: "Хиты продаж",
         az: "Qeydiyyatdan keç",
     },
     contactUs: {
@@ -194,9 +194,9 @@ export const homepageTranslate = {
         az: "Dil",
     },
     az: {
-        en: "Aze",
-        ru: "Азе",
-        az: "Aze",
+        en: "AZ",
+        ru: "АЗ",
+        az: "AZ",
     },
   
      shopByCategory: {
@@ -222,7 +222,7 @@ export const homepageTranslate = {
     cua: {
         en: "Call us anytime",
         ru: "Звоните нам в любое время",
-        az: "İstədiyiniz zaman zng edin",
+        az: "İstədiyiniz zaman zəng edin",
     },
     safety: {
         en: "100% Safety",
@@ -283,7 +283,7 @@ export const homepageTranslate = {
     featured: {
         en: "Featured Products",
         ru: "Рекомендуемые продукты",
-        az: "Seçilmiş Productlar",
+        az: "Seçilmiş məhsullar",
     }
     
    
