@@ -46,13 +46,13 @@ return  currentValue=currentValue+ currentIndex.price*currentIndex.count
     <div className="product-image dropcart__product-image">
       <Link href={`/${buck.category.replace(/#| /g,'-')}/${buck.slug.replace(/#| /g,'-')}`}>
                 <a   className="product-image__body">
-                  <img className="product-image__img" src={"http://142.93.240.128:3000/api/getImage/"+buck.image} alt="" />
+                  <img className="product-image__img" src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+buck.image} alt="" />
                 </a>
      </Link>
               </div>
               <div className="dropcart__product-info">
                 <div className="dropcart__product-name">
-                  <a href={`/product/${buck.id}`}>  {buck.title} </a>
+                  <a >  {buck.title} </a>
                 </div>
         
                 <div className="dropcart__product-meta">

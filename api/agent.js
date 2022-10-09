@@ -11,7 +11,7 @@ export const general = {
          })
     },
     getTeam: () => {
-        return axios.get("http://194.233.173.232/api/our-team/")
+        return axios.get("http://142.93.240.128:3000/api/stroyka/get/team")
             .then((response) => {
              return response.data
         })

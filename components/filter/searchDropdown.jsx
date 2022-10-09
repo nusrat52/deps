@@ -24,8 +24,8 @@ function SearchDropdown ({category}) {
               </div>
       <div onClick={e=>e.stopPropagation()} className="filter__body" data-collapse-content>
         <div className="filter__container">
-                      <div className="filter-categories">
-              <ul className="filter-categories__list">
+                      <div className={!dropOn?"filter-categories d-none": "filter-categories"}>
+              <ul className="filter-categories__list filter-categories__list_none">
                              {category.subcategory.map((child)=> <SearchDr key={child.uniq_id}  child={child}/>)}
              </ul>
           </div>

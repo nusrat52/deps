@@ -246,7 +246,7 @@ export const homepageTranslate = {
     },
     Bestsellers: {
         en: "Bestsellers",
-        ru: "регистр",
+        ru: "Бестселлеры",
         az: "Ən çox satanlar",
     },
     addToCard: {
@@ -266,7 +266,7 @@ export const homepageTranslate = {
     },
     information: {
         en: "İnformation",
-        ru: "регистр",
+        ru: "Информация",
         az: "İnformasiya",
     },
     myAccount: {

@@ -31,7 +31,7 @@ function Index() {
                 </tr>
               </thead>
               <tbody>
-                
+ 
                 {checkout.map((product) => (
                    <Link href={`/${product.product.category.slug.replace(/#| /g, '-')}/${product.product.slug.replace(/#| /g, '-')}`}> 
                   <tr>
@@ -55,32 +55,7 @@ function Index() {
         </div>
         <div className="card-divider" />
         <div className="card-footer">
-          {/* <ul className="pagination justify-content-center">
-        <li className="page-item disabled">
-          <a className="page-link page-link--with-arrow" href="#" aria-label="Previous">
-            <svg className="page-link__arrow page-link__arrow--left" aria-hidden="true" width="8px" height="13px">
-              <use xlinkHref="images/sprite.svg#arrow-rounded-left-8x13" />
-            </svg>
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">1</a>
-        </li>
-        <li className="page-item active">
-          <a className="page-link" href="#">2 <span className="sr-only">(current)</span>
-          </a>
-        </li>
-        <li className="page-item">
-          <a className="page-link" href="#">3</a>
-        </li>
-        <li className="page-item">
-          <a className="page-link page-link--with-arrow" href="#" aria-label="Next">
-            <svg className="page-link__arrow page-link__arrow--right" aria-hidden="true" width="8px" height="13px">
-              <use xlinkHref="images/sprite.svg#arrow-rounded-right-8x13" />
-            </svg>
-          </a>
-        </li>
-      </ul> */}
+ 
         </div>
       </div>
     </ProfileWrapper>

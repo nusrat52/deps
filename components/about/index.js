@@ -14,10 +14,10 @@ function Index () {
  useEffect(() => {
      const fetchAboutData = async () => {
         const aboutData = await Agent.general.getAboutPage("en")
-         setAbout(aboutData.results[0][0].title )
+         setAbout(aboutData.results[0][0].title)
          setContext(aboutData.results[0][0].context )
-         const TeamsData = await Agent.general.getTeam("en")
-         setTeams(TeamsData.results)
+       const TeamsData = await Agent.general.getTeam("en")
+          setTeams(TeamsData)
      }
     fetchAboutData()
  }, [])
@@ -54,14 +54,14 @@ function Index () {
                           <div className='aboutWrapper'>
                             <div className="row w-100">
  
-                          {   teams.map(team=>  <div key={team.id} className="col-lg-4 col-sm-6 col-12">
+                          {   teams.map(team=> <div key={team.uniq_id} className="col-lg-4 col-sm-6 col-12">
                               <div className="teammates__item teammate">
                               <div className="teammate__avatar">
-                                <img src={team.profile} alt="" />
+                                <img src={"http://142.93.240.128:3000/api/getImage/"+team.image} alt="" />
                               </div>
-                              <div className="teammate__name">{team.name} {team.surname}</div>
+                              <div className="teammate__name">{team.title} </div>
                               <div className="teammate__position text-muted">
-                                {team.position}
+                                {team.profession[router.locale]}
                               </div>
                             </div>
                               </div>)}

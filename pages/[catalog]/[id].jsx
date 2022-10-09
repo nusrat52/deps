@@ -7,43 +7,37 @@ import { AiFillHeart, AiOutlineRight } from "react-icons/ai";
 import * as Agent from "../../api/agent";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllPostIds } from "../../lib/posts";
-import {
+ import {
   addProduct,
   deleteProduct,
   decreaseItem,
   increaseItem,
   addWishlist,
-  deleteWishlist
+  deleteWishlist,
 } from "../../store/actions";
 
 import Head from "next/head";
 import { detailedTransfer } from "../../translate";
-function index ({ data }) {
-   const [content, setContent] = useState("description");
+function index({ data }) {
+  const [content, setContent] = useState("description");
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
 
+  const [description, setDescription] = useState([]);
 
-  const [description, setDescription] = useState([])
-  
-  const [spesification, setSpesification] = useState([])
-  
+  const [spesification, setSpesification] = useState([]);
 
   useEffect(() => {
     if (data) {
-     setDescription(JSON.parse(data.description)[router.locale]) 
+      setDescription(JSON.parse(data.description)[router.locale]);
     }
 
+    if (data) {
+      setSpesification(JSON.parse(data.specification)[router.locale]);
+    }
+  }, [data]);
 
-    if (data ) {
-      setSpesification(JSON.parse(data.specification)[router.locale]) 
-     }
-
-  }, [data])
-  
-console.log(description, 'descriptiom');
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   const addToDispatch = (object) => {
     dispatch(addProduct(object));
@@ -54,7 +48,7 @@ console.log(description, 'descriptiom');
   };
   const checkIfInBucket = (id) => {
     const inBucket = bucket.find((buck) => buck.id == id);
-     if (inBucket) {
+    if (inBucket) {
       return true;
     }
     return false;
@@ -85,7 +79,29 @@ console.log(description, 'descriptiom');
     return (currentValue =
       currentValue + currentIndex.price * currentIndex.count);
   }, 0);
-  return (
+
+  const weightReturner = (weight) => {
+
+    const qram = {
+      az: "q",
+      en: "g",
+      ru: "г",
+    };
+
+    const kq = {
+      az: "kq",
+      en: "kg",
+      ru: "кг",
+    };
+      if (weight < 1) {
+        return `${weight*1000} ${qram[router.locale]}`;
+    } else if (weight > 1 && weight < 1000) {
+      return `${weight} ${kq[router.locale]}`;
+    } else if (weight > 1000) {
+      return `${weight/1000} t`;
+    }
+  };
+   return (
     <div>
       {data && (
         <Head>
@@ -175,7 +191,9 @@ console.log(description, 'descriptiom');
                           </svg>
                         </button>
                       </div>
-                      <h1 className="product__name">{data[`name_${router.locale}`]}</h1>
+                      <h1 className="product__name">
+                        {data[`name_${router.locale}`]}
+                      </h1>
 
                       <div className="product__description">
                         {data.description[0]?.description &&
@@ -198,9 +216,8 @@ console.log(description, 'descriptiom');
                           <a>{data.manufacturer}</a>
                         </li>
                         <li>
-                        Code :
-                          <a>{data.code}</a>
-                           </li>
+                          Code :<a>{data.code}</a>
+                        </li>
                       </ul>
                     </div>
                     <div className="product__sidebar">
@@ -211,7 +228,6 @@ console.log(description, 'descriptiom');
                       <div className="product__prices">{data.price} AZN</div>
                       <form className="product__options">
                         <div className="d-flex">
-                
                           <div className="form-group product__option  mr-2">
                             <label className="product__option-label">
                               Model
@@ -234,7 +250,10 @@ console.log(description, 'descriptiom');
                               <div className="input-radio-label__list">
                                 <label>
                                   <input type="radio" name="material" />
-                                  <span>{data.weight}</span>
+                                  <span>
+                                    {weightReturner(parseFloat(data.weight))}
+                                  </span>
+                           
                                 </label>
                               </div>
                             </div>
@@ -278,7 +297,7 @@ console.log(description, 'descriptiom');
                                   className="btn btn-danger btn-lg"
                                   type="button"
                                 >
-                                   {detailedTransfer["delete"][router.locale]}
+                                  {detailedTransfer["delete"][router.locale]}
                                 </button>
                               )}
                               {!checkIfInBucket(data.uniq_id) && (
@@ -291,7 +310,7 @@ console.log(description, 'descriptiom');
                                       image: data.images[0].image,
                                       id: data.uniq_id,
                                       category: data.category.slug,
-                                      slug:data.slug
+                                      slug: data.slug,
                                     })
                                   }
                                   className="btn btn-success btn-lg"
@@ -310,7 +329,7 @@ console.log(description, 'descriptiom');
                                       category: data.category.slug,
                                       title: data[`name_${router.locale}`],
                                       image: data.images[0].image,
-                                      slug:data.slug
+                                      slug: data.slug,
                                     })
                                   )
                                 }
@@ -403,7 +422,6 @@ console.log(description, 'descriptiom');
                       }
                       id="tab-description"
                     >
-           
                       {description.map((description, index) => (
                         <div key={index} className="typography">
                           <h3>{description.title}</h3>
@@ -424,24 +442,20 @@ console.log(description, 'descriptiom');
                           {detailedTransfer["Specification"][router.locale]}
                         </h3>
                         <div className="spec__section">
-                           <div className="spec__row">
-                        
-                          </div>
+                          <div className="spec__row"></div>
 
-
-                    {  spesification.map((spes, index)=><>
-                          <div className="spec__row">
-                            <div className="spec__name">{spes.title}</div>
-                            <div className="spec__value">{spes.context}</div>
-                          </div>
-                        
-                      
-                      
-                          </>)  }
-
-
+                          {spesification.map((spes, index) => (
+                            <>
+                              <div className="spec__row">
+                                <div className="spec__name">{spes.title}</div>
+                                <div className="spec__value">
+                                  {spes.context}
+                                </div>
+                              </div>
+                            </>
+                          ))}
                         </div>
-                       </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -506,16 +520,13 @@ console.log(description, 'descriptiom');
 
 export default index;
 
-export async function getStaticProps (context) {
-  
+export async function getStaticProps(context) {
   const idSlugArrLengtf = context.params.id.split("-").length;
 
-const detaildedData=await Agent.general.getProductBySlug(context.params.id)
-  
-  
+  const detaildedData = await Agent.general.getProductBySlug(context.params.id);
 
   return {
-    props: { data: detaildedData?detaildedData:null },
+    props: { data: detaildedData ? detaildedData : null },
   };
 }
 
@@ -524,15 +535,14 @@ export async function getStaticPaths() {
   const path = productsResponse.map((product) => {
     return {
       params: {
-        id: product.slug.replace(/#| /g,'-'),
-        catalog: `${product.category.slug.replace(/#| /g,'-')}`
+        id: product.slug.replace(/#| /g, "-"),
+        catalog: `${product.category.slug.replace(/#| /g, "-")}`,
       },
     };
   });
 
-   
   return {
     paths: path,
-    fallback: true
+    fallback: true,
   };
 }
