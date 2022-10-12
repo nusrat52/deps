@@ -520,7 +520,7 @@ function index({ data }) {
 
 export default index;
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const idSlugArrLengtf = context.params.id.split("-").length;
 
   const detaildedData = await Agent.general.getProductBySlug(context.params.id);
@@ -530,19 +530,19 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths() {
-  const productsResponse = await Agent.general.getWholeProducts();
-  const path = productsResponse.map((product) => {
-    return {
-      params: {
-        id: product.slug.replace(/#| /g, "-"),
-        catalog: `${product.category.slug.replace(/#| /g, "-")}`,
-      },
-    };
-  });
+// export async function getStaticPaths() {
+//   const productsResponse = await Agent.general.getWholeProducts();
+//   const path = productsResponse.map((product) => {
+//     return {
+//       params: {
+//         id: product.slug.replace(/#| /g, "-"),
+//         catalog: `${product.category.slug.replace(/#| /g, "-")}`,
+//       },
+//     };
+//   });
 
-  return {
-    paths: path,
-    fallback: true,
-  };
-}
+//   return {
+//     paths: path,
+//     fallback: true,
+//   };
+// }
