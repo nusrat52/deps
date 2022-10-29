@@ -182,7 +182,7 @@ const {wishlistReducer} =useSelector(state=>state)
                             width={22}
                           />
                         </div>{" "}
-                        {homepageTranslate['az'][router.locale]}
+                        AZ
                       </a>
                     </Link>
                   </li>

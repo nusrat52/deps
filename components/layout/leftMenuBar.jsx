@@ -124,7 +124,7 @@ function LeftMenuBar ({ mobileLeftMenuBar, setMobileLeftMenuBar }) {
             </li>
             <li className="mobile-links__item" data-collapse-item>
               <div className="mobile-links__item-title">
-              <Link href={`/${router.asPath}`} locale="az" className="mobile-links__item-link"><a className="mobile-links__item-link">   {homepageTranslate['az'][router.locale]} </a></Link>
+              <Link href={`/${router.asPath}`} locale="az" className="mobile-links__item-link"><a className="mobile-links__item-link">   az </a></Link>
               </div>
             </li>
           </MobileMenuDropdown>
