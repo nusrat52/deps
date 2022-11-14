@@ -177,13 +177,13 @@ const router=useRouter()
                   <div
                     className="block-banner__image block-banner__image--desktop"
                     style={{
-                      backgroundImage: `url(http://142.93.240.128:3000/api/getImage/${banners[0].image})`,
+                      backgroundImage: `url(http://api.eynullabeyli.com/api/getImage/${banners[0].image})`,
                     }}
                   ></div>
                   <div
                     className="block-banner__image block-banner__image--mobile"
                     style={{
-                      backgroundImage: `url(http://142.93.240.128:3000/api/getImage/${banners[0].mobile_image})`,
+                      backgroundImage: `url(http://api.eynullabeyli.com/api/getImage/${banners[0].mobile_image})`,
                     }}
                   ></div>
                   <div className="block-banner__title">
@@ -224,7 +224,7 @@ const router=useRouter()
                             >
                               <img
                                 className="product-image__img"
-                                src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+products[0].images[0].image}
+                                src={"http://api.eynullabeyli.com/api/getImage/public/uploads/products/"+products[0].images[0].image}
                                 alt=""
                               />
                             </Link>
@@ -347,7 +347,7 @@ const router=useRouter()
                                 >
                                   <img
                                     className="product-image__img"
-                                    src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+product.images[0].image}
+                                    src={"http://api.eynullabeyli.com/api/getImage/public/uploads/products/"+product.images[0].image}
                                     alt=""
                                   />
                                 </Link>

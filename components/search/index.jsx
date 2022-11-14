@@ -102,7 +102,7 @@ const checkIfInWishlist = (id) => {
                               <Link href={`/${product.category.slug.replace(/#| /g,'-')}/${product.slug.replace(/#| /g,'-')}`}>
                                 <img
                                   className="product-image__img"
-                                  src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+product.images[0].image}
+                                  src={"http://api.eynullabeyli.com/api/getImage/public/uploads/products/"+product.images[0].image}
                                   alt=""
                                 />
                               </Link>

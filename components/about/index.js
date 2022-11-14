@@ -57,7 +57,7 @@ function Index () {
                           {   teams.map(team=> <div key={team.uniq_id} className="col-lg-4 col-sm-6 col-12">
                               <div className="teammates__item teammate">
                               <div className="teammate__avatar">
-                                <img src={"http://142.93.240.128:3000/api/getImage/"+team.image} alt="" />
+                                <img src={"http://api.eynullabeyli.com/api/getImage/"+team.image} alt="" />
                               </div>
                               <div className="teammate__name">{team.title} </div>
                               <div className="teammate__position text-muted">

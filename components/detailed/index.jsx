@@ -18,7 +18,7 @@ const CenterMode = ({ images }) => {
         customPaging: function(i) {
         return (
           <a>
-            <img  className="carouselBigPicture" src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+imageArray[i]}  />
+            <img  className="carouselBigPicture" src={"http://api.eynullabeyli.com/api/getImage/public/uploads/products/"+imageArray[i]}  />
           </a>
         );
       },
@@ -42,7 +42,7 @@ const CenterMode = ({ images }) => {
          <Slider {...settings}>
   
        {   imageArray.map((image, index)=> <div key={index}>
-            <img onClick={(e)=> setUrl(e.target.src)} className="carouselThumbs" src={"http://142.93.240.128:3000/api/getImage/public/uploads/products/"+image} />
+            <img onClick={(e)=> setUrl(e.target.src)} className="carouselThumbs" src={"http://api.eynullabeyli.com/api/getImage/public/uploads/products/"+image} />
           </div>)      
           }
         </Slider>
