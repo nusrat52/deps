@@ -27,16 +27,16 @@ import { useRouter } from "next/router";
                   <h5 className="footer-contacts__title">{homepageTranslate['contactUs'][router.locale]}</h5>
                    <ul className="footer-contacts__contacts">
                     <li>
-                      <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress.adress}
+                      <i className="footer-contacts__icon fas fa-globe-americas"></i> {adress?.adress}
                     </li>
                     <li>
-                      <i className="footer-contacts__icon far fa-envelope"></i> {adress.email}
+                      <i className="footer-contacts__icon far fa-envelope"></i> {adress?.email}
                     </li>
                     <li>
-                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> {adress.number1}, {adress.number2} 
+                    <i className="footer-contacts__icon fas fa-mobile-alt"></i> {adress?.number1}, {adress?.number2} 
                   </li>
                   <li>
-                    <i className="footer-contacts__icon far fa-clock"></i> {adress.openTimes}
+                    <i className="footer-contacts__icon far fa-clock"></i> {adress?.openTimes}
                   </li>
                   </ul>
                 </div>
