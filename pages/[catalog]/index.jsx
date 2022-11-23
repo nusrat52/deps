@@ -56,7 +56,7 @@ export default Index
 
 // burda evvala bir bax gor eyni apini cagirmiya bilirsen
  
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const cate = context.params.catalog
  
   const contentresponse = await Agent.general.getCategories()
@@ -71,33 +71,33 @@ export async function getStaticProps(context) {
 
 
 
-export async function getStaticPaths ({ locales }) {
+// export async function getStaticPaths ({ locales }) {
  
 
-  const productsResponse = await Agent.general.getCategories();
-  const pathMock = productsResponse.map((product) => {
-   return {params: {
-     catalog: `${product.slug}`
-     }}
-  })
+//   const productsResponse = await Agent.general.getCategories();
+//   const pathMock = productsResponse.map((product) => {
+//    return {params: {
+//      catalog: `${product.slug}`
+//      }}
+//   })
 
-const path=[]
+// const path=[]
 
-  locales.forEach(element => {
-    productsResponse.map((product) => {
-      path.push({params: {
-        catalog: `${product.slug.replace(/#| /g,'-')}`,
+//   locales.forEach(element => {
+//     productsResponse.map((product) => {
+//       path.push({params: {
+//         catalog: `${product.slug.replace(/#| /g,'-')}`,
        
-      },
-      locale:element
-      })
-    })
-  });
+//       },
+//       locale:element
+//       })
+//     })
+//   });
 
  
-     return {
-    paths:path,
-    fallback: false
-  };
+//      return {
+//     paths:path,
+//     fallback: false
+//   };
 
-}
+// }
