@@ -172,7 +172,7 @@ const Responsive = () => {
                       >
                         <img
                           className="product-image__img"
-                          src={"http://api.eynullabeyli.com/api/getImage/"+product.images[0].path}
+                          src={"https://api.i-link.az/api/getImage/"+product.images[0].path}
                           alt=""
                            layout='fill'
                         />

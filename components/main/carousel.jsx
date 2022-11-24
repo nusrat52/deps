@@ -35,11 +35,11 @@ function Carousel () {
        { slides.map((item, index)=>   <div key={index} className="item">
          <a className="block-slideshow__slide" >
                  <div className="block-slideshow__slide-image block-slideshow__slide-image--desktop" style={{
-                        backgroundImage: `url('http://api.eynullabeyli.com/api/getImage/${item.image}')`,
+                        backgroundImage: `url('https://api.i-link.az/api/getImage/${item.image}')`,
                       }}></div>
               <div className="block-slideshow__slide-image block-slideshow__slide-image--mobile" style={{
                         backgroundImage:
-                          `url('http://api.eynullabeyli.com/api/getImage/${item.mobile_image}')`,
+                          `url('https://api.i-link.az/api/getImage/${item.mobile_image}')`,
                       }}></div>
               <div className="block-slideshow__slide-content">
                 <div className="block-slideshow__slide-title"> { JSON.parse(item.title)[router.locale] } </div>

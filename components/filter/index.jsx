@@ -226,7 +226,7 @@ function Index() {
                                 <img
                                   className="product-image__img"
                                   src={
-                                    "http://api.eynullabeyli.com/api/getImage/public/uploads/products/" +
+                                    "https://api.i-link.az/api/getImage/public/uploads/products/" +
                                     product.images[0].image
                                   }
                                   alt=""
