@@ -3,7 +3,7 @@ import axios from "axios"
    
 export const general = {
     getAboutPage: (lang) => {
-        return axios.get("http://api.eynullabeyli.com/api/stroyka/get/about") 
+        return axios.get("https://api.i-link.az/api/stroyka/get/about") 
             .then((response) => {
                 if(response.statusText==='OK'){
                     return response.data
@@ -11,31 +11,31 @@ export const general = {
          })
     },
     getTeam: () => {
-        return axios.get("http://api.eynullabeyli.com/api/stroyka/get/team")
+        return axios.get("https://api.i-link.az/api/stroyka/get/team")
             .then((response) => {
              return response.data
         })
     },
     getCarousel: () => {
-        return axios.get("http://api.eynullabeyli.com/api/stroyka/get/slider")
+        return axios.get("https://api.i-link.az/api/stroyka/get/slider")
             .then((response) => {
              return response.data
         })
     },
     getCategories: () => {
-        return axios.get("http://api.eynullabeyli.com/api/stroyka/get/categories")
+        return axios.get("https://api.i-link.az/api/stroyka/get/categories")
             .then((response) => {
              return response.data
         })
     },
     askQuestions: (body) => {
-        return axios.post("http://api.eynullabeyli.com/api/stroyka/contactus/", body)
+        return axios.post("https://api.i-link.az/api/stroyka/contactus/", body)
             .then((response) => {
              return response.data
         })
     },
     writeDirector: (body) => {
-        return axios.post("http://api.eynullabeyli.com/api/stroyka/contactus/", body)
+        return axios.post("https://api.i-link.az/api/stroyka/contactus/", body)
             .then((response) => {
              return response.data
         })
@@ -56,14 +56,14 @@ export const general = {
 
 
     search: (search, lang) => {
-        return axios.get(`http://api.eynullabeyli.com/api/stroyka/product/livesearch?search=${search}&lang=${lang}`)
+        return axios.get(`https://api.i-link.az/api/stroyka/product/livesearch?search=${search}&lang=${lang}`)
             .then((response) => {
              return response.data
         })
     },
     checkout: (body) => {
         const token=localStorage.getItem("token")
-        return axios.post(`http://api.eynullabeyli.com/api/stroyka/checkout`, body, {
+        return axios.post(`https://api.i-link.az/api/stroyka/checkout`, body, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -73,19 +73,19 @@ export const general = {
         })
     },
      featuredProducts: (limit=5, offset=0) => {
-         return axios.get(`http://api.eynullabeyli.com/api/stroyka/get/product/featured`)
+         return axios.get(`https://api.i-link.az/api/stroyka/get/product/featured`)
             .then((response) => {
              return response.data
         })
     },
     bestsellerProduct: (limit=7, offset=0) => {
-        return axios.get(`http://api.eynullabeyli.com/api/stroyka/get/product/bestseller`)
+        return axios.get(`https://api.i-link.az/api/stroyka/get/product/bestseller`)
            .then((response) => {
             return response.data
        })
     },
     getWholeProducts: () => {
-        return axios.get(`http://api.eynullabeyli.com/api/stroyka/get/products/all`)
+        return axios.get(`https://api.i-link.az/api/stroyka/get/products/all`)
            .then((response) => {
             return response.data
        })
@@ -93,20 +93,20 @@ export const general = {
     
 
     getBanners: () => {
-        return axios.get(`http://api.eynullabeyli.com/api/stroyka/banners/list`)
+        return axios.get(`https://api.i-link.az/api/stroyka/banners/list`)
            .then((response) => {
             return response.data
        })
     },
     
      getAdress: () => {
-        return axios.get(`http://api.eynullabeyli.com/api/admin/get/adress`)
+        return axios.get(`https://api.i-link.az/api/admin/get/adress`)
            .then((response) => {
             return response.data
        })
     },
     getProductsBychild: (body) => {
-        return axios.post(`http://api.eynullabeyli.com/api/stroyka/filter/product/subcategory`, body)
+        return axios.post(`https://api.i-link.az/api/stroyka/filter/product/subcategory`, body)
            .then((response) => {
             return response.data
        })
@@ -114,14 +114,14 @@ export const general = {
     
 
     getproductsBySub: (body) => {
-        return axios.post(`http://api.eynullabeyli.com/api/stroyka/filter/product/altcategory`, body)
+        return axios.post(`https://api.i-link.az/api/stroyka/filter/product/altcategory`, body)
            .then((response) => {
             return response.data
        })
     },
      
     getProductBySlug: (slug) => {
-        return axios.get(`http://api.eynullabeyli.com/api/stroyka/get/products/${slug}`)
+        return axios.get(`https://api.i-link.az/api/stroyka/get/products/${slug}`)
            .then((response) => {
             return response.data
        })
@@ -130,13 +130,13 @@ export const general = {
  
 export const login = {
     register: (lang, body) => {
-         return axios.post("http://api.eynullabeyli.com/api/stroyka/register/user", body)
+         return axios.post("https://api.i-link.az/api/stroyka/register/user", body)
             .then((response) => {
             return response.data
         })
     },
     loggin: (body) => {
-        return axios.post("http://api.eynullabeyli.com/api/stroyka/login/user", body)
+        return axios.post("https://api.i-link.az/api/stroyka/login/user", body)
            .then((response) => {
            return response.data
        })
@@ -152,7 +152,7 @@ export const login = {
        })
     },
     changePassword: (token, body) => {
-          return axios.put("http://api.eynullabeyli.com/api/stroyka/user/update/password",body, {
+          return axios.put("https://api.i-link.az/api/stroyka/user/update/password",body, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -173,7 +173,7 @@ export const login = {
     },
     
     getUserData: (token) => {
-        return axios.get("http://api.eynullabeyli.com/api/stroyka/user/me",{
+        return axios.get("https://api.i-link.az/api/stroyka/user/me",{
            headers: {
              'Authorization': `Bearer ${token}` 
            }
