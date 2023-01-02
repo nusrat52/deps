@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import "../styles/globals.css";
+ import "../styles/globals.css";
 import "../styles/bootstrap.min.css";
 import "../styles/photoswipe.css";
 import "../styles/defaultSkin/default.skin.css";
@@ -14,7 +13,7 @@ import Layout from "../components/layout/layout";
 import { reducerMain } from "../store/allreducers";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 
 const composeEnhancers =   compose;
 const store = createStore(

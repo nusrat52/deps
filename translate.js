@@ -237,12 +237,12 @@ export const homepageTranslate = {
     hotOffers: {
         en: "Hot offers",
         ru: "Горячие предложения",
-        az: "qaçınılmaz təklif",
+        az: "Qaçınılmaz təklif",
     },
     dut: {
         en: "Discount up to 90 %",
         ru: "Скидки до 90%",
-        az: "90 faizədək endirim",
+        az: "90%-dək  endirim",
     },
     Bestsellers: {
         en: "Bestsellers",
@@ -303,7 +303,7 @@ export const detailedTransfer = {
     WEIGHT: {
         en: "WEIGHT",
         ru: "МАССА",
-        az: "kq",
+        az: "ÇƏKİ",
     },
     delete: {
         en: "Delete from Cart",

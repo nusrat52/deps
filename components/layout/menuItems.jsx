@@ -19,10 +19,7 @@ const classs= !listOn ?"departments__submenu departments__submenu--type--megamen
        <div className="megamenu megamenu--departments departments__submenu--open">
         <div
           className="megamenu__body"
-          style={{
-            backgroundImage:
-              "url('images/megamenu/megamenu-1.jpg')",
-          }}
+    
         >
           <div className="row">
             <div className="col-12">

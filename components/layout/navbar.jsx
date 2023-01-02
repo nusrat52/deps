@@ -19,7 +19,7 @@ import * as Agent from "../../api/agent";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { homepageTranslate, dashboardtranslate, dashboardTranslate } from "../../translate";
+import { homepageTranslate, dashboardTranslate } from "../../translate";
 import WishlistDropdown from "./wishlistDropdown"
 function Navbar() {
   const buckets = useSelector((state) => state.bucket);
@@ -322,15 +322,7 @@ const {wishlistReducer} =useSelector(state=>state)
                   <div className="nav-panel__indicators">
 
 
-
-                    {/* <div className="indicator">
-                      <a className="indicator__button">
-                        <span className="indicator__area">
-                          <AiOutlineHeart className="heartSp" />
-                          <span className="indicator__value">{wishlistReducer.length}</span>
-                        </span>
-                      </a>
-                    </div> */}
+ 
 
 <WishlistDropdown/>
  

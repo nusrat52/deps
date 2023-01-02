@@ -134,14 +134,18 @@ function index({ data }) {
               <div className="page-header__container container">
                 <div className="page-header__breadcrumb">
                   <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
+                     <ol className="breadcrumb">
+                       {
+                         console.log(data, 'dataaa')
+                       }
+                  
                       <li className="breadcrumb-item">
                         <a href="index.html">Home</a>
                         <AiOutlineRight />
                       </li>
 
                       <li className="breadcrumb-item">
-                        <a href="#">{data.category.slug}</a>
+                        <a href="#">{data.category[`name_${router.locale}`]}</a>
                         <AiOutlineRight />
                       </li>
                       <li
