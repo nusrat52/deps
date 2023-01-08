@@ -135,9 +135,7 @@ function index({ data }) {
                 <div className="page-header__breadcrumb">
                   <nav aria-label="breadcrumb">
                      <ol className="breadcrumb">
-                       {
-                         console.log(data, 'dataaa')
-                       }
+ 
                   
                       <li className="breadcrumb-item">
                         <a href="index.html">Home</a>
@@ -167,7 +165,7 @@ function index({ data }) {
                 >
                   <div className="product__content">
                     <div className="product__gallery">
-                      <Detailed images={data.images} />
+                      <Detailed images={data.images}  />
                     </div>
 
                     <div className="product__info product__info_sp">
@@ -216,8 +214,9 @@ function index({ data }) {
                           <span className="text-success">In Stock</span>
                         </li>
                         <li>
-                          {detailedTransfer["Manifacturer"][router.locale]} :{" "}
-                          <a>{data.manufacturer}</a>
+                           {detailedTransfer["Manifacturer"][router.locale]} :{" "}
+                           <a>{JSON.parse(data.manufacturer)[0][router.locale]} </a>
+               
                         </li>
                         <li>
                           Code :<a>{data.code}</a>

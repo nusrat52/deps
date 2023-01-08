@@ -4733,6 +4733,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
   background: transparent;
   box-shadow: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 .nav-links__item--has-submenu .nav-links__item-body {
   position: relative;
