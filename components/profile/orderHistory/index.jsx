@@ -32,8 +32,8 @@ function Index() {
               </thead>
               <tbody>
  
-                {checkout.map((product) => (
-                   <Link href={`/${product.product.category.slug.replace(/#| /g, '-')}/${product.product.slug.replace(/#| /g, '-')}`}> 
+                {checkout.map((product, index) => (
+                   <Link key={index} href={`/${product.product.category.slug.replace(/#| /g, '-')}/${product.product.slug.replace(/#| /g, '-')}`}> 
                   <tr>
                     <td>
                       <a >

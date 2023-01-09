@@ -8,7 +8,7 @@ import { postQuestions } from "../../translate"
  
 
 
-function writeDirector () {
+function WriteDirector () {
   
 
 const [name, setName]=useState("")
@@ -127,4 +127,4 @@ useEffect(() => {
   )
 }
 
-export default writeDirector
+export default WriteDirector

@@ -18,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Head from "next/head";
 import { detailedTransfer } from "../../translate";
-function index({ data }) {
+function Index({ data }) {
   const [content, setContent] = useState("description");
   const router = useRouter();
   const { bucket } = useSelector((state) => state);
@@ -521,7 +521,7 @@ function index({ data }) {
   );
 }
 
-export default index;
+export default Index;
 
 export async function getServerSideProps(context) {
   const idSlugArrLengtf = context.params.id.split("-").length;

@@ -221,9 +221,9 @@ function Modal() {
         </div>
       </div>
       <div className="product__rating-legend">
-        <a href>7 Reviews</a>
+        <a >7 Reviews</a>
         <span>/</span>
-        <a href>Write A Review</a>
+        <a >Write A Review</a>
       </div>
     </div>
     <div className="product__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.</div>
@@ -231,7 +231,7 @@ function Modal() {
     <ul className="product__meta">
       <li className="product__meta-availability">Availability: <span className="text-success">In Stock</span>
       </li>
-      <li>Brand: <a href>Wakita</a>
+      <li>Brand: <a >Wakita</a>
       </li>
       <li>SKU: 83690/32</li>
     </ul>
@@ -314,24 +314,24 @@ function Modal() {
   </div>{/* .product__end */} <div className="product__footer">
     <div className="product__tags tags">
       <div className="tags__list">
-        <a href>Mounts</a>
-        <a href>Electrodes</a>
-        <a href>Chainsaws</a>
+        <a >Mounts</a>
+        <a >Electrodes</a>
+        <a >Chainsaws</a>
       </div>
     </div>
     <div className="product__share-links share-links">
       <ul className="share-links__list">
         <li className="share-links__item share-links__item--type--like">
-          <a href>Like</a>
+          <a >Like</a>
         </li>
         <li className="share-links__item share-links__item--type--tweet">
-          <a href>Tweet</a>
+          <a >Tweet</a>
         </li>
         <li className="share-links__item share-links__item--type--pin">
-          <a href>Pin It</a>
+          <a >Pin It</a>
         </li>
         <li className="share-links__item share-links__item--type--counter">
-          <a href>4K</a>
+          <a >4K</a>
         </li>
       </ul>
     </div>

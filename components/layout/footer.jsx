@@ -3,7 +3,7 @@ import Link from 'next/link'
 import * as Agent from "../../api/agent"
 import { homepageTranslate, dashboardTranslate} from "../../translate";
 import { useRouter } from "next/router";
-  function footer () {
+  function Footer () {
  
   const [adress, setAdress]=useState({})
   
@@ -155,4 +155,4 @@ import { useRouter } from "next/router";
   )
 }
 
-export default footer
+export default Footer

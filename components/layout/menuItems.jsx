@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { IoIosArrowForward } from "react-icons/io"
 import Child from "./Child"
  import Link from 'next/link'
-function menuItems ({  title, id, slug, subcategory }) {
+function MenuItems ({  title, id, slug, subcategory }) {
  const [listOn, setListOn] = useState(false)
   
 const classs= !listOn ?"departments__submenu departments__submenu--type--megamenu departments__submenu--size--xl departments__submenu--open d-none":"departments__submenu departments__submenu--type--megamenu departments__submenu--size--xl departments__submenu--open"
@@ -36,4 +36,4 @@ const classs= !listOn ?"departments__submenu departments__submenu--type--megamen
   )
 }
 
-export default menuItems
+export default MenuItems

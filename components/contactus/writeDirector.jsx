@@ -6,7 +6,7 @@ import { postQuestions } from "../../translate"
 import { useRouter } from 'next/router'
  
 
-function writeDirector () {
+function WriteDirector () {
   
  
 const [name, setName]=useState("")
@@ -143,4 +143,4 @@ const [adress, setAdress]=useState({})
   )
 }
 
-export default writeDirector
+export default WriteDirector
