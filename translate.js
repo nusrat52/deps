@@ -165,7 +165,7 @@ export const homepageTranslate = {
     },
     vriteDirector: {
         en: "Write director",
-        ru: "Написать режиссера",
+        ru: "Написать директору",
         az: "Direktora yaz",
     },
     askQuestion: {
